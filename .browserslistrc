@@ -1,0 +1,9 @@
+[production staging]
+> 1%
+not dead
+ie >= 10
+last 2 version
+
+[development]
+last 1 chrome version
+last 1 firefox version

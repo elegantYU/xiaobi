@@ -1,0 +1,25 @@
+{
+	"version": "1.0.0",
+	"manifest_version": 2,
+	"minimum_chrome_version": "56.0.0",
+	"name": "小币",
+	"short_name": "小币",
+	"description": "比特币",
+	"offline_enabled": true,
+	"icons": {
+		"128": "static/icons/icon.png"
+	},
+	"browser_action": {
+		"default_icon": {},
+		"default_popup": "index.html",
+		"default_title": ""
+	},
+	"background": {
+		"scripts": ["static/js/background.js"],
+		"persistent": true
+	},
+	"content_scripts": [],
+	"web_accessible_resources": ["static/js/*"],
+	"content_security_policy": "script-src 'self' https://at.alicdn.com 'unsafe-eval'; object-src 'self'",
+	"permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
+}
