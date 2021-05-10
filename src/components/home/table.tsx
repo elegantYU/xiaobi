@@ -28,26 +28,25 @@ const Table: React.FC<Props> = ({ data, clickEvent, itemClick }) => {
 	const renderTableJSX = () => {
 		if (data && data.code) {
 			return <Error />;
-		} else {
-			return (
-				<>
-					<Head clickEvent={clickEvent}></Head>
-					<ContentUI>
-						{!!data ? (
-							!data.length ? (
-								<Empty />
-							) : (
-								(data as TableList[]).map((d) => (
-									<ListBlock key={d.com_id} data={d} onClick={() => itemClick(d.id as number)}></ListBlock>
-								))
-							)
-						) : (
-							<Loading />
-						)}
-					</ContentUI>
-				</>
-			);
 		}
+		return (
+			<>
+				<Head clickEvent={clickEvent} />
+				<ContentUI>
+					{data ? (
+						data.length === 0 ? (
+							<Empty />
+						) : (
+							(data as TableList[]).map((d) => (
+								<ListBlock key={d.com_id} data={d} onClick={() => itemClick(d.id as number)} />
+							))
+						)
+					) : (
+						<Loading />
+					)}
+				</ContentUI>
+			</>
+		);
 	};
 
 	return <WrapperUI>{renderTableJSX()}</WrapperUI>;

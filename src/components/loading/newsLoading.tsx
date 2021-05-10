@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import ContentLoader from 'react-content-loader';
 import useTheme from '@Src/hooks/useTheme';
-import { Context } from '@Src/context/index';
+import { Context } from '@Src/context';
 
 import styled from 'styled-components';
 
@@ -31,7 +31,7 @@ const Loading: React.FC = () => {
 	console.log('config', !config || !config.nav);
 	return (
 		<>
-			{Array.from(Array(8)).map((_, i) => (
+			{Array.from(new Array(8)).map((_, i) => (
 				<WrapperUI key={i}>
 					<ContentLoader
 						speed={1}

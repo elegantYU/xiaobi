@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-30 17:07:10
+ * @LastEditTime: 2021-05-10 16:19:48
  * @Description: 市场行情相关接口
  */
 import {
@@ -44,7 +44,7 @@ const convertData = (list: any[], type?: string) =>
 			logo,
 			project_info,
 		}) => ({
-			id: !!type ? currency_on_market_id : id,
+			id: type ? currency_on_market_id : id,
 			alias,
 			anchor,
 			currency,
@@ -72,9 +72,7 @@ const sortList: SortList<any> = ({ field, sort }, list) => {
 		return list.sort((a, b) => (sort === 1 ? a[field].localeCompare(b[field]) : b[field].localeCompare(a[field])));
 	}
 
-	return list.sort((a, b) => {
-		return sort === 1 ? b[field] - a[field] : a[field] - b[field];
-	});
+	return list.sort((a, b) => (sort === 1 ? b[field] - a[field] : a[field] - b[field]));
 };
 
 // 关注榜
@@ -87,7 +85,7 @@ const getFollowList: BackgroundAsyncMethod = async (sendResponse, { field, sort 
 		} = await getFollowListXHR({ code, timestamp });
 		const result: TableList[] = sortList({ field, sort }, convertData(list));
 		sendResponse(result);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };
@@ -102,7 +100,7 @@ const getHotList: BackgroundAsyncMethod = async (sendResponse, { field, sort }) 
 		} = await getHotListXHR({ code, timestamp });
 		const result: TableList[] = sortList({ field, sort }, convertData(list));
 		sendResponse(result);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };
@@ -117,7 +115,7 @@ const getIncreaseList: BackgroundAsyncMethod = async (sendResponse, { field, sor
 		} = await getIncreaseListXHR({ code, timestamp });
 		const result: TableList[] = sortList({ field, sort }, convertData(list));
 		sendResponse(result);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };
@@ -154,7 +152,7 @@ const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
 	const selfCoins = Store.get('selfCoins') as number[];
 	const { code, timestamp } = decode();
 
-	if (!selfCoins.length) {
+	if (selfCoins.length === 0) {
 		return sendResponse([]);
 	}
 
@@ -162,11 +160,11 @@ const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
 		.then((_) => {
 			const result: TableList[] = data
 				? sortList(
-						data,
-						convertData(
-							_.map(({ data }) => data),
-							'1',
-						),
+					data,
+					convertData(
+						_.map(({ data }) => data),
+						'1',
+					),
 				  )
 				: convertData(_.map(({ data }) => data));
 			sendResponse(result);
@@ -195,20 +193,18 @@ const getKlineData: BackgroundAsyncMethod = async (sendResponse, data: TableList
 			data: { kline },
 		} = await getKlineXHR({ market_id, com_id, symbol, period, anchor, code, timestamp });
 
-		if (kline.length) {
+		if (kline.length > 0) {
 			sendResponse({ kline, status: 0 });
-		} else {
-			if (market_id) {
-				// 折线图
-				const {
-					data: {
-						kline1: { kline: line },
-					},
-				} = await getTrendLineXHR({ market_id, code, timestamp, period, trend_anchor: 'USD', com_ids: com_id });
-				sendResponse({ kline: line, status: 1 });
-			}
+		} else if (market_id) {
+			// 折线图
+			const {
+				data: {
+					kline1: { kline: line },
+				},
+			} = await getTrendLineXHR({ market_id, code, timestamp, period, trend_anchor: 'USD', com_ids: com_id });
+			sendResponse({ kline: line, status: 1 });
 		}
-	} catch (e) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };

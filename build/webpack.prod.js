@@ -9,7 +9,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 
 module.exports = merge(common, {
-	mode: 'production',
 	plugins: [
 		new MiniCssPlugin({
 			filename: 'static/css/[name].css',

@@ -11,8 +11,6 @@ const WrapperUI = styled.p`
 	border-bottom: 1px solid ${(p) => p.theme.titleBorder};
 `;
 
-const Title: React.FC = ({ children }) => {
-	return <WrapperUI>{children}</WrapperUI>;
-};
+const Title: React.FC = ({ children }) => <WrapperUI>{children}</WrapperUI>;
 
 export default Title;

@@ -74,7 +74,7 @@ const Head: React.FC<Props> = ({ data, idx, clickEvent }) => {
 	return (
 		<WrapperUI>
 			{renderBtnJSX()}
-			<LineUI style={{ width: width + 'px', transform: `translateX(${offsetX}px)` }} />
+			<LineUI style={{ width: `${width}px`, transform: `translateX(${offsetX}px)` }} />
 		</WrapperUI>
 	);
 };

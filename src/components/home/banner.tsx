@@ -72,28 +72,27 @@ const CnyUI = styled.p`
 
 const RenderItemJSX = (data: any) => {
 	if (data && data.code) {
-		return Array.from(Array(4)).map((_, i) => <Error type='small' key={i} />);
-	} else {
-		return !!data ? (
-			(data as BannerItem[]).map(({ alias, pair, anchor, currency, percent, cny, usd }) => (
-				<ItemUI key={pair} title={alias}>
-					<TitleUI>
-						<p className='title'>
-							{currency}/{anchor}
-						</p>
-						<p className={`rate ${percent < 0 ? 'decrease' : 'increase'}`}>
-							{percent < 0 ? '' : '+'}
-							{percent}%
-						</p>
-					</TitleUI>
-					<UsdUI className={percent < 0 ? 'decrease' : 'increase'}>{convertCNUnit(usd)}</UsdUI>
-					<CnyUI>￥{convertCNUnit(cny)}</CnyUI>
-				</ItemUI>
-			))
-		) : (
-			<Loading />
-		);
+		return Array.from(new Array(4)).map((_, i) => <Error type='small' key={i} />);
 	}
+	return data ? (
+		(data as BannerItem[]).map(({ alias, pair, anchor, currency, percent, cny, usd }) => (
+			<ItemUI key={pair} title={alias}>
+				<TitleUI>
+					<p className='title'>
+						{currency}/{anchor}
+					</p>
+					<p className={`rate ${percent < 0 ? 'decrease' : 'increase'}`}>
+						{percent < 0 ? '' : '+'}
+						{percent}%
+					</p>
+				</TitleUI>
+				<UsdUI className={percent < 0 ? 'decrease' : 'increase'}>{convertCNUnit(usd)}</UsdUI>
+				<CnyUI>￥{convertCNUnit(cny)}</CnyUI>
+			</ItemUI>
+		))
+	) : (
+		<Loading />
+	);
 };
 
 const Banner = () => {

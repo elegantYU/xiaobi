@@ -48,13 +48,11 @@ const WrapperUI = styled.div`
 	}
 `;
 
-const Error: React.FC<Props> = ({ type }) => {
-	return (
-		<WrapperUI className={type}>
-			<i className='icon iconfont icondinosaur'></i>
-			<p>Ooh,请稍后重试</p>
-		</WrapperUI>
-	);
-};
+const Error: React.FC<Props> = ({ type }) => (
+	<WrapperUI className={type}>
+		<i className='icon iconfont icondinosaur' />
+		<p>Ooh,请稍后重试</p>
+	</WrapperUI>
+);
 
 export default Error;

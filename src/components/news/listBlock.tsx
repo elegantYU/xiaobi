@@ -28,12 +28,17 @@ const WrapperUI = styled.div`
 	&.cursor {
 		cursor: pointer;
 	}
+
+	&.top::before {
+		background-color: ${(p) => p.theme.istop};
+	}
 `;
 const AvatarUI = styled.div`
 	width: 60px;
 	height: 60px;
 	border-radius: 6px;
 	background-color: ${(p) => p.theme.newsItemAvatar};
+	overflow: hidden;
 
 	img {
 		width: 60px;
@@ -98,6 +103,7 @@ const FlashTitleUI = styled.div`
 	color: ${(p) => p.theme.newsItemTitle};
 	text-align: left;
 	white-space: pre-wrap;
+	line-height: 1;
 `;
 const FlashContentUI = styled.div`
 	color: ${(p) => p.theme.newsItemDesc};
@@ -106,7 +112,7 @@ const FlashContentUI = styled.div`
 `;
 
 const ListBlock: React.FC<Props> = ({ data, idx }) => {
-	const { avatar, time, title, content, link } = data;
+	const { avatar, time, title, content, link, is_top } = data;
 
 	const handleClick = () => {
 		window.open(link, '_blank');
@@ -114,7 +120,7 @@ const ListBlock: React.FC<Props> = ({ data, idx }) => {
 
 	if (idx) {
 		return (
-			<WrapperUI onClick={handleClick} title={title} className='cursor'>
+			<WrapperUI onClick={handleClick} title={title} className={`cursor ${is_top ? 'top' : ''}`}>
 				<AvatarUI>
 					<img src={avatar} alt='' />
 				</AvatarUI>

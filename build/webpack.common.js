@@ -19,7 +19,6 @@ module.exports = {
 	entry: {
 		index: resolve('../src/index.tsx'),
 		background: resolve('../src/services/index.ts'),
-		worker: resolve('../src/worker/index.ts')
 	},
 	output: {
 		filename: 'static/js/[name].js',
@@ -136,10 +135,16 @@ module.exports = {
 			}
 		}),
 		new HtmlPlugin({
-			title: 'notion-cn',
+			title: 'xiaobi',
 			filename: 'index.html',
 			template: resolve('../public/index.html'),
 			chunks: ["vendors", "index"]
+		}),
+		new HtmlPlugin({
+			title: "背景页",
+			filename: 'background.html',
+			template: resolve('../public/index.html'),
+			chunks: ["vendors", "background"]
 		}),
 		new CopyPlugin({
 			patterns: [

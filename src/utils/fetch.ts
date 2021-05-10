@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-15 09:29:20
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-01 15:16:58
+ * @LastEditTime: 2021-05-10 16:20:39
  * @Description: fetch 封装
  */
 import { DefaultObject } from '@InterFace/index';
@@ -24,19 +24,19 @@ const xhr = (options: Options) => {
 	const opt: RequestInit =
 		method !== 'GET'
 			? {
-					method,
-					body: params,
-					headers: new Headers(headers),
+				method,
+				body: params,
+				headers: new Headers(headers),
 			  }
 			: {};
 	const api =
 		method === 'GET'
 			? `${url}?${
-					params
-						? Object.keys(params)
-								.map((k) => `${k}=${params[k]}`)
-								.join('&')
-						: ''
+				params
+					? Object.keys(params)
+						.map((k) => `${k}=${params[k]}`)
+						.join('&')
+					: ''
 			  }`
 			: url;
 

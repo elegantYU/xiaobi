@@ -24,21 +24,19 @@ const PageUI = styled.div`
 	padding: 0 10px 10px;
 `;
 
-const Setting = () => {
-	return (
-		<WrapperUI>
-			<SideBar />
-			<PageUI>
-				<Redirect to={StaticRoutes.SettingBase} from={StaticRoutes.Setting} />
-				<Switch>
-					<Route path={StaticRoutes.SettingBase} component={Base}></Route>
-					<Route path={StaticRoutes.SettingNotify} component={Notify}></Route>
-					<Route path={StaticRoutes.SettingHelp} component={Help}></Route>
-					<Route path={StaticRoutes.SettingAbout} component={About}></Route>
-				</Switch>
-			</PageUI>
-		</WrapperUI>
-	);
-};
+const Setting = () => (
+	<WrapperUI>
+		<SideBar />
+		<PageUI>
+			<Redirect to={StaticRoutes.SettingBase} from={StaticRoutes.Setting} />
+			<Switch>
+				<Route path={StaticRoutes.SettingBase} component={Base} />
+				<Route path={StaticRoutes.SettingNotify} component={Notify} />
+				<Route path={StaticRoutes.SettingHelp} component={Help} />
+				<Route path={StaticRoutes.SettingAbout} component={About} />
+			</Switch>
+		</PageUI>
+	</WrapperUI>
+);
 
 export default Setting;

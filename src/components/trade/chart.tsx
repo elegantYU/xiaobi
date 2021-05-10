@@ -44,7 +44,7 @@ const TabUI = styled.div`
 `;
 
 const PanelUI = styled.div.attrs({ id: 'container' })`
-	height: 400px;
+	height: 350px;
 `;
 
 const TabList1 = [
@@ -77,15 +77,15 @@ const ChartView: React.FC<Props> = ({ data }) => {
 	const increase = config.crease ? '#c35466' : '#4aaa91';
 	const decrease = !config.crease ? '#c35466' : '#4aaa91';
 
+	const clearChart = () => {
+		chartEl.current.destroy();
+		chartEl.current = null;
+	};
 	const changeTab = (value: { period: string; limit: number; text: string }) => {
 		const temp = tabList.map((t) => ({ ...t, active: t.text === value.text }));
 		setTabList(temp);
 		clearChart();
 		setParams(value);
-	};
-	const clearChart = () => {
-		chartEl.current.destroy();
-		chartEl.current = null;
 	};
 
 	const renderTabJSX = () =>
@@ -114,7 +114,7 @@ const ChartView: React.FC<Props> = ({ data }) => {
 		chartEl.current = new Chart({
 			container: 'container',
 			autoFit: true,
-			height: 400,
+			height: 350,
 			padding: [15, 10, 30, 40],
 		});
 		const chart = chartEl.current;
@@ -141,11 +141,11 @@ const ChartView: React.FC<Props> = ({ data }) => {
 			.position('time*range')
 			.color('trend', (val: string) => {
 				switch (val) {
-					case '上涨':
-						return increase;
-					case '下跌':
-					default:
-						return decrease;
+				case '上涨':
+					return increase;
+				case '下跌':
+				default:
+					return decrease;
 				}
 			})
 			.shape('candle')
@@ -175,7 +175,7 @@ const ChartView: React.FC<Props> = ({ data }) => {
 		chartEl.current = new Chart({
 			container: 'container',
 			autoFit: true,
-			height: 400,
+			height: 350,
 			padding: [15, 10, 30, 40],
 		});
 		const chart = chartEl.current;
@@ -202,6 +202,7 @@ const ChartView: React.FC<Props> = ({ data }) => {
 		chart.legend(false);
 
 		chart.line().position('time*close').color('#1890ff').tooltip('close*volumefrom');
+		chart.area().position('time*close');
 		chart.axis('time', {
 			label: {
 				formatter: (text: string) => formatTime(`${text}000`, params.period === '15m' ? '{h}:{i}' : '{m}/{d}'),
@@ -235,14 +236,12 @@ const ChartView: React.FC<Props> = ({ data }) => {
 		setTabList(!status ? TabList1 : TabList2);
 	}, [status]);
 
-	useEffect(() => {
-		return clearChart;
-	}, [data]);
+	useEffect(() => clearChart, [data]);
 
 	return (
 		<WrapperUI>
 			<TabUI>{renderTabJSX()}</TabUI>
-			<PanelUI></PanelUI>
+			<PanelUI />
 		</WrapperUI>
 	);
 };

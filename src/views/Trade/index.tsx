@@ -48,7 +48,7 @@ const Trade: React.FC<Props> = ({ location }) => {
 		<WrapperUI>
 			<SideBar data={tableList} clickEvent={handleToggle} />
 			<ContentUI>
-				<Head data={data}></Head>
+				<Head data={data} />
 				{data ? <ChartView data={current} /> : <ChartLoading />}
 				{data ? <Tabs data={data} /> : null}
 			</ContentUI>

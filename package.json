@@ -1,10 +1,11 @@
 {
-	"name": "notion-cn",
+	"name": "xiaobi",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
+		"dev": "npm run start",
 		"start": "cross-env NODE_ENV=development webpack --config=build/webpack.dev.js --progress",
-		"build": "cross-env NODE_ENV=production webpack --config=build/webpack.prod.js",
+		"build": "cross-env NODE_ENV=production webpack --config=build/webpack.prod.js --progress",
 		"lint": "npm run lint-js && npm run lint-style",
 		"lint-js": "eslint --config=.eslintrc.js --ext .ts,.tsx,.js src",
 		"lint-style": "stylelint --config=.stylelintrc.js src/**/*.{less,css,scss}"
@@ -20,7 +21,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js}": [
-			"eslint --config .eslintrc.js"
+			"eslint --fix"
 		],
 		"*.{css,scss,less}": [
 			"stylelint --config .stylelintrc.js"
@@ -40,7 +41,7 @@
 		"@babel/preset-typescript": "^7.12.7",
 		"@commitlint/cli": "^11.0.0",
 		"@commitlint/config-conventional": "^11.0.0",
-		"@types/chrome": "^0.0.128",
+		"@types/chrome": "^0.0.137",
 		"@types/color": "^3.0.1",
 		"@types/jquery": "^3.5.5",
 		"@types/lodash.debounce": "^4.0.6",
@@ -58,7 +59,6 @@
 		"babel-preset-es2015": "^6.24.1",
 		"babel-preset-react": "^6.24.1",
 		"babel-preset-stage-0": "^6.24.1",
-		"chrome": "^0.1.0",
 		"clean-webpack-plugin": "^3.0.0",
 		"copy-webpack-plugin": "^7.0.0",
 		"cross-env": "^7.0.3",

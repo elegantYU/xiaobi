@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:55:46
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-10 16:56:38
+ * @LastEditTime: 2021-05-10 14:54:39
  * @Description: 缓存本地数据
  */
 import { DefaultObject } from '@InterFace/index';
@@ -12,7 +12,7 @@ interface StoreType {
 	notifications: Array<any>;
 	get: (key: string) => any;
 	set: (key: string, value: any) => void;
-	[key: string]: Array<any> | Function | DefaultObject;
+	[key: string]: Array<any> | DefaultObject;
 }
 
 const Store: StoreType = {
@@ -31,7 +31,7 @@ const Store: StoreType = {
 	set(key, value) {
 		if (Array.isArray(value)) {
 			this[key] = [...value];
-		} else if (Object.keys(value).length) {
+		} else if (Object.keys(value).length > 0) {
 			this[key] = { ...value };
 		} else {
 			this[key] = value;

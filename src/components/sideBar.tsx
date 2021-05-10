@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { StaticRoutes } from '@Const/routes';
-import { Context } from '@Src/context/index';
+import { Context } from '@Src/context';
 
 import { TipUI } from '@Components/tipButton';
 
@@ -115,7 +115,6 @@ const SideBar = () => {
 
 	const routers = [
 		{ name: '榜单', icon: 'iconbangdan2', path: StaticRoutes.Home },
-		{ name: 'K线', icon: 'iconKxian', path: StaticRoutes.Trend },
 		{ name: '通知', icon: 'icontongzhi', path: StaticRoutes.Notify },
 		{ name: '新闻', icon: 'iconxinwen', path: StaticRoutes.News },
 	];

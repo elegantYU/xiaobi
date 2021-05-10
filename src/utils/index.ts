@@ -21,28 +21,18 @@ export const coinTypeFilter = (s: string) => {
 	return valid;
 };
 
-// 解析币种symbol 归类
-export const formatCoinCategory: FormatCoinList = (data) => {
-	const itemList = Object.values(data);
+// 科学计数方式转正常
+export const convertNumber: (num: number) => string | number = (num) => {
+	if (Number.isNaN(num)) {
+		return num;
+	}
 
-	const result = itemList.reduce((synthesis, item) => {
-		const { s } = item;
-		const valid = coinTypeFilter(s);
+	const str = `${num}`;
+	if (!/e/i.test(str)) {
+		return num;
+	}
 
-		if (valid) {
-			const [_, __, k] = valid;
-			const key = k.toLocaleUpperCase();
-			const res = formatCoin(item);
-
-			if (!synthesis[key]) {
-				synthesis[key] = [];
-			}
-			synthesis[key].push(res);
-		}
-		return synthesis;
-	}, {});
-
-	return result;
+	return num.toFixed(18).replace(/\.?0+$/, '');
 };
 
 // 格式化coin
@@ -71,6 +61,30 @@ export const formatCoin: FormatCoin = (data) => {
 	return null;
 };
 
+// 解析币种symbol 归类
+export const formatCoinCategory: FormatCoinList = (data) => {
+	const itemList = Object.values(data);
+
+	const result = itemList.reduce((synthesis, item) => {
+		const { s } = item;
+		const valid = coinTypeFilter(s);
+
+		if (valid) {
+			const [_, __, k] = valid;
+			const key = k.toLocaleUpperCase();
+			const res = formatCoin(item);
+
+			if (!synthesis[key]) {
+				synthesis[key] = [];
+			}
+			synthesis[key].push(res);
+		}
+		return synthesis;
+	}, {});
+
+	return result;
+};
+
 // 更新合并数据
 export const concatData: ConcatData<DefaultObject> = (newArr, oldArr) => {
 	if (newArr.length >= oldArr.length) {
@@ -80,24 +94,10 @@ export const concatData: ConcatData<DefaultObject> = (newArr, oldArr) => {
 	const result = oldArr.map((item) => {
 		const curr = newArr.find((v) => v.symbol === item.symbol);
 
-		return curr ? curr : item;
+		return curr || item;
 	});
 
 	return result;
-};
-
-// 科学计数方式转正常
-export const convertNumber: (num: number) => string | number = (num) => {
-	if (isNaN(num)) {
-		return num;
-	}
-
-	const str = '' + num;
-	if (!/e/i.test(str)) {
-		return num;
-	}
-
-	return num.toFixed(18).replace(/\.?0+$/, '');
 };
 
 // 传入所需币种，返回相应数据
@@ -129,17 +129,20 @@ export const convertCNUnit: ConvertCNUnit = (origin) => {
 	const ori = Number(origin);
 	if (ori < 1) {
 		return Number(ori.toFixed(10));
-	} else if (ori < 10) {
-		return Number(ori.toFixed(6));
-	} else if (ori < 1000) {
-		return Number(ori.toFixed(4));
-	} else if (ori < 1000000) {
-		return Number(ori.toFixed(2));
-	} else if (ori < 100000000) {
-		return Number((ori / 10000).toFixed(2)) + '万';
-	} else {
-		return Number((ori / 100000000).toFixed(2)) + '亿';
 	}
+	if (ori < 10) {
+		return Number(ori.toFixed(6));
+	}
+	if (ori < 1000) {
+		return Number(ori.toFixed(4));
+	}
+	if (ori < 1000000) {
+		return Number(ori.toFixed(2));
+	}
+	if (ori < 100000000) {
+		return `${Number((ori / 10000).toFixed(2))}万`;
+	}
+	return `${Number((ori / 100000000).toFixed(2))}亿`;
 };
 
 // 获取主题
@@ -148,20 +151,20 @@ export const matchTheme = ({ theme, crease }: DefaultObject) => {
 
 	if (!theme) {
 		return crease ? light : lightReverse;
-	} else if (theme === 1) {
-		return crease ? dark : darkReverse;
-	} else {
-		return isDark ? (crease ? dark : darkReverse) : crease ? light : lightReverse;
 	}
+	if (theme === 1) {
+		return crease ? dark : darkReverse;
+	}
+	return isDark ? (crease ? dark : darkReverse) : crease ? light : lightReverse;
 };
 
 // 时间转换
 export const formatTime = (ts: number | string, cFormat?: string) => {
-	if (typeof ts === 'string' && /^[0-9]+$/.test(ts)) {
-		ts = parseInt(ts);
+	if (typeof ts === 'string' && /^\d+$/.test(ts)) {
+		ts = Number.parseInt(ts, 10);
 	}
 	if (typeof ts === 'number' && ts.toString().length === 10) {
-		ts = ts * 1000;
+		ts *= 1000;
 	}
 
 	const date = new Date(ts);
@@ -176,7 +179,7 @@ export const formatTime = (ts: number | string, cFormat?: string) => {
 		s: date.getSeconds(),
 		a: date.getDay(),
 	};
-	const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
+	const time_str = format.replace(/{([adhimsy])+}/g, (result, key) => {
 		const value = formatObj[key];
 		// Note: getDay() returns 0 on Sunday
 		if (key === 'a') {

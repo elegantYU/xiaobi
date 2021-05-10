@@ -15,7 +15,7 @@
 		"default_title": ""
 	},
 	"background": {
-		"scripts": ["static/js/background.js"],
+		"page": "background.html",
 		"persistent": true
 	},
 	"content_scripts": [],

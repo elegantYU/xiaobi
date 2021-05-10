@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NewsData } from '@InterFace/index';
 
-import ListBlock from './listBlock';
 import Loading from '@Components/loading/newsLoading';
 import FlashLoading from '@Components/loading/flashLoading';
+import ListBlock from './listBlock';
 
 interface Props {
 	data: NewsData[];

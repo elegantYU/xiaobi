@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-30 16:49:18
+ * @LastEditTime: 2021-05-10 13:45:21
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -58,6 +58,7 @@ export const light = {
 	loadingFore: colour.whitede,
 	error: colour.grey,
 	caret: colour.blue26,
+	istop: colour.yellow,
 };
 
 export const lightReverse = {
@@ -110,6 +111,9 @@ export const dark = {
 
 	loading: colour.blue21,
 	loadingFore: colour.blue31,
+	error: colour.grey,
+	caret: colour.blue26,
+	istop: colour.yellow,
 };
 
 export const darkReverse = {

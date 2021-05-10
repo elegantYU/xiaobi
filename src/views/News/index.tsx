@@ -50,9 +50,8 @@ const News = () => {
 	const renderListJSX = () => {
 		if (request && request.code) {
 			return <Error />;
-		} else {
-			return <List data={tableData} idx={tabIndex} />;
 		}
+		return <List data={tableData} idx={tabIndex} />;
 	};
 
 	useEffect(() => {
@@ -65,7 +64,7 @@ const News = () => {
 
 	return (
 		<WrapperUI>
-			<Head data={tabData} idx={tabIndex} clickEvent={handleClick}></Head>
+			<Head data={tabData} idx={tabIndex} clickEvent={handleClick} />
 			{renderListJSX()}
 		</WrapperUI>
 	);

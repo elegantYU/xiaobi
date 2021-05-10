@@ -9,7 +9,7 @@ module.exports = merge(common, {
 	watchOptions: {
 		ignored: ["node_modules/**"],
 	},
-	plugins: [
-		new BundleAnalyzerPlugin()
-	]
+	// plugins: [
+	// 	new BundleAnalyzerPlugin()
+	// ]
 })

@@ -4,7 +4,7 @@ import { creaseState, themeState, NavMode } from '@Const/setting';
 import { CMDS } from '@Const/commands';
 import useMessage from '@Src/hooks/useMessage';
 import { setSettingSM } from '@Api/setting';
-import { Context } from '@Src/context/index';
+import { Context } from '@Src/context';
 
 import Title from '@Components/setting/title';
 import Operation from '@Components/setting/operation';
@@ -50,13 +50,13 @@ const Base = () => {
 		<WrapperUI>
 			<Title>基础配置</Title>
 			<Operation title='涨跌颜色' desc='可以选择自己习惯的涨跌颜色'>
-				<RatioGroup data={creaseState} active={crease} clickEvent={handleCreaseClick}></RatioGroup>
+				<RatioGroup data={creaseState} active={crease} clickEvent={handleCreaseClick} />
 			</Operation>
 			<Operation title='主题颜色' desc='选择喜欢的主题，或者跟随系统'>
-				<RatioGroup data={themeState} active={theme} clickEvent={handleThemeClick}></RatioGroup>
+				<RatioGroup data={themeState} active={theme} clickEvent={handleThemeClick} />
 			</Operation>
 			<Operation title='侧边导航' desc='可切换为图标模式，扩大页面的空间'>
-				<RatioGroup data={NavMode} active={nav} clickEvent={handleNavClick}></RatioGroup>
+				<RatioGroup data={NavMode} active={nav} clickEvent={handleNavClick} />
 			</Operation>
 		</WrapperUI>
 	);

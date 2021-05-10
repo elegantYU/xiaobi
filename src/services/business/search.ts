@@ -5,11 +5,10 @@
  * @Description: 搜索 添加 删除自选
  */
 import { getSearchXHR } from '@Api/index';
-import { BackgroundAsyncMethod, BackgroundCmdMap } from '@InterFace/index';
+import { BackgroundAsyncMethod, BackgroundCmdMap, SearchData } from '@InterFace/index';
 import Store from '@Services/store';
 import { CMDS } from '@Const/commands';
 import decode from '@Utils/crypto';
-import { SearchData } from '@InterFace/index';
 
 // 搜索币种
 const getSearchData: BackgroundAsyncMethod = async (sendResponse, queryString) => {
@@ -39,7 +38,7 @@ const getSearchData: BackgroundAsyncMethod = async (sendResponse, queryString) =
 		});
 
 		sendResponse(res);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };

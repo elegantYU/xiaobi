@@ -6,20 +6,20 @@ import { CMDS_PAGE, CMDS } from '@Const/commands';
 import { PageCmdMap, DefaultObject } from '@InterFace/index';
 import { matchTheme } from '@Utils/index';
 import { light } from '@Styles/theme';
-import { Context } from '@Src/context/index';
+import { Context } from '@Src/context';
 import useMessage from '@Src/hooks/useMessage';
 
 import SideBar from '@Components/sideBar';
-import Home from './Home/index';
-import Trade from './Trade/index';
-import News from './News/index';
-import Setting from './Setting/index';
-import Search from './Search/index';
-import Error from './Error/index';
+import Home from './Home';
+import Trade from './Trade';
+import News from './News';
+import Setting from './Setting';
+import Search from './Search';
+import Error from './Error';
 
 const WrapperUI = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 60px;
+	grid-template-columns: calc(100% - 60px) 60px;
 	width: 500px;
 	height: 500px;
 	background-color: ${(p) => p.theme.bg};
@@ -79,11 +79,11 @@ const App: React.FC = () => {
 				<WrapperUI className={wrapperClass}>
 					<PageUI>
 						<Switch>
-							<Route path={StaticRoutes.Home} exact component={Home}></Route>
-							<Route path={StaticRoutes.Trend} exact component={Trade}></Route>
-							<Route path={StaticRoutes.News} exact component={News}></Route>
-							<Route path={StaticRoutes.Setting} component={Setting}></Route>
-							<Route path={StaticRoutes.Search} exact component={Search}></Route>
+							<Route path={StaticRoutes.Home} exact component={Home} />
+							<Route path={StaticRoutes.Trend} exact component={Trade} />
+							<Route path={StaticRoutes.News} exact component={News} />
+							<Route path={StaticRoutes.Setting} component={Setting} />
+							<Route path={StaticRoutes.Search} exact component={Search} />
 						</Switch>
 					</PageUI>
 					<SideBar />

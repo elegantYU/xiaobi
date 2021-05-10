@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import useMessage from '@Src/hooks/useMessage';
 import { CMDS } from '@Const/commands';
@@ -72,10 +72,7 @@ const Search: React.FC<Props> = ({ history }) => {
 	const { data } = useMessage({ command: CMDS.CMD_SEARCH, data: keywords });
 	const [listData, setListData] = useState(data);
 
-	const handleChange = useCallback(
-		debounce((e) => setKeyWords(e.target.value), 500),
-		[],
-	);
+	const handleChange = useMemo(() => debounce((e) => setKeyWords(e.target.value), 500), []);
 	const goBack = () => history.push(StaticRoutes.Home);
 
 	const handleChangeSelfCoin = (d: SearchData) => {
@@ -93,7 +90,7 @@ const Search: React.FC<Props> = ({ history }) => {
 		<WrapperUI>
 			<HeadUI>
 				<SearchBoxUI>
-					<i className='iconfont iconsousuo'></i>
+					<i className='iconfont iconsousuo' />
 					<input type='text' placeholder='搜索你关心的币种' onChange={handleChange} />
 				</SearchBoxUI>
 				<span className='cancel' onClick={goBack}>

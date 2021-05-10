@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck lazy lazy lazy
 
 // ws状态列表
 const stateList = [
@@ -15,6 +15,7 @@ class Socket {
 			this.onopen(() => this.send(JSON.stringify(sub)));
 		}
 	}
+
 	onopen(cb) {
 		if (this.ws) {
 			this.ws.onopen = (e) => {
@@ -23,6 +24,7 @@ class Socket {
 			};
 		}
 	}
+
 	onclose(cb) {
 		if (this.ws) {
 			this.ws.onclose = (e) => {
@@ -31,6 +33,7 @@ class Socket {
 			};
 		}
 	}
+
 	onerror(cb) {
 		if (this.ws) {
 			this.ws.onerror = (e) => {
@@ -39,6 +42,7 @@ class Socket {
 			};
 		}
 	}
+
 	onmessage(cb) {
 		if (this.ws) {
 			this.ws.onmessage = ({ data }) => {
@@ -47,12 +51,15 @@ class Socket {
 			};
 		}
 	}
+
 	send(data: DefaultObject) {
 		this.ws.send(JSON.stringify(data));
 	}
+
 	close() {
 		this.ws.close();
 	}
+
 	log() {
 		console.log(stateList[this.ws.readyState ?? 0].value);
 	}

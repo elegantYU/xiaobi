@@ -41,13 +41,12 @@ const ItemUI = styled.div`
 `;
 
 const RatioGroup: React.FC<Props> = ({ data, active, clickEvent }) => {
-	const renderItemJSX = () => {
-		return data.map(({ label, value }) => (
+	const renderItemJSX = () =>
+		data.map(({ label, value }) => (
 			<ItemUI key={value} className={active === value ? 'active' : ''} onClick={() => clickEvent(value)}>
 				{label}
 			</ItemUI>
 		));
-	};
 
 	return <WrapperUI>{renderItemJSX()}</WrapperUI>;
 };

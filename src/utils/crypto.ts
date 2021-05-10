@@ -1,27 +1,26 @@
-// @ts-nocheck
+/* eslint-disable */
+// @ts-nocheck because those codes are from website.
 const o = function (t) {
 	function r(t) {
-		return !!t.constructor && 'function' == typeof t.constructor.isBuffer && t.constructor.isBuffer(t);
+		return !!t.constructor && typeof t.constructor.isBuffer === 'function' && t.constructor.isBuffer(t);
 	}
 
 	return (
-		null != t &&
+		t != null &&
 		(r(t) ||
 			(function (t) {
-				return 'function' == typeof t.readFloatLE && 'function' == typeof t.slice && r(t.slice(0, 0));
+				return typeof t.readFloatLE === 'function' && typeof t.slice === 'function' && r(t.slice(0, 0));
 			})(t) ||
 			!!t._isBuffer)
 	);
 };
 const endian = (t) => {
 	if (t.constructor == Number) return (16711935 & rotl(t, 8)) | (4278255360 & rotl(t, 24));
-	for (var e = 0; e < t.length; e++) t[e] = endian(t[e]);
+	for (let e = 0; e < t.length; e++) t[e] = endian(t[e]);
 	return t;
 };
 
-const rotl = (t, e) => {
-	return (t << e) | (t >>> (32 - e));
-};
+const rotl = (t, e) => (t << e) | (t >>> (32 - e));
 
 const bytesToWords = (t) => {
 	for (var e = [], r = 0, n = 0; r < t.length; r++, n += 8) e[n >>> 5] |= t[r] << (24 - (n % 32));
@@ -46,7 +45,7 @@ const stringToBytes = (t) => {
 
 const s = (t, e) => {
 	t.constructor == String
-		? (t = e && 'binary' === e.encoding ? a.stringToBytes(t) : stringToBytes(t))
+		? (t = e && e.encoding === 'binary' ? a.stringToBytes(t) : stringToBytes(t))
 		: o(t)
 		? (t = Array.prototype.slice.call(t, 0))
 		: Array.isArray(t) || (t = t.toString());
@@ -57,15 +56,15 @@ const s = (t, e) => {
 	)
 		r[d] = (16711935 & ((r[d] << 8) | (r[d] >>> 24))) | (4278255360 & ((r[d] << 24) | (r[d] >>> 8)));
 	(r[u >>> 5] |= 128 << u % 32), (r[14 + (((u + 64) >>> 9) << 4)] = u);
-	var p = s._ff,
-		v = s._gg,
-		y = s._hh,
-		b = s._ii;
+	const p = s._ff;
+	const v = s._gg;
+	const y = s._hh;
+	const b = s._ii;
 	for (d = 0; d < r.length; d += 16) {
-		var m = f,
-			g = c,
-			_ = l,
-			w = h;
+		const m = f;
+		const g = c;
+		const _ = l;
+		const w = h;
 		(c = b(
 			(c = b(
 				(c = b(
@@ -364,19 +363,19 @@ const s = (t, e) => {
 };
 
 s._ff = function (t, e, r, n, i, o, a) {
-	var s = t + ((e & r) | (~e & n)) + (i >>> 0) + a;
+	const s = t + ((e & r) | (~e & n)) + (i >>> 0) + a;
 	return ((s << o) | (s >>> (32 - o))) + e;
 };
 s._gg = function (t, e, r, n, i, o, a) {
-	var s = t + ((e & n) | (r & ~n)) + (i >>> 0) + a;
+	const s = t + ((e & n) | (r & ~n)) + (i >>> 0) + a;
 	return ((s << o) | (s >>> (32 - o))) + e;
 };
 s._hh = function (t, e, r, n, i, o, a) {
-	var s = t + (e ^ r ^ n) + (i >>> 0) + a;
+	const s = t + (e ^ r ^ n) + (i >>> 0) + a;
 	return ((s << o) | (s >>> (32 - o))) + e;
 };
 s._ii = function (t, e, r, n, i, o, a) {
-	var s = t + (r ^ (e | ~n)) + (i >>> 0) + a;
+	const s = t + (r ^ (e | ~n)) + (i >>> 0) + a;
 	return ((s << o) | (s >>> (32 - o))) + e;
 };
 s._blocksize = 16;
@@ -384,17 +383,17 @@ s._digestsize = 16;
 
 // 加密
 const encryption = (t, e) => {
-	if (void 0 === t || null === t) throw new Error('Illegal argument ' + t);
-	var r = wordsToBytes(s(t, e));
+	if (void 0 === t || t === null) throw new Error(`Illegal argument ${t}`);
+	const r = wordsToBytes(s(t, e));
 	return e && e.asBytes ? r : e && e.asString ? a.bytesToString(r) : bytesToHex(r);
 };
 
 export default () => {
 	const e = Date.now().toString();
-	const temp = e + '9527' + e.substr(0, 6);
+	const temp = `${e}9527${e.slice(0, 6)}`;
 
 	return {
-		code: encryption(temp, undefined),
+		code: encryption(temp),
 		timestamp: e,
 	};
 };

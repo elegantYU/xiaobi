@@ -61,12 +61,10 @@ const renderLinkJSX = () => {
 	));
 };
 
-const SideBar = () => {
-	return (
-		<WrapperUI>
-			<div>{renderLinkJSX()}</div>
-		</WrapperUI>
-	);
-};
+const SideBar = () => (
+	<WrapperUI>
+		<div>{renderLinkJSX()}</div>
+	</WrapperUI>
+);
 
 export default SideBar;

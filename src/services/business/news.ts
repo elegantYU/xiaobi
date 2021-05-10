@@ -12,17 +12,20 @@ const getNewsList: BackgroundAsyncMethod = async (sendResponse, data) => {
 			data: { list },
 		} = await getNewsListXHR({ code, timestamp, news_category: data });
 
-		const res: NewsData[] = (list as any[]).map(({ abstract, author, updated_at, photo_abstract, link, title }) => ({
-			content: abstract,
-			link,
-			title,
-			source_name: author,
-			avatar: photo_abstract,
-			time: formatTime(updated_at + '000', `{m}/{d} {h}:{i}`),
-		}));
+		const res: NewsData[] = (list as any[]).map(
+			({ abstract, author, updated_at, photo_abstract, link, title, is_top }) => ({
+				content: abstract,
+				link,
+				title,
+				is_top,
+				source_name: author,
+				avatar: photo_abstract,
+				time: formatTime(`${updated_at}000`, `{m}/{d} {h}:{i}`),
+			}),
+		);
 
 		sendResponse(res);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };
@@ -41,11 +44,11 @@ const getFlashList: BackgroundAsyncMethod = async (sendResponse) => {
 			source_link,
 			source_name,
 			title,
-			time: formatTime(published_at + '000', '{h}:{i}'),
+			time: formatTime(`${published_at}000`, '{h}:{i}'),
 		}));
 
 		sendResponse(res);
-	} catch (error) {
+	} catch {
 		sendResponse({ code: -1 });
 	}
 };
@@ -69,14 +72,14 @@ const getCoinNews: BackgroundAsyncMethod = async (send, data) => {
 		const res: NewsData[] = (list as any[]).map(({ photo_url, source, title, posted_at, abstract, link }) => ({
 			content: abstract,
 			link: convertLink(link),
-			time: formatTime(posted_at + '000', '{m}/{d} {h}:{i}'),
+			time: formatTime(`${posted_at}000`, '{m}/{d} {h}:{i}'),
 			title,
 			avatar: photo_url,
 			source_name: source,
 		}));
 
 		send(res);
-	} catch (error) {
+	} catch {
 		send({ code: -1 });
 	}
 };

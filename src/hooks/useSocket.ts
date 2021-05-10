@@ -1,8 +1,8 @@
-// @ts-nocheck
+// @ts-nocheck because I don't want to write ts!
 /*
  * @Date: 2021-03-15 09:52:15
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-17 10:07:05
+ * @LastEditTime: 2021-05-10 15:00:26
  * @Description: websocket hooks
  */
 import React, { useState, useEffect, useRef } from 'react';
@@ -13,7 +13,7 @@ const useSocket = ({ url, data }) => {
 	const ws = useRef(null);
 
 	const createWs = () => {
-		if (!data || data.code || !data.length) return;
+		if (!data || data.code || data.length === 0) return;
 
 		ws.current = new WebSocket(url);
 		ws.current.onopen = (e) => {

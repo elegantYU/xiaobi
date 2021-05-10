@@ -47,7 +47,7 @@ const Operation: React.FC<Props> = ({ title, desc, children }) => {
 				<TitleUI>{title}</TitleUI>
 				<HandleUI>{children}</HandleUI>
 			</ContentUI>
-			<RenderDesc></RenderDesc>
+			<RenderDesc />
 		</WrapperUI>
 	);
 };

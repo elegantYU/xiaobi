@@ -70,8 +70,6 @@ const Tabs: React.FC<Props> = ({ data }) => {
 	const [offsetX, setOffsetX] = useState(0);
 	const { data: news } = useMessage({ command: CMDS.CMD_COINNEWS, data: data.id });
 
-	console.log('data tabs', news);
-
 	const handleClick = (idx: number) => {
 		const temp = tabData.map((v, i) => ({ ...v, active: false }));
 		temp[idx].active = true;
@@ -104,7 +102,7 @@ const Tabs: React.FC<Props> = ({ data }) => {
 		<WrapperUI>
 			<TabBoxUI>
 				{renderBtnJSX()}
-				<LineUI style={{ width: width + 'px', transform: `translateX(${offsetX}px)` }} />
+				<LineUI style={{ width: `${width}px`, transform: `translateX(${offsetX}px)` }} />
 			</TabBoxUI>
 			{idx ? <News data={news} /> : <Info data={data} />}
 		</WrapperUI>

@@ -84,6 +84,7 @@ export interface NewsData {
 	source_name?: string;
 	time: string;
 	avatar?: string;
+	is_top?: 0 | 1; //	置顶
 }
 
 // 搜索结果数据

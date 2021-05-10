@@ -55,17 +55,15 @@ const Tabs: React.FC<Props> = ({ data, idx, clickEvent }) => {
 		setOffsetX(x);
 	};
 
-	const RenderBtnJSX = () => {
-		return (
-			<>
-				{data.map((v, i) => (
-					<TabItemUI key={i} onClick={() => clickEvent(i)} className={v.active ? 'active' : ''}>
-						{v.name}
-					</TabItemUI>
-				))}
-			</>
-		);
-	};
+	const RenderBtnJSX = () => (
+		<>
+			{data.map((v, i) => (
+				<TabItemUI key={i} onClick={() => clickEvent(i)} className={v.active ? 'active' : ''}>
+					{v.name}
+				</TabItemUI>
+			))}
+		</>
+	);
 
 	useEffect(() => {
 		calcLineWidth();
@@ -74,7 +72,7 @@ const Tabs: React.FC<Props> = ({ data, idx, clickEvent }) => {
 	return (
 		<WrapperUI>
 			<RenderBtnJSX />
-			<LineUI style={{ width: width + 'px', transform: `translateX(${offsetX}px)` }} />
+			<LineUI style={{ width: `${width}px`, transform: `translateX(${offsetX}px)` }} />
 		</WrapperUI>
 	);
 };

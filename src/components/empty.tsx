@@ -21,7 +21,7 @@ const EmptyUI = styled.div`
 
 const Empty = () => (
 	<EmptyUI>
-		<i className='iconfont iconsousuowujieguo'></i>
+		<i className='iconfont iconsousuowujieguo' />
 		<span>无结果</span>
 	</EmptyUI>
 );

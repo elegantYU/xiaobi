@@ -90,9 +90,9 @@ const Home: React.FC<Props> = ({ history }) => {
 
 	return (
 		<WrapperUI>
-			<Banner></Banner>
+			<Banner />
 			<MenuUI>
-				<Tabs data={tabData} idx={tabIndex} clickEvent={handleClick}></Tabs>
+				<Tabs data={tabData} idx={tabIndex} clickEvent={handleClick} />
 				<BtnGroupUI>
 					{/* <TipButton placement='top' icon='iconpaixu'>
 						排序
@@ -102,7 +102,7 @@ const Home: React.FC<Props> = ({ history }) => {
 					</TipButton>
 				</BtnGroupUI>
 			</MenuUI>
-			<Table data={tableData} clickEvent={setSort} itemClick={goDetail}></Table>
+			<Table data={tableData} clickEvent={setSort} itemClick={goDetail} />
 		</WrapperUI>
 	);
 };

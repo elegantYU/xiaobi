@@ -111,7 +111,7 @@ const Item: React.FC<ItemProps> = ({ text, field, active, clickEvent }) => {
 		<ItemUI onClick={toggleSort}>
 			<span>{text}</span>
 			<CaretUI>
-				<span className={className}></span>
+				<span className={className} />
 			</CaretUI>
 		</ItemUI>
 	);

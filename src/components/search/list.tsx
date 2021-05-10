@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SearchData, DefaultObject } from '@InterFace/index';
 
-import ListBlock from './listBlock';
 import Empty from '@Components/empty';
+import ListBlock from './listBlock';
 
 interface Props {
 	data: SearchData[] | null | DefaultObject;
@@ -17,11 +17,10 @@ const WrapperUI = styled.div`
 
 const List: React.FC<Props> = ({ data, clickEvent }) => {
 	const renderListJSX = () => {
-		if (!data || !data.length) {
+		if (!data || data.length === 0) {
 			return <Empty />;
-		} else {
-			return (data as SearchData[]).map((d) => <ListBlock data={d} key={d.id} onClick={() => clickEvent(d)} />);
 		}
+		return (data as SearchData[]).map((d) => <ListBlock data={d} key={d.id} onClick={() => clickEvent(d)} />);
 	};
 
 	return <WrapperUI>{renderListJSX()}</WrapperUI>;

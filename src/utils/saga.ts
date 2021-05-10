@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck copy from my other project and it's a vanilla js
 const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
 function Saga(fns) {

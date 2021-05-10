@@ -7,7 +7,7 @@ const Loading: React.FC = () => {
 
 	return (
 		<>
-			{Array.from(Array(4)).map((_, idx) => (
+			{Array.from(new Array(4)).map((_, idx) => (
 				<ContentLoader
 					speed={1}
 					width={105}
