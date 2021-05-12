@@ -26,11 +26,12 @@ const TitleUI = styled.div`
 
 	p {
 		font-size: 18px;
+		color: ${(p) => p.theme.tradeBlack};
 	}
 `;
 
 const LabelUI = styled.div`
-	height: 42px;
+	min-height: 42px;
 	display: grid;
 	align-items: center;
 	grid-template-columns: 100px 1fr;
@@ -73,6 +74,7 @@ const DescUI = styled.div`
 
 	.title {
 		line-height: 40px;
+		color: ${(p) => p.theme.tradeHeadDesc};
 	}
 `;
 
@@ -101,6 +103,7 @@ const Info: React.FC<Props> = ({ data }) => {
 	} = data;
 	const { list } = info;
 	const desc = (list as any[]).find((v) => v.key === 'description')?.content || '--';
+	const alias = data.alias ? `(${data.alias})` : '';
 
 	const renderLabelJSX = () =>
 		ItemList.map((v) => {
@@ -142,7 +145,9 @@ const Info: React.FC<Props> = ({ data }) => {
 		<WrapperUI>
 			<TitleUI>
 				<img src={data.logo} alt='fail' />
-				<p>{data.pair}</p>
+				<p>
+					{data.pair} {alias}
+				</p>
 			</TitleUI>
 			{renderLabelJSX()}
 			<DescUI>

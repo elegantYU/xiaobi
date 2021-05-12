@@ -21,5 +21,5 @@
 	"content_scripts": [],
 	"web_accessible_resources": ["static/js/*"],
 	"content_security_policy": "script-src 'self' https://at.alicdn.com 'unsafe-eval'; object-src 'self'",
-	"permissions": ["webRequest", "webRequestBlocking", "<all_urls>"]
+	"permissions": ["webRequest", "webRequestBlocking", "notifications", "<all_urls>"]
 }

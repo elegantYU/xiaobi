@@ -6,9 +6,11 @@ import { CMDS } from '@Src/constants/commands';
 
 import Info from './info';
 import News from './news';
+import ToolBox from './toolbox';
 
 interface Props {
 	data: TableList;
+	id: number;
 }
 
 const WrapperUI = styled.div`
@@ -63,7 +65,19 @@ const TabsList = [
 	{ name: '相关资讯', active: false },
 ];
 
-const Tabs: React.FC<Props> = ({ data }) => {
+const Tabs: React.FC<Props> = ({ data, id }) => {
+	if (!data) {
+		return (
+			<WrapperUI>
+				<TabBoxUI>
+					{TabsList.map((v) => (
+						<TabItemUI key={v.name}>{v.name}</TabItemUI>
+					))}
+				</TabBoxUI>
+			</WrapperUI>
+		);
+	}
+
 	const [tabData, setTabData] = useState(TabsList);
 	const [idx, setIdx] = useState(0);
 	const [width, setWidth] = useState(0);
@@ -105,6 +119,7 @@ const Tabs: React.FC<Props> = ({ data }) => {
 				<LineUI style={{ width: `${width}px`, transform: `translateX(${offsetX}px)` }} />
 			</TabBoxUI>
 			{idx ? <News data={news} /> : <Info data={data} />}
+			<ToolBox id={id} />
 		</WrapperUI>
 	);
 };

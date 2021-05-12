@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:37:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-25 14:01:45
+ * @LastEditTime: 2021-05-12 23:07:31
  * @Description: chrome api 封装
  */
 import { DefaultObject } from '@InterFace/index';
@@ -9,6 +9,10 @@ import { DefaultObject } from '@InterFace/index';
 type SendMessage = (params: { command: string; data?: DefaultObject | string | number | null }) => Promise<any>;
 
 type CreateNotify = (options: chrome.notifications.NotificationOptions) => Promise<string>;
+
+type SetBadgeText = (text: string) => Promise<void>;
+
+type SetBadgeColor = (color: string) => Promise<void>;
 
 export const sendMessage: SendMessage = ({ command, data = null }) =>
 	new Promise((resolve) => {
@@ -20,5 +24,15 @@ export const sendMessage: SendMessage = ({ command, data = null }) =>
 
 export const createNotify: CreateNotify = (options) =>
 	new Promise((resolve) => {
-		chrome.notifications.create(options, resolve);
+		chrome.notifications.create('', options, resolve);
+	});
+
+export const setBadgeText: SetBadgeText = (text) =>
+	new Promise((resolve) => {
+		chrome.browserAction.setBadgeText({ text }, resolve);
+	});
+
+export const setBadgeBackground: SetBadgeColor = async (color) =>
+	new Promise((resolve) => {
+		chrome.browserAction.setBadgeBackgroundColor({ color }, resolve);
 	});

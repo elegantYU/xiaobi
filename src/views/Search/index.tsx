@@ -60,6 +60,7 @@ const SearchBoxUI = styled.div`
 		font-size: 14px;
 		font-weight: bold;
 		caret-color: ${(p) => p.theme.caret};
+		color: ${(p) => p.theme.search};
 
 		&::placeholder {
 			font-weight: normal;
@@ -82,7 +83,6 @@ const Search: React.FC<Props> = ({ history }) => {
 	};
 
 	useEffect(() => {
-		console.log('search data', data);
 		setListData(data);
 	}, [data]);
 

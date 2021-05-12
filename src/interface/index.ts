@@ -99,6 +99,15 @@ export interface SearchData {
 	[key: string]: any;
 }
 
+// store 保存通知数据格式
+export interface NoticeType {
+	id: string;
+	name: string;
+	type: 'price' | 'turnover' | string;
+	rule: number;
+	create: string;
+}
+
 // 排序格式
 export interface SortData {
 	field: 'currency' | 'volume' | 'usd' | 'turnover' | 'percent' | string;

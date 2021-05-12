@@ -35,6 +35,7 @@ module.exports = {
 	},
 	rules: {
 		'no-tabs': [0, { allowIndentationTabs: true }],
+		eqeqeq: 0,
 		camelcase: 0,
 		'no-shadow': 0,
 		'no-plusplus': 0,
@@ -57,7 +58,9 @@ module.exports = {
 		'@typescript-eslint/no-use-before-define': ['error'],
 		'react/no-array-index-key': 'off',
 		'react/jsx-filename-extension': 'off',
+		'react/jsx-props-no-spreading': 'off',
 		'react-hooks/exhaustive-deps': 0,
+		'react-hooks/rules-of-hooks': 0,
 		indent: ['error', 'tab'],
 		'import/extensions': 'off',
 		'import/prefer-default-export': 'off',

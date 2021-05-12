@@ -108,7 +108,7 @@ export const matchCoinData: MatchCoinData<IndexCoinData, keyof IndexCoinData> = 
 };
 
 // 传入一个对象数组及判断的属性名，返回去重数据
-export const uniqueData: UniqueData<IndexCoinData, keyof IndexCoinData> = (arr, key) => {
+export const uniqueData: UniqueData<any, any> = (arr, key) => {
 	const map = new Map();
 	const res = [];
 

@@ -23,8 +23,7 @@ const WrapperUI = styled.div`
 const Loading: React.FC = () => {
 	const { theme } = useTheme();
 	const { config } = useContext(Context);
-	const data =
-		!config || !config.nav ? [460, '0 0 460 76', 8, 76, 76, 380, 380] : [440, '0 0 440 76', 8, 76, 76, 360, 360];
+	const data = !config?.nav ? [460, '0 0 460 76', 8, 76, 76, 380, 380] : [440, '0 0 440 76', 8, 76, 76, 360, 360];
 
 	return (
 		<>

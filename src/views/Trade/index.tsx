@@ -8,7 +8,6 @@ import { sendMessage } from '@Utils/chrome';
 import SideBar from '@Components/trade/sidebar';
 import Head from '@Components/trade/head';
 import ChartView from '@Components/trade/chart';
-import ChartLoading from '@Components/loading/chartLoading';
 import Tabs from '@Components/trade/tabs';
 
 interface Props {
@@ -25,7 +24,6 @@ const WrapperUI = styled.div`
 
 const ContentUI = styled.div`
 	overflow: auto;
-	padding-bottom: 20px;
 `;
 
 const Trade: React.FC<Props> = ({ location }) => {
@@ -49,8 +47,8 @@ const Trade: React.FC<Props> = ({ location }) => {
 			<SideBar data={tableList} clickEvent={handleToggle} />
 			<ContentUI>
 				<Head data={data} />
-				{data ? <ChartView data={current} /> : <ChartLoading />}
-				{data ? <Tabs data={data} /> : null}
+				<ChartView data={current} loading={!!data} />
+				<Tabs data={data} id={current.id || 0} />
 			</ContentUI>
 		</WrapperUI>
 	);

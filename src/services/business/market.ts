@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 16:19:48
+ * @LastEditTime: 2021-05-12 17:25:16
  * @Description: 市场行情相关接口
  */
 import {
@@ -169,7 +169,7 @@ const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
 				: convertData(_.map(({ data }) => data));
 			sendResponse(result);
 		})
-		.catch(() => {
+		.catch((error) => {
 			sendResponse({ code: -1 });
 		});
 };

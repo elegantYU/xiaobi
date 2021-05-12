@@ -56,7 +56,7 @@ const SideBar: React.FC<Props> = ({ data, clickEvent }) => {
 	const renderItemJSX = () =>
 		data
 			? data.map((d) => (
-				<StyleNavUI key={d.com_id} className={d.active ? 'active' : ''} onClick={() => clickEvent(d)}>
+				<StyleNavUI key={`${d.com_id}-${d.id}`} className={d.active ? 'active' : ''} onClick={() => clickEvent(d)}>
 					<div className='button'>{d.currency}</div>
 				</StyleNavUI>
 			  ))

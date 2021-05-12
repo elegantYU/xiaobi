@@ -1,10 +1,10 @@
 /*
  * @Date: 2021-04-01 15:28:03
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-16 23:39:21
+ * @LastEditTime: 2021-05-10 17:19:21
  * @Description: tabs 栏
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import styled from 'styled-components';
 import { TabItem } from '@InterFace/index';
 
@@ -77,4 +77,4 @@ const Tabs: React.FC<Props> = ({ data, idx, clickEvent }) => {
 	);
 };
 
-export default Tabs;
+export default memo(Tabs);

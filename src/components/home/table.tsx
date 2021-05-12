@@ -38,7 +38,7 @@ const Table: React.FC<Props> = ({ data, clickEvent, itemClick }) => {
 							<Empty />
 						) : (
 							(data as TableList[]).map((d) => (
-								<ListBlock key={d.com_id} data={d} onClick={() => itemClick(d.id as number)} />
+								<ListBlock key={`${d.com_id}-${d.id}`} data={d} onClick={() => itemClick(d.id as number)} />
 							))
 						)
 					) : (

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 13:45:21
+ * @LastEditTime: 2021-05-10 18:02:51
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -48,6 +48,7 @@ export const light = {
 	newsItemTime: colour.grey93,
 	newsItemTime2: colour.blue,
 
+	search: colour.grey,
 	searchIcon: colour.grey8f,
 	searchEmpty: colour.grey8f,
 
@@ -86,7 +87,7 @@ export const dark = {
 	tdTitle: colour.whited4,
 	tdDesc: colour.grey51,
 	tdType: colour.whitedd,
-	tdBorder: colour.grey,
+	tdBorder: colour.blue0b,
 	tdHover: colour.black0c,
 	rateFont: colour.white,
 	volumeFont: colour.blue26,
@@ -102,12 +103,19 @@ export const dark = {
 	ratioBgHover: colour.whitee0,
 	ratioActiveBgHover: colour.blue41,
 
-	tabBorder: colour.grey,
+	tabBorder: colour.blue0b,
 	newsItemTitle: colour.whited4,
 	newsItemDesc: colour.grey99,
 	newsItemAvatar: colour.whitee0,
 	newsItemTime: colour.grey99,
 	newsItemTime2: colour.blue41,
+
+	search: colour.whitecf,
+	searchIcon: colour.grey8f,
+	searchEmpty: colour.grey8f,
+
+	tradeHeadDesc: colour.grey93,
+	tradeBlack: colour.whitecf,
 
 	loading: colour.blue21,
 	loadingFore: colour.blue31,

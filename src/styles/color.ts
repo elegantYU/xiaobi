@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:54:59
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-08 11:45:55
+ * @LastEditTime: 2021-05-10 16:55:24
  * @Description: 原色谱
  */
 
@@ -30,6 +30,7 @@ export default {
 	blue21: '#212f41',
 	blue31: '#314156',
 	blue1a: '#1a293e',
+	blue0b: '#0b1019',
 	blue3d: '#3d85f7',
 	blue26: '#2666d8',
 	blue00: '#0089ff',

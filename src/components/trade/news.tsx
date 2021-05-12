@@ -11,7 +11,7 @@ interface ItemProps {
 }
 
 const WrapperUI = styled.div`
-	min-height: 440px;
+	min-height: 460px;
 `;
 
 const ItemUI = styled.div`

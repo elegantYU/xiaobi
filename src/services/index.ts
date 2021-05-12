@@ -4,6 +4,8 @@ import local from './business/local';
 import news from './business/news';
 import search from './business/search';
 
+import './alarm';
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 	const cmdMap = new Map([...marketMap, ...local, ...news, ...search]);
 	const { command, data } = msg;

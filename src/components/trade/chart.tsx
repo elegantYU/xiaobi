@@ -8,10 +8,12 @@ import { TableList } from '@InterFace/index';
 import { formatTime } from '@Utils/index';
 import { sendMessage } from '@Utils/chrome';
 import { Context } from '@Src/context';
+import ChartLoading from '@Components/loading/chartLoading';
 
 interface Props {
 	data: TableList | null;
 	theme?: any;
+	loading?: boolean;
 }
 
 const WrapperUI = styled.div`
@@ -63,7 +65,15 @@ const TabList2 = [
 	{ period: '1d', text: '1年', limit: 365, active: false },
 ];
 
-const ChartView: React.FC<Props> = ({ data }) => {
+const ChartView: React.FC<Props> = ({ data, loading }) => {
+	if (!loading) {
+		return (
+			<WrapperUI>
+				<ChartLoading />
+			</WrapperUI>
+		);
+	}
+
 	const { config } = useContext(Context);
 	const [status, setStatus] = useState(0);
 	const [tabList, setTabList] = useState(TabList1);

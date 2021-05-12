@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { CMDS } from '@Const/commands';
 import styled from 'styled-components';
 import { TabItem, SortData } from '@InterFace/index';
@@ -53,13 +53,16 @@ const Home: React.FC<Props> = ({ history }) => {
 	const [tableData, setTableData] = useState<any>(request);
 	const { wsData } = useSocket({ url: WS_TICKET, data: request });
 
-	const handleClick = (idx: number) => {
-		const temp = tabData.map((v, i) => ({ ...v, active: false }));
-		temp[idx].active = true;
+	const handleClick = useCallback(
+		(idx: number) => {
+			const temp = tabData.map((v, i) => ({ ...v, active: false }));
+			temp[idx].active = true;
 
-		setTabData(temp);
-		setTabIndex(idx);
-	};
+			setTabData(temp);
+			setTabIndex(idx);
+		},
+		[tabIndex],
+	);
 
 	const goSearch = () => history.push(StaticRoutes.Search);
 	// coin 详情页
@@ -76,7 +79,7 @@ const Home: React.FC<Props> = ({ history }) => {
 		if (request) {
 			if (!wsData) {
 				setTableData(request);
-			} else {
+			} else if (!request.code) {
 				const combine = request.map((v: any) => {
 					if (v.id === (wsData as any).id) {
 						return { ...v, ...wsData };
@@ -84,6 +87,8 @@ const Home: React.FC<Props> = ({ history }) => {
 					return { ...v };
 				});
 				setTableData(combine);
+			} else {
+				setTableData(request);
 			}
 		}
 	}, [request, wsData]);
