@@ -20,7 +20,7 @@ const WrapperUI = styled.div`
 `;
 
 const HeadUI = styled.div`
-	padding: 8px 10px;
+	padding: 8px 20px;
 	display: grid;
 	grid-template-columns: 1fr 40px;
 	align-items: center;

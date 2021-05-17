@@ -3,7 +3,7 @@ export enum StaticRoutes {
 	News = '/news',
 	Trend = '/trend',
 	Notify = '/notify',
-	NotifyDetail = '/notify/detail',
+	NotifyDetail = '/notify/detail/:id',
 	Setting = '/setting',
 	SettingBase = '/setting/base',
 	SettingNotify = '/setting/notify',

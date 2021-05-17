@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEventHandler } from 'react';
 import styled from 'styled-components';
 import RateBlock from '@Components/home/rateBlock';
 import { TableList } from '@InterFace/index';
@@ -6,6 +6,7 @@ import { TableList } from '@InterFace/index';
 interface Props {
 	data: TableList;
 	onClick: () => void;
+	onContextMenu: () => void;
 }
 
 const WrapperUI = styled.div`
@@ -70,11 +71,17 @@ const PriceUI = styled.div`
 	}
 `;
 
-const ListBlock: React.FC<Props> = ({ data, onClick }) => {
+const handleContextMenu: MouseEventHandler<HTMLDivElement> = (e) => {
+	console.log('右键菜单');
+	e.preventDefault();
+	return false;
+};
+
+const ListBlock: React.FC<Props> = ({ data, onClick, onContextMenu }) => {
 	const { alias, anchor, currency, pair, usd, cny, percent, turnover, volume } = data;
 
 	return (
-		<WrapperUI title={pair} onClick={onClick}>
+		<WrapperUI title={pair} onClick={onClick} onContextMenu={handleContextMenu}>
 			<TitleUI>
 				<div className='title'>
 					<b>{currency}</b>

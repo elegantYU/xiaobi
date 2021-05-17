@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-12 23:14:49
+ * @LastEditTime: 2021-05-17 16:46:58
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
@@ -49,4 +49,5 @@ const noticeSaga = new (Saga as any)(noticeLoop);
 noticeSaga.start((d: any) => {
 	if (!d) return;
 	console.log('object');
+	//
 }, delay);

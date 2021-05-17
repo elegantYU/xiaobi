@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:54:59
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 16:55:24
+ * @LastEditTime: 2021-05-17 10:21:37
  * @Description: 原色谱
  */
 
@@ -17,6 +17,7 @@ export default {
 	whitede: '#dedede',
 	whitecc: '#ccc',
 	whitecf: '#cfd4e8',
+	whited1: '#d1d9dd',
 	whited4: '#d4d8dc',
 	black: '#000',
 	black15: '#15191e',
@@ -28,6 +29,7 @@ export default {
 	black0c: '#0c172b',
 	blue: '#2467e3',
 	blue21: '#212f41',
+	blue25: '#253247',
 	blue31: '#314156',
 	blue1a: '#1a293e',
 	blue0b: '#0b1019',
@@ -41,7 +43,7 @@ export default {
 	grey: '#333',
 	grey44: '#445368',
 	greyc8: '#c8ced3',
-	greycf: '#cfe3d7',
+	greycf: '#cfd3d7',
 	grey8f: '#8f9fac',
 	grey93: '#939ea6',
 	grey99: '#999',
@@ -52,7 +54,7 @@ export default {
 	grey70: '#7088a5',
 	grey71: '#7187a4',
 	pink: '#f97fa2',
-	yellow: '#ffbc00',
+	yellow: '#f29700',
 	orange: '#F36C33',
 	coffee: '#6B400E',
 	green: '#4aaa91',
@@ -60,6 +62,7 @@ export default {
 	greene7: '#e7f6f5',
 	red: '#c35466',
 	rede2: '#e2314e',
+	redc4: '#c4192d',
 	redf7: '#f7edef',
 	shadowDark: '#0000001a',
 	shadowLight: '#5050501a',

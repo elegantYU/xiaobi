@@ -2,8 +2,8 @@
 export const API_INDEX = 'https://api.mytokenapi.com/ticker/currencylist';
 export const API_RATE = 'https://api.mytokenapi.com/ticker/currencylist';
 export const API_DETAIL = 'https://api.mytokenapi.com/ticker/currencydetail';
-export const API_NEWS = 'https://api.mytokenapi.com/media/medialist';
-export const API_NEWSFLASH = 'https://api.mytokenapi.com/newsflash/list'; //	快讯
+export const API_NEWS = 'https://api.jinse.com/noah/v1/modules'; //	金色财经 大事件
+export const API_NEWSFLASH = 'https://api.jinse.com/noah/v2/lives'; //	金色财经 基础快讯
 export const API_SEARCH = 'https://api.mytokenapi.com/esearch/association';
 export const API_KLINE = 'https://api.mytokenapi.com/currency/kline'; //	k线
 export const API_TRENDLINE = 'https://api.mytokenapi.com/currency/trendlist'; //	折线图

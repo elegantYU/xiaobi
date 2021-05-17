@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { NewsData } from '@Src/interface';
+import { CoinNewsData } from '@Src/interface';
 
 interface Props {
-	data: NewsData[];
+	data: CoinNewsData[];
 }
 
 interface ItemProps {
-	data: NewsData;
+	data: CoinNewsData;
 }
 
 const WrapperUI = styled.div`

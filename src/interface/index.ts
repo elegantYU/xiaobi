@@ -3,39 +3,6 @@ export interface DefaultObject {
 	[key: string]: any;
 }
 
-export interface IndexCoinOrigin {
-	a: number;
-	h: number;
-	l: number;
-	o: number;
-	r: number;
-	s: string;
-	v: number;
-	c: number;
-	co: number;
-}
-
-// 首页币种列表数据
-export interface IndexCoinData {
-	amount: number | string; //	24H总量
-	open: number | string; //	开盘价格
-	high: number | string; //	最高价
-	low: number | string; //	最低价
-	rate: number | string; //	涨幅
-	symbol: string; //	币名
-	value: number | string; //	成交额
-	close: number | string; //	收盘价
-	count: number | string; //	交易笔数
-	type: string; //	币种
-}
-
-// 首页worker返回信息
-export interface IndexData {
-	topData: IndexCoinData[];
-	rateData: (IndexCoinData | null)[];
-	[key: string]: any;
-}
-
 // ——————————————
 // banner background 返回数据
 export interface BannerItem {
@@ -68,23 +35,47 @@ export interface TabItem {
 	name: string;
 	active: boolean;
 }
-// 新闻数据格式
+// 新闻数据tab格式
 export interface NewsTabItem {
 	command: string | number;
 	name: string;
 	active: boolean;
+	params: DefaultObject;
 }
 
 // 快讯数据格式
 export interface NewsData {
+	id: string;
 	title: string;
 	content?: string;
-	link: string;
-	source_link?: string;
-	source_name?: string;
+	origin: string;
 	time: string;
-	avatar?: string;
-	is_top?: 0 | 1; //	置顶
+	grade: number;
+	images?: any[];
+	upCount?: number;
+	downCount?: number;
+	commentCount?: number;
+	link: string;
+	attribute?: string; //	置顶
+}
+
+// 大事件快讯
+export interface NewsEventData {
+	id: string;
+	time: string;
+	title: string;
+	author?: string;
+	link: string;
+}
+
+// 单个基金相关资讯
+
+export interface CoinNewsData {
+	avatar: string;
+	title: string;
+	content?: string;
+	time: string;
+	link: string;
 }
 
 // 搜索结果数据
@@ -102,10 +93,28 @@ export interface SearchData {
 // store 保存通知数据格式
 export interface NoticeType {
 	id: string;
+	uid: string;
 	name: string;
 	type: 'price' | 'turnover' | string;
-	rule: number;
-	create: string;
+	rule: number | string;
+	create: number | string;
+	market: string;
+	sound?: boolean;
+}
+
+// 格式化后Notice数组
+export interface NoticeBlockType {
+	id: string;
+	name: string;
+	market: string;
+	price?: string | number;
+	children: Array<{
+		uid: string;
+		type: 'price' | 'turnover' | string;
+		rule: number | string;
+		sound?: boolean;
+		create: number | string;
+	}>;
 }
 
 // 排序格式

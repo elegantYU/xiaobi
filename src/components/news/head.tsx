@@ -62,7 +62,7 @@ const Head: React.FC<Props> = ({ data, idx, clickEvent }) => {
 
 	const renderBtnJSX = () =>
 		data.map((v, i) => (
-			<TabItemUI key={v.command} onClick={() => clickEvent(i)} className={v.active ? 'active' : ''}>
+			<TabItemUI key={v.name} onClick={() => clickEvent(i)} className={v.active ? 'active' : ''}>
 				{v.name}
 			</TabItemUI>
 		));

@@ -1,11 +1,5 @@
-import { DefaultObject, IndexCoinOrigin, IndexCoinData } from '@InterFace/index';
+import { DefaultObject } from '@InterFace/index';
 import { dark, light, lightReverse, darkReverse } from '@Styles/theme';
-
-type FormatCoin = (data: IndexCoinOrigin) => IndexCoinData | null;
-
-type FormatCoinList = (data: DefaultObject) => { [key: string]: IndexCoinData[] };
-
-type ConcatData<T> = (newArr: T[], oldArr: T[]) => T[];
 
 type MatchCoinData<T, P extends keyof T> = (keys: string[], list: T[], key: P) => T[];
 
@@ -34,79 +28,6 @@ export const convertNumber: (num: number) => string | number = (num) => {
 
 	return num.toFixed(18).replace(/\.?0+$/, '');
 };
-
-// 格式化coin
-export const formatCoin: FormatCoin = (data) => {
-	const { a, h, l, o, r, s, v, c, co } = data;
-	const valid = coinTypeFilter(s);
-
-	if (valid) {
-		const [_, name, k] = valid;
-		const key = k.toLocaleUpperCase();
-
-		return {
-			amount: convertNumber(a),
-			open: convertNumber(o),
-			high: convertNumber(h),
-			low: convertNumber(l),
-			rate: convertNumber(r),
-			symbol: name.toLocaleUpperCase(),
-			value: convertNumber(v),
-			count: convertNumber(co),
-			close: convertNumber(c),
-			type: key,
-		};
-	}
-
-	return null;
-};
-
-// 解析币种symbol 归类
-export const formatCoinCategory: FormatCoinList = (data) => {
-	const itemList = Object.values(data);
-
-	const result = itemList.reduce((synthesis, item) => {
-		const { s } = item;
-		const valid = coinTypeFilter(s);
-
-		if (valid) {
-			const [_, __, k] = valid;
-			const key = k.toLocaleUpperCase();
-			const res = formatCoin(item);
-
-			if (!synthesis[key]) {
-				synthesis[key] = [];
-			}
-			synthesis[key].push(res);
-		}
-		return synthesis;
-	}, {});
-
-	return result;
-};
-
-// 更新合并数据
-export const concatData: ConcatData<DefaultObject> = (newArr, oldArr) => {
-	if (newArr.length >= oldArr.length) {
-		return newArr;
-	}
-
-	const result = oldArr.map((item) => {
-		const curr = newArr.find((v) => v.symbol === item.symbol);
-
-		return curr || item;
-	});
-
-	return result;
-};
-
-// 传入所需币种，返回相应数据
-export const matchCoinData: MatchCoinData<IndexCoinData, keyof IndexCoinData> = (keys, list, key) => {
-	const keysMap: any = keys.reduce((o, k) => ({ ...o, [k]: key }), {});
-
-	return list.filter((v) => keysMap[v[key] || '']);
-};
-
 // 传入一个对象数组及判断的属性名，返回去重数据
 export const uniqueData: UniqueData<any, any> = (arr, key) => {
 	const map = new Map();
@@ -202,3 +123,16 @@ export const findArrMax = (arr: any[], field: string) => {
 		min,
 	};
 };
+
+// 获取query参数
+
+export const getLocationQuery: (s: string) => DefaultObject = (search) =>
+	search
+		.split('?')[1]
+		.split('&')
+		.map((q) => q.split('='))
+		.reduce((a, c) => {
+			// @ts-ignore
+			a[c[0]] = c[1];
+			return a;
+		}, {});

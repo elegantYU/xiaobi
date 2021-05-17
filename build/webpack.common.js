@@ -83,10 +83,10 @@ module.exports = {
 				test: /\.(eot|woff2?|ttf|svg)$/,
 				use: [
 					{
-						loader: "url-loader",
+						loader: "file-loader",
 						options: {
 							name: "[name]-[hash:6].min.[ext]",
-							outputPath: "static/fonts/",
+							outputPath: "/static/fonts/",
 							limit: 5000,
 						},
 					},

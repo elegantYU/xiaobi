@@ -12,6 +12,8 @@ import useMessage from '@Src/hooks/useMessage';
 import SideBar from '@Components/sideBar';
 import Home from './Home';
 import Trade from './Trade';
+import Notify from './Notify';
+import NotifyDetail from './Notify/detail';
 import News from './News';
 import Setting from './Setting';
 import Search from './Search';
@@ -81,6 +83,8 @@ const App: React.FC = () => {
 						<Switch>
 							<Route path={StaticRoutes.Home} exact component={Home} />
 							<Route path={StaticRoutes.Trend} exact component={Trade} />
+							<Route path={StaticRoutes.Notify} exact component={Notify} />
+							<Route path={StaticRoutes.NotifyDetail} component={NotifyDetail} />
 							<Route path={StaticRoutes.News} exact component={News} />
 							<Route path={StaticRoutes.Setting} component={Setting} />
 							<Route path={StaticRoutes.Search} exact component={Search} />
