@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:55:46
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-12 21:42:34
+ * @LastEditTime: 2021-05-18 10:49:16
  * @Description: 缓存本地数据
  */
 import { DefaultObject, NoticeType } from '@InterFace/index';
@@ -35,7 +35,7 @@ const Store: StoreType = {
 	set(key, value) {
 		if (Array.isArray(value)) {
 			this[key] = [...value];
-		} else if (Object.keys(value).length > 0) {
+		} else if (value instanceof Object) {
 			this[key] = { ...value };
 		} else {
 			this[key] = value;

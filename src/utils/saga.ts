@@ -11,8 +11,14 @@ Saga.prototype.start = async function (callback, time = 5000) {
 
 	while (!this.pause) {
 		if (this.pause) break;
-		const datas = isArray ? await Promise.all(this.fns.map((fn) => fn())) : await this.fns();
-		callback(datas);
+
+		try {
+			const datas = isArray ? await Promise.all(this.fns.map((fn) => fn())) : await this.fns();
+			callback(datas);
+		} catch (error) {
+			console.log('网络错误，但是keep going', error);
+		}
+
 		await delay(time);
 	}
 };

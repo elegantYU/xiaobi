@@ -21,7 +21,7 @@ const NothingUI = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	padding-top: 100px;
 	gap: 20px;
 	background-color: ${(p) => p.theme.panelBg};
 

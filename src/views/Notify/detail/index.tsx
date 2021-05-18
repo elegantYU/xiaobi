@@ -202,6 +202,7 @@ const Index: React.FC<Props> = ({ match }) => {
 					rule: Number(keywords).toString(),
 					market: data.market,
 					create: time,
+					compare: Number(keywords) > data.usd,
 				};
 
 				sendMessage({ command: CMDS.CMD_ADDNOTICE, data: params })

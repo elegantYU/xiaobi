@@ -11,3 +11,8 @@
 
   - font-display: swap 在字体加载完成前，使用默认字体，并在加载完成后提供非常小的阻塞(平滑过渡的意思)
   - webpack 打包 file-loader outpath 使用根路径
+
+- saga 轮询方法无错误判断
+
+  badge notification 业务在背景页轮询时，若当前环境网络异常，则直接停止轮询。
+  现已加上 catch 处理 error

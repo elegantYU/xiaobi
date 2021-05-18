@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-15 18:55:46
+ * @LastEditTime: 2021-05-18 15:40:48
  * @Description: 通知管理
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeType, NoticeBlockType } from '@InterFace/index';
@@ -38,8 +38,6 @@ const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 		return arr;
 	}, [] as NoticeBlockType[]);
 
-	// Promise.all(list.map((v) => getDetailXHR({ currency_on_market_id: v.id, code, timestamp }))).then((d) => {});
-
 	send(blockList);
 };
 
@@ -68,7 +66,7 @@ const getSingleInfo: BackgroundAsyncMethod = async (send, d) => {
 
 	try {
 		const {
-			data: { alias, anchor, currency, percent_change_utc0, price, pair, legal_currency_price, market_name },
+			data: { alias, anchor, currency, percent_change_utc0, price_usd, pair, legal_currency_price, market_name },
 		} = await getDetailXHR({ currency_on_market_id: d, code, timestamp });
 		const res = {
 			alias,
@@ -77,7 +75,7 @@ const getSingleInfo: BackgroundAsyncMethod = async (send, d) => {
 			percent: percent_change_utc0,
 			pair,
 			cny: convertCNUnit(legal_currency_price),
-			usd: convertCNUnit(price),
+			usd: convertCNUnit(price_usd),
 			market: market_name,
 			list,
 		};

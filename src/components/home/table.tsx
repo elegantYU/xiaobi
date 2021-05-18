@@ -12,6 +12,7 @@ interface Props {
 	data: TableList[] | DefaultObject | any;
 	clickEvent: (p: SortData) => void;
 	itemClick: (id: string | number) => void;
+	shortcut: boolean;
 }
 
 const WrapperUI = styled.div`
@@ -24,7 +25,7 @@ const ContentUI = styled.div`
 	overflow: auto;
 `;
 
-const Table: React.FC<Props> = ({ data, clickEvent, itemClick }) => {
+const Table: React.FC<Props> = ({ data, clickEvent, itemClick, shortcut }) => {
 	const renderTableJSX = () => {
 		if (data && data.code) {
 			return <Error />;
@@ -42,7 +43,7 @@ const Table: React.FC<Props> = ({ data, clickEvent, itemClick }) => {
 									key={`${d.com_id}-${d.id}`}
 									data={d}
 									onClick={() => itemClick(d.id as number)}
-									onContextMenu={() => 1}
+									shortcut={shortcut}
 								/>
 							))
 						)

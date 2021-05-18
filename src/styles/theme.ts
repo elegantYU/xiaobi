@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-17 17:02:15
+ * @LastEditTime: 2021-05-18 13:47:24
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -30,6 +30,7 @@ export const light = {
 	rateFont: colour.white,
 	volumeFont: colour.blue26,
 	volumeBg: colour.bluef0,
+	quickBtnBg: colour.white,
 
 	title: colour.grey53,
 	titleBorder: colour.whitef8,
@@ -47,8 +48,6 @@ export const light = {
 	newsItemDesc: colour.grey93,
 	newsItemAvatar: colour.whitee0,
 	newsItemTime: colour.grey93,
-	newsItemTime2: colour.blue,
-	newsIcon: colour.whited4,
 	newsAttr: colour.white,
 	newsGrade4: colour.yellow,
 	newsGrade5: colour.redc4,
@@ -60,6 +59,9 @@ export const light = {
 
 	tradeHeadDesc: colour.grey93,
 	tradeBlack: colour.black15,
+	tradeDrawer: colour.blue,
+	tradeDrawerBg: colour.white,
+	tradeDrawerGroup: colour.white,
 
 	noticeName: colour.black15,
 	noticePlat: colour.black25,
@@ -87,6 +89,9 @@ export const light = {
 	loadingFore: colour.whitede,
 	error: colour.grey,
 	caret: colour.blue26,
+	pink: colour.pink,
+	yellow: colour.yellow,
+	blue: colour.blue00,
 };
 
 export const lightReverse = {
@@ -121,6 +126,7 @@ export const dark = {
 	rateFont: colour.white,
 	volumeFont: colour.blue26,
 	volumeBg: colour.bluef0,
+	quickBtnBg: colour.blue31,
 
 	title: colour.whitecc,
 	titleBorder: colour.grey,
@@ -133,11 +139,15 @@ export const dark = {
 	ratioActiveBgHover: colour.blue41,
 
 	tabBorder: colour.blue0b,
+	newsBorder: colour.grey,
 	newsItemTitle: colour.whited4,
 	newsItemDesc: colour.grey99,
 	newsItemAvatar: colour.whitee0,
 	newsItemTime: colour.grey99,
-	newsItemTime2: colour.blue41,
+	newsAttr: colour.white,
+	newsGrade4: colour.yellow,
+	newsGrade5: colour.rede2,
+	newsTitleHover: colour.blue00,
 
 	search: colour.whitecf,
 	searchIcon: colour.grey8f,
@@ -145,6 +155,9 @@ export const dark = {
 
 	tradeHeadDesc: colour.grey93,
 	tradeBlack: colour.whitecf,
+	tradeDrawer: colour.blueb8,
+	tradeDrawerBg: colour.blue31,
+	tradeDrawerGroup: colour.blue21,
 
 	noticeName: colour.black15,
 	noticePlat: colour.black25,
@@ -156,18 +169,25 @@ export const dark = {
 	noticePlace: colour.grey44,
 	noticeTip: colour.grey8f,
 	noticeInput: colour.blue3d,
-	noticeBtn: colour.grey71,
+	noticeBtn: colour.bluef0,
 	noticeBtnBg: colour.grey44,
 	noticeBtnHover: colour.blue3d,
 	noticeTab: colour.grey71,
 	noticeItem: colour.greycf,
 	decreaseBg: colour.greene7,
 	increaseBg: colour.redf7,
+	noticeEmptyIcon: colour.grey44,
+	noticeEmptyBtn: colour.blue26,
+	noticeEmptyBtnBg: colour.black0a,
+	noticeEmptyDesc: colour.grey44,
 
 	loading: colour.blue21,
 	loadingFore: colour.blue31,
 	error: colour.grey,
 	caret: colour.blue26,
+	pink: colour.pink,
+	yellow: colour.yellow,
+	blue: colour.blue00,
 };
 
 export const darkReverse = {

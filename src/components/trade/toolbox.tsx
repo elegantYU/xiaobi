@@ -45,7 +45,6 @@ to {
 const WrapperUI = styled.div`
 	width: 35px;
 	height: 35px;
-	background-color: White;
 	border-radius: 50%;
 	position: fixed;
 	bottom: 5px;
@@ -73,6 +72,8 @@ const MoreUI = styled.div`
 	position: relative;
 	z-index: 1;
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	background-color: ${(p) => p.theme.tradeDrawerBg};
+	color: ${(p) => p.theme.tradeDrawer};
 
 	&:hover {
 		box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
@@ -94,6 +95,7 @@ const GroupBoxUI = styled.div`
 		pointer-events: all;
 		overflow: visible;
 		box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+		background-color: ${(p) => p.theme.tradeDrawerGroup};
 	}
 `;
 
@@ -114,17 +116,17 @@ const ItemUI = styled.div`
 	height: 32px;
 	&.yellow {
 		.iconfont {
-			color: yellow;
+			color: ${(p) => p.theme.yellow};
 		}
 	}
 	&.pink {
 		.iconfont {
-			color: pink;
+			color: ${(p) => p.theme.pink};
 		}
 	}
 	&.blue {
 		.iconfont {
-			color: blue;
+			color: ${(p) => p.theme.blue};
 		}
 	}
 `;
@@ -154,7 +156,7 @@ const TipsProps = [
 	{
 		id: 0,
 		key: 'follow',
-		before: 'iconxinaixin',
+		before: 'iconxinaixin2',
 		after: 'iconxinaixin1',
 		status: false,
 		color: 'pink',

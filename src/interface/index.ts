@@ -100,6 +100,8 @@ export interface NoticeType {
 	create: number | string;
 	market: string;
 	sound?: boolean;
+	compare?: boolean; //	大于还是小于关系 true > false <
+	ignore?: boolean; //	取消提醒
 }
 
 // 格式化后Notice数组

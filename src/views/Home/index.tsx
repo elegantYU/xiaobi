@@ -46,6 +46,7 @@ const tabList: TabItem[] = [
 ];
 
 const Home: React.FC<Props> = ({ history }) => {
+	const [isVisible, setVisible] = useState(false); //	切换快捷入口
 	const [tabData, setTabData] = useState(tabList);
 	const [tabIndex, setTabIndex] = useState(1);
 	const [sort, setSort] = useState<SortData>({ field: 'currency', sort: 0 }); //	列表排序
@@ -60,6 +61,7 @@ const Home: React.FC<Props> = ({ history }) => {
 
 			setTabData(temp);
 			setTabIndex(idx);
+			setVisible(false);
 		},
 		[tabIndex],
 	);
@@ -69,6 +71,9 @@ const Home: React.FC<Props> = ({ history }) => {
 	const goDetail = (id: string | number) => {
 		// 传入 request + id
 		history.push({ pathname: StaticRoutes.Trend, state: { list: request, id } });
+	};
+	const toggleNotify = () => {
+		setVisible(!isVisible);
 	};
 
 	useEffect(() => {
@@ -102,12 +107,15 @@ const Home: React.FC<Props> = ({ history }) => {
 					{/* <TipButton placement='top' icon='iconpaixu'>
 						排序
 					</TipButton> */}
+					<TipButton placement='top' icon='iconfeijifasong' onClick={toggleNotify}>
+						快捷
+					</TipButton>
 					<TipButton placement='top' icon='iconsousuo' onClick={goSearch}>
 						搜索
 					</TipButton>
 				</BtnGroupUI>
 			</MenuUI>
-			<Table data={tableData} clickEvent={setSort} itemClick={goDetail} />
+			<Table data={tableData} clickEvent={setSort} itemClick={goDetail} shortcut={isVisible} />
 		</WrapperUI>
 	);
 };

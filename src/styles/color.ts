@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:54:59
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-17 10:21:37
+ * @LastEditTime: 2021-05-18 09:57:04
  * @Description: 原色谱
  */
 
@@ -53,7 +53,7 @@ export default {
 	greyb7: '#b7c1c7',
 	grey70: '#7088a5',
 	grey71: '#7187a4',
-	pink: '#f97fa2',
+	pink: '#FF6666',
 	yellow: '#f29700',
 	orange: '#F36C33',
 	coffee: '#6B400E',

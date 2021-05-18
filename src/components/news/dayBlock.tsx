@@ -15,6 +15,7 @@ const WrapperUI = styled.div`
 const TitleUI = styled.div`
 	padding-left: 3px;
 	font-size: 14px;
+	color: ${(p) => p.theme.newsItemTitle};
 `;
 
 const DayBlock: React.FC<Props> = ({ date, list, idx }) => {

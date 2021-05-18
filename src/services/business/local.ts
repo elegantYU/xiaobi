@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:23:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-12 21:42:25
+ * @LastEditTime: 2021-05-18 10:51:00
  * @Description: 从store获取数据
  */
 import Store from '@Services/store';
@@ -57,7 +57,7 @@ const changeSelf: BackgroundAsyncMethod = async (send, id) => {
 // 直接替换特殊关注
 const changeFollow: BackgroundAsyncMethod = async (send, id) => {
 	const follow = Store.get('follow');
-	const res = follow === id ? '6306516' : id;
+	const res = follow == id ? '6306516' : id;
 
 	Store.set('follow', res);
 
