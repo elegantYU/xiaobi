@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 13:47:24
+ * @LastEditTime: 2021-05-20 22:21:34
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -49,8 +49,9 @@ export const light = {
 	newsItemAvatar: colour.whitee0,
 	newsItemTime: colour.grey93,
 	newsAttr: colour.white,
-	newsGrade4: colour.yellow,
-	newsGrade5: colour.redc4,
+	newsTitle: colour.black25,
+	newsGrade4: colour.yellowf1,
+	newsGrade5: colour.redd4,
 	newsTitleHover: colour.blue00,
 
 	search: colour.grey,
@@ -84,6 +85,21 @@ export const light = {
 	noticeEmptyBtn: colour.blue26,
 	noticeEmptyBtnBg: colour.bluef6,
 	noticeEmptyDesc: colour.greyc8,
+
+	helpQuestion: colour.black15,
+	helpAnswer: colour.grey66,
+
+	progressBg: colour.whitede,
+	progressBtn: colour.white,
+	progressActive: colour.blue00,
+	progressText: colour.grey99,
+
+	aboutTitle: colour.black15,
+
+	updateBg: colour.white,
+	updateTitle: colour.black15,
+	updateDesc: colour.grey,
+	updateClose: colour.grey99,
 
 	loading: colour.whitef0,
 	loadingFore: colour.whitede,
@@ -129,7 +145,7 @@ export const dark = {
 	quickBtnBg: colour.blue31,
 
 	title: colour.whitecc,
-	titleBorder: colour.grey,
+	titleBorder: colour.grey44,
 	desc: colour.grey66,
 	ratio: colour.grey,
 	ratioBg: colour.whiteee,
@@ -145,7 +161,8 @@ export const dark = {
 	newsItemAvatar: colour.whitee0,
 	newsItemTime: colour.grey99,
 	newsAttr: colour.white,
-	newsGrade4: colour.yellow,
+	newsTitle: colour.whitecc,
+	newsGrade4: colour.yellowf1,
 	newsGrade5: colour.rede2,
 	newsTitleHover: colour.blue00,
 
@@ -180,6 +197,21 @@ export const dark = {
 	noticeEmptyBtn: colour.blue26,
 	noticeEmptyBtnBg: colour.black0a,
 	noticeEmptyDesc: colour.grey44,
+
+	helpQuestion: colour.whiteee,
+	helpAnswer: colour.whitecf,
+
+	progressBg: colour.whitede,
+	progressBtn: colour.white,
+	progressActive: colour.blue00,
+	progressText: colour.grey99,
+
+	aboutTitle: colour.whitede,
+
+	updateBg: colour.black0a,
+	updateTitle: colour.whiteee,
+	updateDesc: colour.whitecf,
+	updateClose: colour.whitecf,
 
 	loading: colour.blue21,
 	loadingFore: colour.blue31,

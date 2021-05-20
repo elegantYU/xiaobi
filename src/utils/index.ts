@@ -1,5 +1,6 @@
 import { DefaultObject } from '@InterFace/index';
 import { dark, light, lightReverse, darkReverse } from '@Styles/theme';
+import { getManifest } from './chrome';
 
 type MatchCoinData<T, P extends keyof T> = (keys: string[], list: T[], key: P) => T[];
 
@@ -136,3 +137,19 @@ export const getLocationQuery: (s: string) => DefaultObject = (search) =>
 			a[c[0]] = c[1];
 			return a;
 		}, {});
+
+// 比较是否需要更新公告
+export const checkUpdate = () => {
+	const { version } = getManifest();
+	const res = localStorage.getItem(`version${version}`);
+
+	return !!res;
+};
+
+//	控制body的zoom
+export const changeViewPort = (multiple: number) => {
+	const map = ['0.9', '1', '1.1', '1.2'];
+	const res = map[multiple];
+
+	document.body.style.zoom = res;
+};

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:55:46
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 10:49:16
+ * @LastEditTime: 2021-05-20 15:15:50
  * @Description: 缓存本地数据
  */
 import { DefaultObject, NoticeType } from '@InterFace/index';
@@ -27,6 +27,7 @@ const Store: StoreType = {
 		theme: 0, //	0 浅 1 深 2 跟随
 		crease: 1, // 0 绿涨 1 红涨
 		nav: 1, //	0 icon 1 text
+		viewport: 1, //	默认 [0,1,2,3] => [0.9, 1, 1.1, 1.2]
 	},
 	searchRecord: [], //	搜索记录
 	get(key: string) {

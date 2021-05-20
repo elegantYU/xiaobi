@@ -1,14 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { creaseState, themeState, NavMode } from '@Const/setting';
-import { CMDS } from '@Const/commands';
-import useMessage from '@Src/hooks/useMessage';
 import { setSettingSM } from '@Api/setting';
 import { Context } from '@Src/context';
 
 import Title from '@Components/setting/title';
 import Operation from '@Components/setting/operation';
 import RatioGroup from '@Components/setting/ratioGroup';
+import Process from '@Components/setting/progress';
 
 const WrapperUI = styled.div`
 	width: 100%;
@@ -16,47 +15,42 @@ const WrapperUI = styled.div`
 `;
 
 const Base = () => {
-	const { data } = useMessage({ command: CMDS.CMD_SETTING });
-	const { setConfig } = useContext(Context);
-	const [crease, setCrease] = useState(0);
-	const [theme, setTheme] = useState(1);
-	const [nav, setNav] = useState(1);
+	const { config, times, setTimes } = useContext(Context);
 
 	const handleCreaseClick = (value: any) => {
-		setCrease(value);
-		setSettingSM({ ...data, crease: value });
+		setSettingSM({ ...config, crease: value });
+		setTimes(times + 1);
 	};
 
 	const handleThemeClick = (value: any) => {
-		setTheme(value);
-		setSettingSM({ ...data, theme: value });
+		setSettingSM({ ...config, theme: value });
+		setTimes(times + 1);
 	};
 
 	const handleNavClick = (value: any) => {
-		setNav(value);
-		setConfig({ ...data, nav: value });
-		setSettingSM({ ...data, nav: value });
+		setSettingSM({ ...config, nav: value });
+		setTimes(times + 1);
 	};
 
-	useEffect(() => {
-		if (data) {
-			setCrease(data.crease);
-			setTheme(data.theme);
-			setNav(data.nav);
-		}
-	}, [data]);
+	const handleViewPortChange = (multi: number) => {
+		setSettingSM({ ...config, viewport: multi });
+		setTimes(times + 1);
+	};
 
 	return (
 		<WrapperUI>
 			<Title>基础配置</Title>
 			<Operation title='涨跌颜色' desc='可以选择自己习惯的涨跌颜色'>
-				<RatioGroup data={creaseState} active={crease} clickEvent={handleCreaseClick} />
+				<RatioGroup data={creaseState} active={config?.crease} clickEvent={handleCreaseClick} />
 			</Operation>
 			<Operation title='主题颜色' desc='选择喜欢的主题，或者跟随系统'>
-				<RatioGroup data={themeState} active={theme} clickEvent={handleThemeClick} />
+				<RatioGroup data={themeState} active={config?.theme} clickEvent={handleThemeClick} />
 			</Operation>
 			<Operation title='侧边导航' desc='可切换为图标模式，扩大页面的空间'>
-				<RatioGroup data={NavMode} active={nav} clickEvent={handleNavClick} />
+				<RatioGroup data={NavMode} active={config?.nav} clickEvent={handleNavClick} />
+			</Operation>
+			<Operation title='窗口大小' desc='拖动调节窗口大小'>
+				<Process value={config?.viewport || 0} changeEvent={handleViewPortChange} />
 			</Operation>
 		</WrapperUI>
 	);

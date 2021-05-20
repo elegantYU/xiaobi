@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 16:45:46
+ * @LastEditTime: 2021-05-20 22:39:14
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
@@ -69,7 +69,7 @@ noticeSaga.start((d: any) => {
 					type: 'basic',
 				};
 
-				if (type === 'price' && !ignore) {
+				if (!ignore) {
 					let title;
 
 					if (compare && price_usd > rule) {
@@ -85,6 +85,10 @@ noticeSaga.start((d: any) => {
 						const newList = notices.map((v) => (v.uid === uid ? { ...v, ignore: true } : { ...v }));
 						Store.set('notifications', newList);
 					}
+				} else if ((compare && price_usd < rule) || (!compare && price_usd > rule)) {
+					// 已通知过(上涨、下跌) 若价格(下跌、上涨) 则再次启用通知，等待下次价格变化
+					const newList = notices.map((v) => (v.uid === uid ? { ...v, ignore: false } : { ...v }));
+					Store.set('notifications', newList);
 				}
 			});
 		},

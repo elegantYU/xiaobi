@@ -28,7 +28,7 @@ module.exports = {
 		type: "memory"
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss', '.css'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.scss', '.css', '.jpg'],
 		alias
 	},
 	module: {

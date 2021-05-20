@@ -6,6 +6,8 @@
 !.vscode/extensions.json
 *.code-workspace
 
+src/utils/crypto.ts
+
 # Local History for Visual Studio Code
 .history/
 

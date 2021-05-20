@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:54:59
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 09:57:04
+ * @LastEditTime: 2021-05-19 11:12:26
  * @Description: 原色谱
  */
 
@@ -55,6 +55,7 @@ export default {
 	grey71: '#7187a4',
 	pink: '#FF6666',
 	yellow: '#f29700',
+	yellowf1: '#f1a545',
 	orange: '#F36C33',
 	coffee: '#6B400E',
 	green: '#4aaa91',
@@ -63,6 +64,7 @@ export default {
 	red: '#c35466',
 	rede2: '#e2314e',
 	redc4: '#c4192d',
+	redd4: '#d4727e',
 	redf7: '#f7edef',
 	shadowDark: '#0000001a',
 	shadowLight: '#5050501a',

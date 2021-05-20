@@ -68,6 +68,7 @@ module.exports = {
 		'jsx-a11y/no-static-element-interactions': 0,
 		'jsx-a11y/label-has-associated-control': 0,
 		'jsx-a11y/no-noninteractive-element-interactions': 0,
+		'jsx-a11y/mouse-events-have-key-events': 0,
 		'promise/always-return': 0,
 		'@typescript-eslint/ban-ts-comment': [
 			'warn',

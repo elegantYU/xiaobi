@@ -4,12 +4,15 @@ import { Switch, Route } from 'react-router-dom';
 import { StaticRoutes } from '@Const/routes';
 import { CMDS_PAGE, CMDS } from '@Const/commands';
 import { PageCmdMap, DefaultObject } from '@InterFace/index';
-import { matchTheme } from '@Utils/index';
+import { matchTheme, checkUpdate, changeViewPort } from '@Utils/index';
 import { light } from '@Styles/theme';
 import { Context } from '@Src/context';
+import { getManifest } from '@Src/utils/chrome';
 import useMessage from '@Src/hooks/useMessage';
 
 import SideBar from '@Components/sideBar';
+import AnnounceMent from '@Components/announcement';
+import Reward from '@Components/reward';
 import Home from './Home';
 import Trade from './Trade';
 import Notify from './Notify';
@@ -17,7 +20,6 @@ import NotifyDetail from './Notify/detail';
 import News from './News';
 import Setting from './Setting';
 import Search from './Search';
-import Error from './Error';
 
 const WrapperUI = styled.div`
 	display: grid;
@@ -25,6 +27,7 @@ const WrapperUI = styled.div`
 	width: 500px;
 	height: 500px;
 	background-color: ${(p) => p.theme.bg};
+	position: relative;
 
 	&.iconMode {
 		grid-template-columns: 1fr 40px;
@@ -37,11 +40,27 @@ const PageUI = styled.div`
 	background-color: ${(p) => p.theme.bg};
 `;
 
+const needUpdate = checkUpdate();
+
 const App: React.FC = () => {
+	const [showUpdate, setShowUpdate] = useState(!needUpdate);
+	const [showReward, setReward] = useState(false);
 	const [theme, setTheme] = useState<DefaultObject | null>(light);
-	const { data } = useMessage({ command: CMDS.CMD_SETTING });
+	const [times, setTimes] = useState(0); //	及时更新设置
+	const { data } = useMessage({ command: CMDS.CMD_SETTING, data: times });
 	const [config, setConfig] = useState<any>(data);
+	const { version } = getManifest();
 	const wrapperClass = `${config?.nav === 1 ? '' : 'iconMode'}`;
+
+	const handleClose = () => {
+		setShowUpdate(false);
+		localStorage.setItem(`version${version}`, 'true');
+	};
+	const handleCloseReward = () => setReward(false);
+	const handleOpenReward = () => {
+		handleClose();
+		setReward(true);
+	};
 
 	const onMessageListener = (msg: any) => {
 		const { command, data } = msg;
@@ -72,11 +91,12 @@ const App: React.FC = () => {
 		if (data) {
 			setTheme(matchTheme(data));
 			setConfig(data);
+			changeViewPort(data.viewport);
 		}
 	}, [data]);
 
 	return (
-		<Context.Provider value={{ config, setConfig }}>
+		<Context.Provider value={{ config, times, setConfig, setTimes, setShowUpdate, handleOpenReward }}>
 			<ThemeProvider theme={theme}>
 				<WrapperUI className={wrapperClass}>
 					<PageUI>
@@ -91,6 +111,10 @@ const App: React.FC = () => {
 						</Switch>
 					</PageUI>
 					<SideBar />
+					{/* 全屏通知 */}
+					{showUpdate ? <AnnounceMent closeEvent={handleClose} reward={handleOpenReward} /> : null}
+					{/* 打赏 */}
+					{showReward ? <Reward closeEvent={handleCloseReward} /> : null}
 				</WrapperUI>
 			</ThemeProvider>
 		</Context.Provider>

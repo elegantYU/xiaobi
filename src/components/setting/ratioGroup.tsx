@@ -13,13 +13,11 @@ interface Props {
 const WrapperUI = styled.div`
 	display: flex;
 	align-items: center;
-	border-radius: 6px;
-	height: 28px;
-	overflow: hidden;
+	gap: 2px;
 `;
 
 const ItemUI = styled.div`
-	height: 32px;
+	height: 30px;
 	padding: 0 8px;
 	font-size: 12px;
 	display: flex;
@@ -27,6 +25,8 @@ const ItemUI = styled.div`
 	cursor: pointer;
 	color: ${(p) => p.theme.ratio};
 	background-color: ${(p) => p.theme.ratioBg};
+	border-radius: 6px;
+
 	&:hover {
 		background-color: ${(p) => p.theme.ratioBgHover};
 	}

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:37:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 14:47:04
+ * @LastEditTime: 2021-05-19 15:28:40
  * @Description: chrome api 封装
  */
 import { DefaultObject } from '@InterFace/index';
@@ -38,3 +38,5 @@ export const setBadgeBackground: SetBadgeColor = async (color) =>
 	});
 
 export const getExtURL = (path: string) => chrome.runtime.getURL(path);
+
+export const getManifest = () => chrome.runtime.getManifest();

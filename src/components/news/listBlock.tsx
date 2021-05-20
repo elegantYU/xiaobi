@@ -50,6 +50,7 @@ const TitleUI = styled.div`
 
 	.title {
 		font-weight: bold;
+		color: ${(p) => p.theme.newsTitle};
 	}
 
 	&::before {
@@ -160,7 +161,7 @@ const ListBlock: React.FC<Props> = ({ data, idx }) => {
 				<ContentUI onClick={handleClick}>{title}</ContentUI>
 			</WrapperUI>
 		);
-	} 
+	}
 	const { title, content, grade, upCount, downCount, commentCount, attribute, time, images } = data as NewsData;
 	const titleClass = attribute ? 'grade4' : grade === 5 ? 'grade5' : '';
 
@@ -188,15 +189,15 @@ const ListBlock: React.FC<Props> = ({ data, idx }) => {
 					<div className='like' onClick={handleClick}>
 						<LikeBtnUI className='increase'>
 							<i className='iconfont iconchangyongiconyikuozhan_huaban22' />
-								利好 <span className='count'>{upCount}</span>
+							利好 <span className='count'>{upCount}</span>
 						</LikeBtnUI>
 						<LikeBtnUI className='decrease'>
 							<i className='iconfont iconchangyongiconyikuozhan_huaban23' />
-								利空 <span className='count'>{downCount}</span>
+							利空 <span className='count'>{downCount}</span>
 						</LikeBtnUI>
 						<LikeBtnUI>
 							<i className='iconfont iconpinglun' />
-								评论 {commentCount}
+							评论 {commentCount}
 						</LikeBtnUI>
 					</div>
 					{attribute ? <TagUI className={grade === 5 ? 'grade5' : ''}>精选</TagUI> : null}
@@ -204,7 +205,6 @@ const ListBlock: React.FC<Props> = ({ data, idx }) => {
 			</ContentBoxUI>
 		</WrapperUI>
 	);
-	
 };
 
 export default ListBlock;

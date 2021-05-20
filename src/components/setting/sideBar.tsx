@@ -49,7 +49,7 @@ const StyleNavUI = styled(NavLink).attrs({ activeClassName: 'active' })`
 const renderLinkJSX = () => {
 	const routers = [
 		{ name: '基础', path: StaticRoutes.SettingBase },
-		{ name: '通知', path: StaticRoutes.SettingNotify },
+		// { name: '通知', path: StaticRoutes.SettingNotify },
 		{ name: '帮助', path: StaticRoutes.SettingHelp },
 		{ name: '关于', path: StaticRoutes.SettingAbout },
 	];
