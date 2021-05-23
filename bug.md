@@ -16,3 +16,11 @@
 
   badge notification 业务在背景页轮询时，若当前环境网络异常，则直接停止轮询。
   现已加上 catch 处理 error
+
+- gitignore 对已添加 git 追踪的文件无效
+
+  本地文件需保留的话，使用`git rm -r --cached file_path` 删除本地缓存，然后再提交，gitignore 就会生效
+
+- ts 2749
+
+  ts 后缀文件不能书写 jsx， <>会被识别成 ts 泛型

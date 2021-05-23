@@ -11,6 +11,7 @@ import TipButton from '@Src/components/tipButton';
 import Banner from '@Src/components/home/banner';
 import Tabs from '@Src/components/home/tabs';
 import Table from '@Components/home/table';
+import message from '@Components/message';
 
 interface Props {
 	history: any;
@@ -73,6 +74,7 @@ const Home: React.FC<Props> = ({ history }) => {
 		history.push({ pathname: StaticRoutes.Trend, state: { list: request, id } });
 	};
 	const toggleNotify = () => {
+		!isVisible && message.info('鼠标悬浮列表，可触发快捷入口');
 		setVisible(!isVisible);
 	};
 
@@ -107,8 +109,8 @@ const Home: React.FC<Props> = ({ history }) => {
 					{/* <TipButton placement='top' icon='iconpaixu'>
 						排序
 					</TipButton> */}
-					<TipButton placement='top' icon='iconfeijifasong' onClick={toggleNotify}>
-						快捷
+					<TipButton placement='top' icon='iconfeijifasong' hold onClick={toggleNotify}>
+						快捷模式
 					</TipButton>
 					<TipButton placement='top' icon='iconsousuo' onClick={goSearch}>
 						搜索

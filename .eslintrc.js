@@ -51,6 +51,7 @@ module.exports = {
 		'unicorn/prefer-add-event-listener': 'off',
 		'unicorn/prevent-abbreviations': 'off',
 		'unicorn/prefer-spread': 'off',
+		'unicorn/prefer-query-selector': 'off',
 		'unicorn/no-null': 'off',
 		'unicorn/no-array-reduce': 'off',
 		'unicorn/no-abusive-eslint-disable': 'off',

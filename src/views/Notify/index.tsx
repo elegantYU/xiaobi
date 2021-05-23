@@ -74,7 +74,7 @@ const Notify: React.FC = () => {
 					<i className='iconfont iconweibiaoti-1_huaban1' />
 					创建提醒
 				</div>
-				<p className='desc'>当前暂无提醒，榜单列表右击币种即可快速创建提醒</p>
+				<p className='desc'>当前暂无提醒，榜单列表开启快捷模式可快捷添加通知</p>
 			</NothingUI>
 		);
 	};

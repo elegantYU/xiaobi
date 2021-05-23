@@ -11,13 +11,15 @@ import { useHistory } from 'react-router-dom';
 
 import DataLoading from '@Components/loading/dataLoading';
 import Empty from '@Components/empty';
+import message from '@Components/message';
 
 interface Props {
 	match: any;
 }
 
 const WrapperUI = styled.div`
-	overflow: hidden;
+	overflow: auto;
+	height: 100%;
 `;
 
 const ContentUI = styled.div`
@@ -143,7 +145,6 @@ const DescUI = styled.div`
 `;
 
 const ListUI = styled.div`
-	height: 198px;
 	background-color: ${(p) => p.theme.panelBg};
 `;
 const TabUI = styled.div`
@@ -162,8 +163,7 @@ const TabUI = styled.div`
 `;
 
 const ScrollUI = styled.div`
-	height: 162px;
-	overflow: auto;
+	min-height: 168px;
 	padding: 0 20px;
 `;
 
@@ -212,6 +212,8 @@ const Index: React.FC<Props> = ({ match }) => {
 						if (inputEl.current) {
 							inputEl.current.value = '';
 						}
+
+						message.info('通知创建成功');
 					})
 					.catch((error) => error);
 			}, 500),

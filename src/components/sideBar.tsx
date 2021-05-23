@@ -114,9 +114,9 @@ const SideBar = () => {
 	const { config } = useContext(Context);
 
 	const routers = [
-		{ name: '榜单', icon: 'iconbangdan2', path: StaticRoutes.Home },
+		{ name: '行情', icon: 'iconbangdan2', path: StaticRoutes.Home },
 		{ name: '通知', icon: 'icontongzhi', path: StaticRoutes.Notify },
-		{ name: '新闻', icon: 'iconxinwen', path: StaticRoutes.News },
+		{ name: '快讯', icon: 'iconxinwen', path: StaticRoutes.News },
 	];
 
 	const renderLinkJSX = () => {

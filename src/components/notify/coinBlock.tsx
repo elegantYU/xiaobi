@@ -15,6 +15,22 @@ const CoinBlockUI = styled.div`
 	border-radius: 6px;
 	padding: 10px;
 	background-color: ${(p) => p.theme.panelBg};
+	margin-bottom: 10px;
+`;
+
+const TabUI = styled.div`
+	height: 36px;
+	display: grid;
+	grid-template-columns: 140px 1fr 80px;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px solid ${(p) => p.theme.noticeBorder};
+	padding: 0 20px;
+	color: ${(p) => p.theme.noticeTab};
+
+	p:last-child {
+		justify-self: flex-end;
+	}
 `;
 
 const CoinBlockHeadUI = styled.div`
@@ -25,19 +41,19 @@ const CoinBlockHeadUI = styled.div`
 	height: 42px;
 	border-bottom: 1px solid ${(p) => p.theme.tdBorder};
 
-	.name {
+	.platform {
 		font-size: 16px;
-		color: ${(p) => p.theme.noticeName};
+		color: ${(p) => p.theme.noticePlat};
 		font-weight: bold;
 	}
 
-	.platform {
+	.name {
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		font-size: 14px;
-		color: ${(p) => p.theme.noticePlat};
+		color: ${(p) => p.theme.noticeName};
 		font-weight: bold;
 	}
 
@@ -49,6 +65,10 @@ const CoinBlockHeadUI = styled.div`
 			color: ${(p) => p.theme.noticeLinkHover};
 		}
 	}
+`;
+
+const ListUI = styled.div`
+	padding: 0 20px;
 `;
 
 const CoinBlock: React.FC<Props> = ({ id, market, name, children, update }) => {
@@ -69,13 +89,18 @@ const CoinBlock: React.FC<Props> = ({ id, market, name, children, update }) => {
 	return (
 		<CoinBlockUI>
 			<CoinBlockHeadUI>
-				<p className='name'>{name}</p>
 				<p className='platform'>{market}</p>
+				<p className='name'>{name}</p>
 				<p className='link' onClick={goDetail}>
 					添加
 				</p>
 			</CoinBlockHeadUI>
-			{renderListJSX()}
+			<TabUI>
+				<p>类型</p>
+				<p>提醒规则</p>
+				<p>操作</p>
+			</TabUI>
+			<ListUI>{renderListJSX()}</ListUI>
 		</CoinBlockUI>
 	);
 };

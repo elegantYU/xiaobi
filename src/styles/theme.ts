@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-20 22:21:34
+ * @LastEditTime: 2021-05-23 20:42:02
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -108,6 +108,7 @@ export const light = {
 	pink: colour.pink,
 	yellow: colour.yellow,
 	blue: colour.blue00,
+	toast: colour.white,
 };
 
 export const lightReverse = {
@@ -176,8 +177,8 @@ export const dark = {
 	tradeDrawerBg: colour.blue31,
 	tradeDrawerGroup: colour.blue21,
 
-	noticeName: colour.black15,
-	noticePlat: colour.black25,
+	noticeName: colour.greycf,
+	noticePlat: colour.grey99,
 	noticeLink: colour.blue26,
 	noticeLinkHover: colour.blue00,
 	noticeUsd: colour.greycf,
@@ -220,6 +221,7 @@ export const dark = {
 	pink: colour.pink,
 	yellow: colour.yellow,
 	blue: colour.blue00,
+	toast: colour.white,
 };
 
 export const darkReverse = {
