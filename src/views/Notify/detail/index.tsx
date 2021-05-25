@@ -8,6 +8,7 @@ import { sendMessage } from '@Src/utils/chrome';
 import { getLocationQuery } from '@Utils/index';
 import { NoticeType } from '@Src/interface';
 import { useHistory } from 'react-router-dom';
+import { StaticRoutes } from '@Src/constants/routes';
 
 import DataLoading from '@Components/loading/dataLoading';
 import Empty from '@Components/empty';
@@ -220,7 +221,7 @@ const Index: React.FC<Props> = ({ match }) => {
 		[enable, keywords],
 	);
 
-	const goBack = () => history.goBack();
+	const goBack = () => history.replace({ pathname: StaticRoutes.Notify });
 	const handleFocus = () => setFocus(true);
 	const handleBlur = () => setFocus(false);
 	const handleKeyup: KeyboardEventHandler<HTMLInputElement> = (e) => {

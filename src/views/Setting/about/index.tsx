@@ -153,6 +153,13 @@ const Base = () => {
 			</GroupUI>
 			<GroupUI>
 				<label>下载地址</label>
+				<a
+					href='https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh'
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					谷歌商店
+				</a>
 			</GroupUI>
 			<GroupUI>
 				<label>开发者</label>

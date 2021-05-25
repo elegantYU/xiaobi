@@ -119,7 +119,7 @@ const Tabs: React.FC<Props> = ({ data, id }) => {
 				<LineUI style={{ width: `${width}px`, transform: `translateX(${offsetX}px)` }} />
 			</TabBoxUI>
 			{idx ? <News data={news} /> : <Info data={data} />}
-			<ToolBox id={id} />
+			<ToolBox id={id} pair={data?.pair} />
 		</WrapperUI>
 	);
 };

@@ -135,3 +135,6 @@
 ## 支持
 
 觉得”小币“还不错的可以 star 一下~(github 和谷歌商店，球球了)
+
+[我要去商店给好评！](https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh)
+[直接 Star!](#)

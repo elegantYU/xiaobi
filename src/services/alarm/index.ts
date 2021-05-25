@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-23 22:05:53
+ * @LastEditTime: 2021-05-25 22:00:21
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
@@ -65,7 +65,7 @@ noticeSaga.start((d: any) => {
 					iconUrl: LOGO,
 					// imageUrl: logo,
 					contextMessage: `${pair} = ${price_usd} USD`,
-					message: `通知规则：价格${compare ? '大于' : '小于'} ${price_usd}`,
+					message: `通知规则：价格${compare ? '大于' : '小于'} ${rule}`,
 					type: 'basic',
 				};
 

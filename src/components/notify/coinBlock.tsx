@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { NoticeBlockType } from '@InterFace/index';
 import { useHistory } from 'react-router-dom';
+import message from '@Components/message';
 
 import ListBlock from '@Components/notify/listBlock';
 import { sendMessage } from '@Src/utils/chrome';
@@ -77,6 +78,7 @@ const CoinBlock: React.FC<Props> = ({ id, market, name, children, update }) => {
 
 	const handleDel = async (uid: string) => {
 		await sendMessage({ command: CMDS.CMD_DELNOTICE, data: uid });
+		message.info('删除成功');
 		update();
 	};
 	const renderListJSX = () => {

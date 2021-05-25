@@ -5,9 +5,11 @@ import TipButton from '@Components/tipButton';
 import { changeFollowState, changeSelfState } from '@Api/follow';
 import useMessage from '@Src/hooks/useMessage';
 import { CMDS } from '@Src/constants/commands';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
 	id: number;
+	pair: string;
 }
 
 interface HighTipProps {
@@ -173,11 +175,12 @@ const TipsProps = [
 	},
 ];
 
-const ToolBox: React.FC<Props> = ({ id }) => {
+const ToolBox: React.FC<Props> = ({ id, pair }) => {
 	const [list, setList] = useState(TipsProps);
 	const { data: request } = useMessage({ command: CMDS.CMD_COINTSTATE, data: id });
 	const [show, setShow] = useState(false);
 	const { config } = useContext(Context);
+	const history = useHistory();
 
 	const isClose = !config?.nav;
 	const className = `${isClose ? 'close' : ''}`;
@@ -193,7 +196,7 @@ const ToolBox: React.FC<Props> = ({ id }) => {
 			setList(list.map((v) => ({ ...v, status: v.key === 'follow' ? !v.status : v.status })));
 		},
 		notice: (id: number) => {
-			console.log('object');
+			history.push({ pathname: `/notify/detail/${id}?pair=${pair}` });
 		},
 	};
 
