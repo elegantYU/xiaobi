@@ -1,0 +1,27 @@
+{
+	"version": "1.0.1",
+	"manifest_version": 2,
+	"minimum_chrome_version": "56.0.0",
+	"name": "小币",
+	"short_name": "xiaobi",
+	"description": "聚合币圈行情资讯，自定义币种通知提醒",
+	"offline_enabled": true,
+	"icons": {
+		"128": "static/icons/icon.png"
+	},
+	"browser_action": {
+		"default_icon": {
+			"128": "static/icons/icon.png"
+		},
+		"default_popup": "index.html",
+		"default_title": ""
+	},
+	"background": {
+		"page": "background.html",
+		"persistent": true
+	},
+	"content_scripts": [],
+	"web_accessible_resources": ["static/js/*"],
+	"content_security_policy": "script-src 'self' https://at.alicdn.com 'unsafe-eval'; object-src 'self'",
+	"permissions": ["webRequest", "webRequestBlocking", "notifications", "<all_urls>"]
+}
