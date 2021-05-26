@@ -10,7 +10,6 @@ import { getDetailXHR } from '@Api/coin';
 import { convertCNUnit, uniqueData } from '@Utils/index';
 import decode from '@Utils/crypto';
 import Saga from '@Utils/saga';
-import { NoticeType } from '@InterFace/index';
 
 const delay = Store.get('noticeDelay');
 const LOGO = getExtURL('./static/icons/icon.png');

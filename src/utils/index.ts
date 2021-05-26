@@ -19,7 +19,7 @@ export const coinTypeFilter = (s: string) => {
 // 科学计数方式转正常
 export const convertNumber: (num: number) => string | number = (num) => {
 	if (Number.isNaN(num)) {
-		return num;
+		return '';
 	}
 
 	const str = `${num}`;
@@ -30,25 +30,21 @@ export const convertNumber: (num: number) => string | number = (num) => {
 	return num.toFixed(18).replace(/\.?0+$/, '');
 };
 // 传入一个对象数组及判断的属性名，返回去重数据
-export const uniqueData: UniqueData<any, any> = (arr, key) => {
-	const map = new Map();
-	const res = [];
-
-	for (let i = 0, len = arr.length; i < len; i++) {
-		const item = arr[i];
-		const k = item[key];
-		if (!map.has(k)) {
-			res.push(item);
-			map.set(k, 1);
-		}
-	}
-
-	return res;
-};
+export const uniqueData: UniqueData<any, any> = (arr, key) => [
+	...arr
+		.reduce((map, item) => {
+			if (!map.has(item[key])) {
+				map.set(item[key], item);
+			}
+			return map;
+		}, new Map())
+		.values(),
+];
 
 // 中文单位数据换算
 export const convertCNUnit: ConvertCNUnit = (origin) => {
 	const ori = Number(origin);
+
 	if (ori < 1) {
 		return Number(ori.toFixed(10));
 	}
@@ -77,6 +73,7 @@ export const matchTheme = ({ theme, crease }: DefaultObject) => {
 	if (theme === 1) {
 		return crease ? dark : darkReverse;
 	}
+
 	return isDark ? (crease ? dark : darkReverse) : crease ? light : lightReverse;
 };
 
@@ -101,7 +98,7 @@ export const formatTime = (ts: number | string, cFormat?: string) => {
 		s: date.getSeconds(),
 		a: date.getDay(),
 	};
-	const time_str = format.replace(/{([adhimsy])+}/g, (result, key) => {
+	const time_str = format.replace(/{([adhimsy])+}/g, (_result, key) => {
 		const value = formatObj[key];
 		// Note: getDay() returns 0 on Sunday
 		if (key === 'a') {
@@ -128,15 +125,13 @@ export const findArrMax = (arr: any[], field: string) => {
 // 获取query参数
 
 export const getLocationQuery: (s: string) => DefaultObject = (search) =>
-	search
-		.split('?')[1]
-		.split('&')
-		.map((q) => q.split('='))
-		.reduce((a, c) => {
-			// @ts-ignore
-			a[c[0]] = c[1];
-			return a;
-		}, {});
+	[...new URLSearchParams(search.split('?')[1]).entries()].reduce(
+		(kvs, [k, v]) => ({
+			...kvs,
+			[k]: v,
+		}),
+		{},
+	);
 
 // 比较是否需要更新公告
 export const checkUpdate = () => {
