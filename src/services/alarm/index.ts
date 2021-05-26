@@ -1,11 +1,11 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-25 22:00:21
+ * @LastEditTime: 2021-05-26 14:19:27
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
-import { setBadgeBackground, setBadgeText, createNotify, getExtURL } from '@Utils/chrome';
+import { setBadgeBackground, setBadgeText, setBadgeTitle, createNotify, getExtURL } from '@Utils/chrome';
 import { getDetailXHR } from '@Api/coin';
 import { convertCNUnit, uniqueData } from '@Utils/index';
 import decode from '@Utils/crypto';
@@ -35,8 +35,10 @@ badgeSaga.start((data: any) => {
 	const down = crease ? '#4aaa91' : '#c35466';
 	const color = status ? up : down;
 
+	console.log('price_usd', price_usd, typeof price_usd);
 	setBadgeBackground(color);
 	setBadgeText(convertCNUnit(price_usd).toString());
+	setBadgeTitle(convertCNUnit(price_usd).toString());
 }, delay);
 
 const noticeLoop = async () => {

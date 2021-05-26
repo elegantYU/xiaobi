@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:37:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-19 15:28:40
+ * @LastEditTime: 2021-05-26 14:17:01
  * @Description: chrome api 封装
  */
 import { DefaultObject } from '@InterFace/index';
@@ -35,6 +35,11 @@ export const setBadgeText: SetBadgeText = (text) =>
 export const setBadgeBackground: SetBadgeColor = async (color) =>
 	new Promise((resolve) => {
 		chrome.browserAction.setBadgeBackgroundColor({ color }, resolve);
+	});
+
+export const setBadgeTitle = async (title: string) =>
+	new Promise((resolve) => {
+		chrome.browserAction.setTitle({ title }, () => resolve(1));
 	});
 
 export const getExtURL = (path: string) => chrome.runtime.getURL(path);

@@ -16,7 +16,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-f8bc45.svg)](https://github.com/prettier/prettier)
 [![stylelint](https://img.shields.io/badge/scss-stylelint-orange)](https://github.com/stylelint/stylelint)
 
-”小币“是一款可以快捷查看币圈各平台行情数据，币种价格提醒及币圈新闻资讯的浏览器器插件。
+”小币“是一款可以快捷查看币圈各平台行情数据，币种价格提醒及币圈新闻资讯的浏览器插件。
 
 ## 行情
 
