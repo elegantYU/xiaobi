@@ -13,7 +13,7 @@ const useLoop = ({ updated, fn, delay }: Props) => {
 	useEffect(() => {
 		if (!fn) return;
 
-		const saga = new (Saga as any)(fn);
+		const saga = new Saga(fn);
 		saga.start((d: any) => {
 			setResponse(d);
 		}, delay);

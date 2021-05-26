@@ -23,8 +23,10 @@ const badgeLoop = async () => {
 	return data;
 };
 
-const badgeSaga = new (Saga as any)(badgeLoop);
-badgeSaga.start((d: any) => {
+const badgeSaga = new Saga(badgeLoop);
+badgeSaga.start((data: any) => {
+	const d = data?.[0] ?? data;
+
 	if (!d) return;
 
 	const { crease } = Store.get('settings');
