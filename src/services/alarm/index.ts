@@ -42,7 +42,7 @@ badgeSaga.start((data: any) => {
 
 const noticeLoop = async () => {
 	const { code, timestamp } = decode();
-	const notices = Store.get('notifications') as any[];
+	const notices = Store.get('notifications');
 
 	if (notices.length === 0) return false;
 
@@ -50,10 +50,10 @@ const noticeLoop = async () => {
 	return Promise.all(list.map((v) => getDetailXHR({ code, timestamp, currency_on_market_id: v.id })));
 };
 
-const noticeSaga = new (Saga as any)(noticeLoop);
+const noticeSaga = new Saga(noticeLoop);
 noticeSaga.start((d: any) => {
 	if (!d) return;
-	const notices = Store.get('notifications') as NoticeType[];
+	const notices = Store.get('notifications');
 
 	(d as any[]).forEach(
 		({ data: { currency_on_market_id, logo, price_usd, price_display_cny, symbol, pair, alias, market_name } }) => {

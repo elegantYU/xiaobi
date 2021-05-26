@@ -122,7 +122,7 @@ const getIncreaseList: BackgroundAsyncMethod = async (sendResponse, { field, sor
 
 // banner
 const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
-	const symbols = Store.get('bannerCoin') as number[];
+	const symbols = Store.get('bannerCoin');
 	const { code, timestamp } = decode();
 
 	Promise.all(symbols.map((id) => getDetailXHR({ code, timestamp, currency_on_market_id: id })))
@@ -149,7 +149,7 @@ const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
 
 // 自选列表
 const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
-	const selfCoins = Store.get('selfCoins') as number[];
+	const selfCoins = Store.get('selfCoins');
 	const { code, timestamp } = decode();
 
 	if (selfCoins.length === 0) {

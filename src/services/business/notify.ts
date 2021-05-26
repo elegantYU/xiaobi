@@ -13,7 +13,7 @@ import Store from '../store';
 
 const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 	// const { code, timestamp } = decode();
-	const notify = Store.get('notifications') as NoticeType[];
+	const notify = Store.get('notifications');
 	// const list = uniqueData(notify, 'id');
 
 	const blockList = notify.reduce((arr, item) => {
@@ -42,7 +42,7 @@ const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 };
 
 const delNotify: BackgroundAsyncMethod = async (send, data) => {
-	const notify = Store.get('notifications') as NoticeType[];
+	const notify = Store.get('notifications');
 	const idx = notify.findIndex(({ uid }) => uid === data);
 
 	notify.splice(idx, 1);
@@ -61,7 +61,7 @@ const addNotify: BackgroundAsyncMethod = async (send, data) => {
 
 const getSingleInfo: BackgroundAsyncMethod = async (send, d) => {
 	const { code, timestamp } = decode();
-	const notify = Store.get('notifications') as NoticeType[];
+	const notify = Store.get('notifications');
 	const list = notify.filter((v) => v.id === d).reverse();
 
 	try {

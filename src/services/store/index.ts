@@ -4,17 +4,23 @@
  * @LastEditTime: 2021-05-20 15:15:50
  * @Description: 缓存本地数据
  */
-import { DefaultObject, NoticeType } from '@InterFace/index';
-
-type Params = 'bannerCoin' | 'selfCoins' | 'notifications' | 'follow' | 'settings' | 'noticeDelay';
+import { NoticeType } from '@InterFace/index';
 
 interface StoreType {
-	bannerCoin: Array<number>;
-	selfCoins: Array<any>;
-	notifications: Array<NoticeType>;
-	get: (key: Params) => any;
-	set: (key: Params, value: any) => void;
-	[key: string]: Array<any> | DefaultObject | string | number;
+	bannerCoin: number[];
+	selfCoins: string[];
+	notifications: NoticeType[];
+	follow: string;
+	noticeDelay: number;
+	searchRecord: string[];
+	settings: {
+		theme: 0 | 1 | 2;
+		crease: 0 | 1;
+		nav: 0 | 1;
+		viewport: 0 | 1 | 2 | 3;
+	};
+	get<K extends keyof StoreType>(key: K): StoreType[K];
+	set<K extends keyof StoreType>(key: K, value: StoreType[K]): void;
 }
 
 const Store: StoreType = {
@@ -30,17 +36,11 @@ const Store: StoreType = {
 		viewport: 1, //	默认 [0,1,2,3] => [0.9, 1, 1.1, 1.2]
 	},
 	searchRecord: [], //	搜索记录
-	get(key: string) {
+	get(key) {
 		return this[key];
 	},
 	set(key, value) {
-		if (Array.isArray(value)) {
-			this[key] = [...value];
-		} else if (value instanceof Object) {
-			this[key] = { ...value };
-		} else {
-			this[key] = value;
-		}
+		this[key] = value;
 	},
 };
 

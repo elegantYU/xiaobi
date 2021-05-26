@@ -12,7 +12,7 @@ import decode from '@Utils/crypto';
 
 // 搜索币种
 const getSearchData: BackgroundAsyncMethod = async (sendResponse, queryString) => {
-	const selfCoins = Store.get('selfCoins') as number[];
+	const selfCoins = Store.get('selfCoins');
 	const { code, timestamp } = decode();
 
 	if (!queryString) {
@@ -45,7 +45,7 @@ const getSearchData: BackgroundAsyncMethod = async (sendResponse, queryString) =
 
 // 更改自选
 const setSelfCoin: BackgroundAsyncMethod = async (sendResponse, d) => {
-	const selfCoins = Store.get('selfCoins') as number[];
+	const selfCoins = Store.get('selfCoins');
 
 	if (d.active) {
 		selfCoins.push(d.id);

@@ -26,9 +26,9 @@ const changeSetting: BackgroundAsyncMethod = async (sendResponse, data) => {
 
 // 获取币种状态
 const getCoinState: BackgroundAsyncMethod = async (send, id) => {
-	const selfCoins = Store.get('selfCoins') as string[];
+	const selfCoins = Store.get('selfCoins');
 	const follow = Store.get('follow');
-	const notices = Store.get('notifications') as NoticeType[];
+	const notices = Store.get('notifications');
 
 	const res = {
 		self: selfCoins.some((d) => d == id),
@@ -41,7 +41,7 @@ const getCoinState: BackgroundAsyncMethod = async (send, id) => {
 
 // 根据id判断是否是自选
 const changeSelf: BackgroundAsyncMethod = async (send, id) => {
-	const selfCoins = Store.get('selfCoins') as string[];
+	const selfCoins = Store.get('selfCoins');
 	const idx = selfCoins.findIndex((d) => d == id);
 
 	if (idx !== -1) {
