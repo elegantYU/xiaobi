@@ -58,6 +58,7 @@ module.exports = {
 		'prefer-destructuring': ['error', { object: false, array: false }],
 		'@typescript-eslint/no-use-before-define': ['error'],
 		'react/no-array-index-key': 'off',
+		'react/no-danger': 'off',
 		'react/jsx-filename-extension': 'off',
 		'react/jsx-props-no-spreading': 'off',
 		'react-hooks/exhaustive-deps': 0,
