@@ -9,6 +9,7 @@ import { light } from '@Styles/theme';
 import { Context } from '@Src/context';
 import { getManifest } from '@Src/utils/chrome';
 import useMessage from '@Src/hooks/useMessage';
+import { setStorage } from '@Utils/localStorage';
 
 import SideBar from '@Components/sideBar';
 import AnnounceMent from '@Components/announcement';
@@ -54,7 +55,7 @@ const App: React.FC = () => {
 
 	const handleClose = () => {
 		setShowUpdate(false);
-		localStorage.setItem(`version${version}`, 'true');
+		setStorage(`version${version}`, 'true');
 	};
 	const handleCloseReward = () => setReward(false);
 	const handleOpenReward = () => {

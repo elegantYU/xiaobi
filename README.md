@@ -18,6 +18,14 @@
 
 ”小币“是一款可以快捷查看币圈各平台行情数据，币种价格提醒及币圈新闻资讯的浏览器插件。
 
+## 下载
+
+目前只上架了谷歌市场，无科学上网可下载安装包手动安装，Firefox 及 Edge 浏览器正在适配中。
+
+[谷歌市场](https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh)
+
+[安装包下载](https://chrome.pictureknow.com/extension?id=44ff63184eef4b00bd7db9c7383876e3)
+
 ## 行情
 
 插件首页就是币圈的行情数据(数据源来自 [MyToken](https://www.mytokencap.com/) )，目前收录四个类别的行情数据
@@ -125,6 +133,12 @@
 - ...
 
 > 提示：未经同意禁止商用，我都没商用
+
+## Contributors
+
+[justwink](https://github.com/justwink) (代码帅，人更帅 - 阿凯老师)
+
+[frankroad](https://chrome.pictureknow.com/) (国内插件镜像平台 - 收藏猫)
 
 ## 反馈
 

@@ -9,10 +9,12 @@ import Error from '@Components/error';
 import Empty from '@Components/empty';
 
 interface Props {
+	idx: number;
 	data: TableList[] | DefaultObject | any;
+	shortcut: boolean;
 	clickEvent: (p: SortData) => void;
 	itemClick: (id: string | number) => void;
-	shortcut: boolean;
+	refresh: () => void;
 }
 
 const WrapperUI = styled.div`
@@ -25,7 +27,7 @@ const ContentUI = styled.div`
 	overflow: auto;
 `;
 
-const Table: React.FC<Props> = ({ data, clickEvent, itemClick, shortcut }) => {
+const Table: React.FC<Props> = ({ idx, data, shortcut, clickEvent, itemClick, refresh }) => {
 	const renderTableJSX = () => {
 		if (data && data.code) {
 			return <Error />;
@@ -44,6 +46,7 @@ const Table: React.FC<Props> = ({ data, clickEvent, itemClick, shortcut }) => {
 									data={d}
 									onClick={() => itemClick(d.id as number)}
 									shortcut={shortcut}
+									refresh={!idx ? refresh : undefined}
 								/>
 							))
 						)

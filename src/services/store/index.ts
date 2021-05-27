@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:55:46
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-26 14:39:20
+ * @LastEditTime: 2021-05-27 09:10:41
  * @Description: 缓存本地数据
  */
 import { NoticeType } from '@InterFace/index';

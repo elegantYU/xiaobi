@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-23 20:42:02
+ * @LastEditTime: 2021-05-27 13:55:22
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -100,6 +100,7 @@ export const light = {
 	updateTitle: colour.black15,
 	updateDesc: colour.grey,
 	updateClose: colour.grey99,
+	updateLink: colour.blue,
 
 	loading: colour.whitef0,
 	loadingFore: colour.whitede,
@@ -213,6 +214,7 @@ export const dark = {
 	updateTitle: colour.whiteee,
 	updateDesc: colour.whitecf,
 	updateClose: colour.whitecf,
+	updateLink: colour.blue41,
 
 	loading: colour.blue21,
 	loadingFore: colour.blue31,

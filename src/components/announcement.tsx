@@ -91,6 +91,11 @@ const ContentUI = styled.ul`
 		font-size: 14px;
 		padding: 5px 0;
 		color: ${(p) => p.theme.updateDesc};
+
+		a {
+			font-size: 14px;
+			color: ${(p) => p.theme.updateLink};
+		}
 	}
 `;
 
@@ -111,7 +116,7 @@ const Announcement: React.FC<Props> = ({ closeEvent, reward }) => {
 				</TitleUI>
 				<ContentUI>
 					{v.content.map((l) => (
-						<li key={l}>{l}</li>
+						<li key={l} dangerouslySetInnerHTML={{ __html: l }} />
 					))}
 				</ContentUI>
 			</Block>

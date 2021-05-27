@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 15:28:03
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 17:19:21
+ * @LastEditTime: 2021-05-27 10:45:04
  * @Description: tabs 栏
  */
 import React, { useState, useEffect, memo } from 'react';
@@ -51,6 +51,7 @@ const Tabs: React.FC<Props> = ({ data, idx, clickEvent }) => {
 		const w = currentItem ? currentItem.offsetWidth : 0;
 		const x = currentItem ? currentItem.offsetLeft : 0;
 
+		console.log('计算宽度', w, x);
 		setWidth(w);
 		setOffsetX(x);
 	};

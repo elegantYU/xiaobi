@@ -28,7 +28,7 @@ Saga.prototype.start = async function (callback, time = 5000) {
 		try {
 			callback(await Promise.all(this.fns.map(self)));
 		} catch (error) {
-			console.log('网络错误，但是keep going', error);
+			console.log('网络错误，但是keep going', error, this.fns);
 		}
 
 		await delay(time);

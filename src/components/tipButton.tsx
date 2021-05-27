@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 interface Props {
 	icon: string;
 	placement: 'top' | 'left';
-	hold?: boolean; //	点击后保持状态
+	outState?: boolean; //	外层状态控制
 	onClick?: () => void;
 }
 
@@ -93,26 +93,24 @@ export const TipUI = styled.div`
 	}
 `;
 
-const TipButton: React.FC<Props> = ({ icon, placement, children, hold, onClick }) => {
+const TipButton: React.FC<Props> = ({ icon, placement, children, outState, onClick }) => {
 	const [active, setActive] = useState(false);
 	const [isShow, setIsShow] = useState(false);
 	const className = `${placement} ${isShow ? 'tip-show' : 'tip-hide'}`;
 
 	const handleMouseIn = () => setIsShow(true);
 	const handleMouseOut = () => setIsShow(false);
-	const handleClick = () => {
-		if (hold) {
-			setActive(!active);
-		}
-		onClick?.();
-	};
+
+	useEffect(() => {
+		setActive(!!outState);
+	}, [outState]);
 
 	return (
 		<WrapperUI
 			className={`iconfont ${icon} ${active ? 'active' : ''}`}
 			onMouseEnter={handleMouseIn}
 			onMouseOut={handleMouseOut}
-			onClick={handleClick}
+			onClick={onClick}
 		>
 			<TipUI className={className}>{children}</TipUI>
 		</WrapperUI>

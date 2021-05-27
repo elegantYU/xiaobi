@@ -1,6 +1,7 @@
 import { DefaultObject } from '@InterFace/index';
 import { dark, light, lightReverse, darkReverse } from '@Styles/theme';
 import { getManifest } from './chrome';
+import { getStorage } from './localStorage';
 
 type MatchCoinData<T, P extends keyof T> = (keys: string[], list: T[], key: P) => T[];
 
@@ -46,16 +47,16 @@ export const convertCNUnit: ConvertCNUnit = (origin) => {
 	const ori = Number(origin);
 
 	if (ori < 1) {
-		return Number(ori.toFixed(10));
+		return convertNumber(Number(ori.toFixed(10)));
 	}
 	if (ori < 10) {
-		return Number(ori.toFixed(6));
+		return convertNumber(Number(ori.toFixed(6)));
 	}
 	if (ori < 1000) {
-		return Number(ori.toFixed(4));
+		return convertNumber(Number(ori.toFixed(4)));
 	}
 	if (ori < 1000000) {
-		return Number(ori.toFixed(2));
+		return convertNumber(Number(ori.toFixed(2)));
 	}
 	if (ori < 100000000) {
 		return `${Number((ori / 10000).toFixed(2))}万`;
@@ -124,19 +125,13 @@ export const findArrMax = (arr: any[], field: string) => {
 
 // 获取query参数
 
-export const getLocationQuery: (s: string) => DefaultObject = (search) =>
-	[...new URLSearchParams(search.split('?')[1]).entries()].reduce(
-		(kvs, [k, v]) => ({
-			...kvs,
-			[k]: v,
-		}),
-		{},
-	);
+export const getLocationQuery: (s: string, k: string) => string = (search, key) =>
+	new URLSearchParams(search.split('?')[1])?.get(key) ?? '';
 
 // 比较是否需要更新公告
 export const checkUpdate = () => {
 	const { version } = getManifest();
-	const res = localStorage.getItem(`version${version}`);
+	const res = getStorage(`version${version}`);
 
 	return !!res;
 };
@@ -147,4 +142,22 @@ export const changeViewPort = (multiple: number) => {
 	const res = map[multiple];
 
 	document.body.style.zoom = res;
+};
+
+// badge单位
+export const formatBadge = (num: number) => {
+	const rulesMap: [number, (n: number) => string][] = [
+		[1, (n: number) => n.toFixed(3)],
+		[10, (n: number) => n.toFixed(2)],
+		[100, (n: number) => n.toFixed(1)],
+		[100000, (n: number) => `${(n / 1000).toFixed(1)}k`],
+		[1000000, (n: number) => `${(n / 10000).toFixed(1)}w`],
+	];
+
+	const current = rulesMap.find(([r]) => num < r);
+	if (current) {
+		return current[1](num);
+	}
+
+	return '';
 };

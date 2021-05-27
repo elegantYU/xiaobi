@@ -6,12 +6,14 @@ import { StaticRoutes } from '@Const/routes';
 import useMessage from '@Src/hooks/useMessage';
 import useSocket from '@Hooks/useSocket';
 import { WS_TICKET } from '@Const/ws';
+import { LocalKey } from '@Const/local';
 
 import TipButton from '@Src/components/tipButton';
 import Banner from '@Src/components/home/banner';
 import Tabs from '@Src/components/home/tabs';
 import Table from '@Components/home/table';
 import message from '@Components/message';
+import { getStorage } from '@Src/utils/localStorage';
 
 interface Props {
 	history: any;
@@ -46,16 +48,20 @@ const tabList: TabItem[] = [
 	{ command: CMDS.CMD_FOLLOWLIST, name: '关注榜', active: false },
 ];
 
+const getTabList = (idx: number) => tabList.map((v, i) => ({ ...v, active: i === idx }));
+
 const Home: React.FC<Props> = ({ history }) => {
+	const defaultTabIdx = getStorage(LocalKey.HomeTab) ?? 0;
+
 	const [isVisible, setVisible] = useState(false); //	切换快捷入口
-	const [tabData, setTabData] = useState(tabList);
-	const [tabIndex, setTabIndex] = useState(1);
+	const [tabData, setTabData] = useState(getTabList(defaultTabIdx));
+	const [tabIndex, setTabIndex] = useState(defaultTabIdx);
 	const [sort, setSort] = useState<SortData>({ field: 'currency', sort: 0 }); //	列表排序
 	const { data: request } = useMessage({ command: tabList[tabIndex].command, data: sort });
 	const [tableData, setTableData] = useState<any>(request);
 	const { wsData } = useSocket({ url: WS_TICKET, data: request });
 
-	const handleClick = useCallback(
+	const handleTabChange = useCallback(
 		(idx: number) => {
 			const temp = tabData.map((v, i) => ({ ...v, active: false }));
 			temp[idx].active = true;
@@ -77,6 +83,7 @@ const Home: React.FC<Props> = ({ history }) => {
 		!isVisible && message.info('鼠标悬浮列表，可触发快捷入口');
 		setVisible(!isVisible);
 	};
+	const freshList = () => setSort({ ...sort });
 
 	useEffect(() => {
 		setTableData(null);
@@ -104,12 +111,12 @@ const Home: React.FC<Props> = ({ history }) => {
 		<WrapperUI>
 			<Banner />
 			<MenuUI>
-				<Tabs data={tabData} idx={tabIndex} clickEvent={handleClick} />
+				<Tabs data={tabData} idx={tabIndex} clickEvent={handleTabChange} />
 				<BtnGroupUI>
 					{/* <TipButton placement='top' icon='iconpaixu'>
 						排序
 					</TipButton> */}
-					<TipButton placement='top' icon='iconfeijifasong' hold onClick={toggleNotify}>
+					<TipButton placement='top' icon='iconfeijifasong' outState={isVisible} onClick={toggleNotify}>
 						快捷模式
 					</TipButton>
 					<TipButton placement='top' icon='iconsousuo' onClick={goSearch}>
@@ -117,7 +124,14 @@ const Home: React.FC<Props> = ({ history }) => {
 					</TipButton>
 				</BtnGroupUI>
 			</MenuUI>
-			<Table data={tableData} clickEvent={setSort} itemClick={goDetail} shortcut={isVisible} />
+			<Table
+				idx={tabIndex}
+				data={tableData}
+				clickEvent={setSort}
+				itemClick={goDetail}
+				shortcut={isVisible}
+				refresh={freshList}
+			/>
 		</WrapperUI>
 	);
 };

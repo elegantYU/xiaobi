@@ -153,13 +153,23 @@ const Base = () => {
 			</GroupUI>
 			<GroupUI>
 				<label>下载地址</label>
-				<a
-					href='https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					谷歌商店
-				</a>
+				<p>
+					<a
+						href='https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						谷歌商店
+					</a>
+					&nbsp;
+					<a
+						href='https://chrome.pictureknow.com/extension?id=44ff63184eef4b00bd7db9c7383876e3'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						收藏猫(国内)
+					</a>
+				</p>
 			</GroupUI>
 			<GroupUI>
 				<label>开发者</label>

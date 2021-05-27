@@ -14,6 +14,13 @@ export const NavMode = [
 	{ label: '文字', value: 1 },
 ];
 
+export const HomeTabState = [
+	{ label: '自选', value: 0 },
+	{ label: '涨幅榜', value: 1 },
+	{ label: '热搜榜', value: 2 },
+	{ label: '关注榜', value: 3 },
+];
+
 export const Help = [
 	{
 		question: '这个插件怎么使用',
@@ -52,6 +59,11 @@ export const Help = [
 	{
 		question: '特别关注是什么',
 		answer: '特别关注是可以让选定的币种，在插件logo的角标(badge)中显示。</br>(暂时无详细设置的功能)',
+	},
+	{
+		question: '为什么插件需要’所有网站‘的权限，是否会有什么不合理的操作',
+		answer:
+			'获取所有网站的权限，主要是因为小币需要请求多个网站的接口(目前是两个)，</br>为了后续的扩展性考虑(可能会加入其它网站的数据请求)，选择了"all_urls"权限。</br>若是逐条添加网站，插件每次更新都会弹出”新权限请求“对话框，这样会引起很多用户的误会。</br></br>小币代码已开源，大家可随意查看代码，若有其他的安全疑虑可提issue',
 	},
 	{
 		question: '我的数据存放在哪里，怎么做同步',

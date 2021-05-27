@@ -6,11 +6,13 @@ import { changeFollowState, changeSelfState } from '@Api/follow';
 import { useHistory } from 'react-router-dom';
 import { CMDS } from '@Src/constants/commands';
 import useMessage from '@Src/hooks/useMessage';
+import message from '../message';
 
 interface Props {
 	data: TableList;
 	shortcut: boolean;
 	onClick: () => void;
+	refresh?: () => void;
 }
 
 const FadeIn = keyframes`
@@ -138,7 +140,11 @@ const IconUI = styled.div`
 	}
 `;
 
-const ListBlock: React.FC<Props> = ({ data, shortcut, onClick }) => {
+const stopPropagation: React.MouseEventHandler<HTMLDivElement> = (e) => {
+	e.stopPropagation();
+};
+
+const ListBlock: React.FC<Props> = ({ data, shortcut, onClick, refresh }) => {
 	const history = useHistory();
 	const [animate, setAnimate] = useState('');
 	const [selfState, setSelfState] = useState(false);
@@ -163,15 +169,19 @@ const ListBlock: React.FC<Props> = ({ data, shortcut, onClick }) => {
 	const toggleSelf: React.MouseEventHandler<HTMLDivElement> = (e) => {
 		changeSelfState(id as number)
 			.then((_) => {
+				message.info(selfState ? '取消自选' : '添加自选');
 				setSelfState(!selfState);
 			})
 			.catch((error) => error);
 
+		// 自选列表刷新
+		refresh?.();
 		e.stopPropagation();
 	};
 	const toggleFollow: React.MouseEventHandler<HTMLDivElement> = (e) => {
 		changeFollowState(id as number)
 			.then((_) => {
+				message.info(followState ? '取消特殊关注' : '添加特殊关注');
 				setFollowState(!followState);
 			})
 			.catch((error) => error);
@@ -192,6 +202,10 @@ const ListBlock: React.FC<Props> = ({ data, shortcut, onClick }) => {
 		}
 	}, [request]);
 
+	useEffect(() => {
+		setAnimate('');
+	}, [shortcut]);
+
 	return (
 		<WrapperUI title={alias} onClick={onClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 			<TitleUI>
@@ -208,7 +222,7 @@ const ListBlock: React.FC<Props> = ({ data, shortcut, onClick }) => {
 			<RateBlock data={turnover} />
 			<RateBlock data={percent} type='rate' />
 			{shortcut ? (
-				<MaskUI className={animate}>
+				<MaskUI className={animate} onClick={stopPropagation}>
 					<IconUI className={selfClass} onClick={toggleSelf} />
 					<IconUI className={followClass} onClick={toggleFollow} />
 					<IconUI className={noticeClass} onClick={goNotice} />

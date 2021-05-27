@@ -176,7 +176,7 @@ const handleKeydown: KeyboardEventHandler<HTMLInputElement> = (e) => {
 
 const Index: React.FC<Props> = ({ match }) => {
 	const id = match.params.id.split('?')[0];
-	const pair = getLocationQuery(window.location.href).pair;
+	const pair = getLocationQuery(window.location.href, 'pair');
 	const history = useHistory();
 	const [keywords, setKeyWords] = useState<string>();
 	const [enable, setEnable] = useState(false);

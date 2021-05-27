@@ -1,13 +1,13 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-26 14:19:27
+ * @LastEditTime: 2021-05-27 14:44:40
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
 import { setBadgeBackground, setBadgeText, setBadgeTitle, createNotify, getExtURL } from '@Utils/chrome';
 import { getDetailXHR } from '@Api/coin';
-import { convertCNUnit, uniqueData } from '@Utils/index';
+import { convertCNUnit, uniqueData, formatBadge } from '@Utils/index';
 import decode from '@Utils/crypto';
 import Saga from '@Utils/saga';
 
@@ -29,16 +29,17 @@ badgeSaga.start((data: any) => {
 	if (!d) return;
 
 	const { crease } = Store.get('settings');
-	const { percent_change_utc0, price_usd } = d;
+	const { percent_change_utc0, price_usd, pair } = d;
 	const status = percent_change_utc0 > 0;
 	const up = crease ? '#c35466' : '#4aaa91';
 	const down = crease ? '#4aaa91' : '#c35466';
 	const color = status ? up : down;
+	const title = `  特殊关注:
+  ${pair}    ${convertCNUnit(price_usd).toString()}  `;
 
-	console.log('price_usd', price_usd, typeof price_usd);
 	setBadgeBackground(color);
-	setBadgeText(convertCNUnit(price_usd).toString());
-	setBadgeTitle(convertCNUnit(price_usd).toString());
+	setBadgeText(formatBadge(price_usd));
+	setBadgeTitle(title);
 }, delay);
 
 const noticeLoop = async () => {
@@ -52,7 +53,9 @@ const noticeLoop = async () => {
 };
 
 const noticeSaga = new Saga(noticeLoop);
-noticeSaga.start((d: any) => {
+noticeSaga.start((data: any) => {
+	const d = data?.[0] ?? data;
+
 	if (!d) return;
 	const notices = Store.get('notifications');
 

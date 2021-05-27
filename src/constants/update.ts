@@ -1,5 +1,20 @@
 export default [
 	{
+		version: '1.0.2',
+		content: [
+			'修复：',
+			'- 特殊关注角标数据粗略化展示',
+			'- 特殊关注精确数据显示在图标title内，鼠标放置图标一会可显示',
+			'- 行情页默认tab类型，可在设置中选择，当前默认为(自选)',
+			'- 快捷模式切换后显示问题',
+			'- 行情页24H成交量排序无效',
+			'- 自选列表中取消自选，刷新列表',
+			'',
+			'更新详情',
+			'<a href="https://github.com/elegantYU/xiaobi/issues/5" target="_blank" rel="noreferrer">https://github.com/elegantYU/xiaobi/issues/5</a>',
+		],
+	},
+	{
 		version: '1.0.1',
 		content: ['修复：', '- 通知文案有误', '- 币种详情页通知无法跳转', '- 通知详情返回页面错误'],
 	},

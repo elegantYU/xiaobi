@@ -7,7 +7,8 @@ interface Props {
 		value: any;
 	}>;
 	active: any;
-	clickEvent: (value: any) => void;
+	field: string;
+	clickEvent: (value: any, key: string) => void;
 }
 
 const WrapperUI = styled.div`
@@ -40,10 +41,10 @@ const ItemUI = styled.div`
 	}
 `;
 
-const RatioGroup: React.FC<Props> = ({ data, active, clickEvent }) => {
+const RatioGroup: React.FC<Props> = ({ data, active, field, clickEvent }) => {
 	const renderItemJSX = () =>
 		data.map(({ label, value }) => (
-			<ItemUI key={value} className={active === value ? 'active' : ''} onClick={() => clickEvent(value)}>
+			<ItemUI key={value} className={active === value ? 'active' : ''} onClick={() => clickEvent(value, field)}>
 				{label}
 			</ItemUI>
 		));

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-12 17:25:16
+ * @LastEditTime: 2021-05-27 10:15:56
  * @Description: 市场行情相关接口
  */
 import {
@@ -54,6 +54,7 @@ const convertData = (list: any[], type?: string) =>
 			percent: percent_change_utc0,
 			turnover: turnover_rate.replace('%', ''),
 			volume: convertCNUnit(volume_24h),
+			realVolume: volume_24h,
 			com_id,
 			market_id,
 			symbol: currency_on_market_name,
@@ -70,6 +71,10 @@ const sortList: SortList<any> = ({ field, sort }, list) => {
 
 	if (field === 'currency') {
 		return list.sort((a, b) => (sort === 1 ? a[field].localeCompare(b[field]) : b[field].localeCompare(a[field])));
+	}
+
+	if (field === 'volume') {
+		return list.sort((a, b) => (sort === 1 ? b.realVolume - a.realVolume : a.realVolume - b.realVolume));
 	}
 
 	return list.sort((a, b) => (sort === 1 ? b[field] - a[field] : a[field] - b[field]));
@@ -114,6 +119,7 @@ const getIncreaseList: BackgroundAsyncMethod = async (sendResponse, { field, sor
 			data: { list },
 		} = await getIncreaseListXHR({ code, timestamp });
 		const result: TableList[] = sortList({ field, sort }, convertData(list));
+		console.log('切换涨跌', field, sort, result);
 		sendResponse(result);
 	} catch {
 		sendResponse({ code: -1 });
