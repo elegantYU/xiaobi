@@ -1,10 +1,10 @@
 /*
  * @Date: 2021-03-23 14:37:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-26 14:17:01
+ * @LastEditTime: 2021-05-28 13:43:23
  * @Description: chrome api 封装
  */
-import { DefaultObject } from '@InterFace/index';
+import { DefaultObject, SyncDataType } from '@InterFace/index';
 
 type SendMessage = (params: { command: string; data?: DefaultObject | string | number | null }) => Promise<any>;
 
@@ -13,6 +13,8 @@ type CreateNotify = (options: chrome.notifications.NotificationOptions) => Promi
 type SetBadgeText = (text: string) => Promise<void>;
 
 type SetBadgeColor = (color: string) => Promise<void>;
+
+type GetSyncMethod<T> = <K extends keyof T>(fields: K | K[] | null) => Promise<{ [key in K]: T[K] }>;
 
 export const sendMessage: SendMessage = ({ command, data = null }) =>
 	new Promise((resolve) => {
@@ -32,12 +34,12 @@ export const setBadgeText: SetBadgeText = (text) =>
 		chrome.browserAction.setBadgeText({ text }, resolve);
 	});
 
-export const setBadgeBackground: SetBadgeColor = async (color) =>
+export const setBadgeBackground: SetBadgeColor = (color) =>
 	new Promise((resolve) => {
 		chrome.browserAction.setBadgeBackgroundColor({ color }, resolve);
 	});
 
-export const setBadgeTitle = async (title: string) =>
+export const setBadgeTitle = (title: string) =>
 	new Promise((resolve) => {
 		chrome.browserAction.setTitle({ title }, () => resolve(1));
 	});
@@ -45,3 +47,18 @@ export const setBadgeTitle = async (title: string) =>
 export const getExtURL = (path: string) => chrome.runtime.getURL(path);
 
 export const getManifest = () => chrome.runtime.getManifest();
+
+export const getSyncData: GetSyncMethod<SyncDataType> = (fields) =>
+	new Promise((resolve) => {
+		chrome.storage.sync.get(fields, (d) => resolve(d));
+	});
+
+export const setSyncData = (items: DefaultObject) =>
+	new Promise((resolve) => {
+		chrome.storage.sync.set(items, () => resolve(1));
+	});
+
+export const removeSyncData = (fields: string | string[]) =>
+	new Promise((resolve) => {
+		chrome.storage.sync.remove(fields, () => resolve(1));
+	});

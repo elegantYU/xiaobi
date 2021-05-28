@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-27 14:44:40
+ * @LastEditTime: 2021-05-27 17:40:04
  * @Description: 轮询store通知，及插件badge轮询
  */
 import Store from '@Services/store';
