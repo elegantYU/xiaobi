@@ -34,6 +34,8 @@ module.exports = {
 		},
 	},
 	rules: {
+		'@typescript-eslint/explicit-module-boundary-types': 0,
+		'@typescript-eslint/no-explicit-any': 'off',
 		'no-tabs': [0, { allowIndentationTabs: true }],
 		eqeqeq: 0,
 		camelcase: 0,
@@ -43,7 +45,7 @@ module.exports = {
 		'consistent-return': 0,
 		'no-console': ['error', { allow: ['warn', 'error', 'log', 'time', 'timeEnd'] }],
 		'no-use-before-define': 'off',
-		'no-unused-vars': 'off',
+		'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
 		'no-param-reassign': 'off',
 		'@typescript-eslint/no-unused-vars': 0,
 		'no-unused-expressions': [0, { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }],
