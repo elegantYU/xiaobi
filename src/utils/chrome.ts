@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:37:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 13:43:23
+ * @LastEditTime: 2021-05-28 14:03:52
  * @Description: chrome api 封装
  */
 import { DefaultObject, SyncDataType } from '@InterFace/index';
@@ -14,7 +14,7 @@ type SetBadgeText = (text: string) => Promise<void>;
 
 type SetBadgeColor = (color: string) => Promise<void>;
 
-type GetSyncMethod<T> = <K extends keyof T>(fields: K | K[] | null) => Promise<{ [key in K]: T[K] }>;
+type GetSyncMethod<T> = <K extends keyof T>(fields: K | K[] | null) => Promise<T>;
 
 export const sendMessage: SendMessage = ({ command, data = null }) =>
 	new Promise((resolve) => {
@@ -50,7 +50,7 @@ export const getManifest = () => chrome.runtime.getManifest();
 
 export const getSyncData: GetSyncMethod<SyncDataType> = (fields) =>
 	new Promise((resolve) => {
-		chrome.storage.sync.get(fields, (d) => resolve(d));
+		chrome.storage.sync.get(fields, (d) => resolve(d as SyncDataType));
 	});
 
 export const setSyncData = (items: DefaultObject) =>

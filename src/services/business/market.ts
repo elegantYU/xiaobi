@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 11:05:34
+ * @LastEditTime: 2021-05-28 14:11:46
  * @Description: 市场行情相关接口
  */
 import {
@@ -129,7 +129,8 @@ const getIncreaseList: BackgroundAsyncMethod = async (sendResponse, { field, sor
 
 // banner
 const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
-	const symbols = (await getSyncData(SyncKey.BannerCoins)) as any[];
+	const syncData = await getSyncData(SyncKey.BannerCoins);
+	const symbols = syncData[SyncKey.BannerCoins];
 	const { code, timestamp } = decode();
 
 	Promise.all(symbols.map((id) => getDetailXHR({ code, timestamp, currency_on_market_id: id })))
@@ -156,7 +157,8 @@ const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
 
 // 自选列表
 const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
-	const followCodes = (await getSyncData(SyncKey.FollowCodes)) as any[];
+	const syncData = await getSyncData(SyncKey.FollowCodes);
+	const followCodes = syncData[SyncKey.FollowCodes];
 	const { code, timestamp } = decode();
 
 	if (followCodes.length === 0) {

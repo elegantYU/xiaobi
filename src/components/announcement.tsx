@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Update from '@Const/update';
+import { Update, ListType, ContentType } from '@Const/update';
 
 interface Props {
 	closeEvent: () => void;
@@ -79,6 +79,7 @@ const TitleUI = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-bottom: 10px;
 
 	i {
 		font-size: 24px;
@@ -86,11 +87,25 @@ const TitleUI = styled.div`
 	}
 `;
 
-const ContentUI = styled.ul`
-	li {
+const ContentUI = styled.div`
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+`;
+
+const TypeUI = styled.div`
+	.title {
 		font-size: 14px;
-		padding: 5px 0;
-		color: ${(p) => p.theme.updateDesc};
+		margin-bottom: 10px;
+		color: ${(p) => p.theme.updateTitle};
+	}
+
+	li {
+		p {
+			font-size: 13px;
+			padding: 5px 0;
+			color: ${(p) => p.theme.updateDesc};
+		}
 
 		a {
 			font-size: 14px;
@@ -98,6 +113,27 @@ const ContentUI = styled.ul`
 		}
 	}
 `;
+
+const renderTypeJSX = (l: ListType[]) =>
+	l.map(({ text, type, href }, index) => (
+		<li key={index}>
+			{type ? (
+				<a href={href} target='_blank' rel='noopener noreferrer'>
+					{text}
+				</a>
+			) : (
+				<p>{text}</p>
+			)}
+		</li>
+	));
+
+const renderContentJSX = (c: ContentType[]) =>
+	c.map(({ title, list }, index) => (
+		<TypeUI key={index}>
+			<p className='title'>{title}</p>
+			<ul>{renderTypeJSX(list)}</ul>
+		</TypeUI>
+	));
 
 const Announcement: React.FC<Props> = ({ closeEvent, reward }) => {
 	const [out, setOut] = useState(false);
@@ -108,17 +144,13 @@ const Announcement: React.FC<Props> = ({ closeEvent, reward }) => {
 	};
 
 	const renderBlockJSX = () =>
-		Update.map((v, i) => (
+		Update.map(({ version, content }, i) => (
 			<Block key={i}>
 				<TitleUI>
-					{v.version} 版本
+					{version} 版本
 					<i className='iconfont iconqian' onClick={reward} />
 				</TitleUI>
-				<ContentUI>
-					{v.content.map((l) => (
-						<li key={l} dangerouslySetInnerHTML={{ __html: l }} />
-					))}
-				</ContentUI>
+				<ContentUI>{renderContentJSX(content)}</ContentUI>
 			</Block>
 		));
 

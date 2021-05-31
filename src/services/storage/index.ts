@@ -1,11 +1,12 @@
 import Store from '@Services/store';
-import { getSyncData, setSyncData, getManifest } from '@Utils/chrome';
+import { getSyncData, setSyncData } from '@Utils/chrome';
 import { SyncKey } from '@Const/local';
 
-const { version } = getManifest();
 const DefaultData = {
-	[SyncKey.BannerCoins]: [6306516, 1334942, 821701822, 821698840],
 	[SyncKey.Badge]: '6306516',
+	[SyncKey.BannerCoins]: [6306516, 1334942, 821701822, 821698840],
+	[SyncKey.FollowCodes]: [],
+	[SyncKey.Notifications]: [],
 	[SyncKey.Settings]: {
 		theme: 0, //	0 浅 1 深 2 跟随
 		crease: 1, // 0 绿涨 1 红涨
@@ -17,9 +18,9 @@ const DefaultData = {
 
 // 弥补自己犯下的错，判断sign同步Store数据
 const fixMyFault = async () => {
-	const faultSign = await getSyncData(SyncKey.MyFault);
+	const syncData = await getSyncData(SyncKey.MyFault);
 
-	if (faultSign) return;
+	if (syncData[SyncKey.MyFault]) return;
 
 	const selfCoins = Store.get('selfCoins');
 	const follow = Store.get('follow');
@@ -31,16 +32,7 @@ const fixMyFault = async () => {
 		[SyncKey.MyFault]: true,
 	};
 
-	await setSyncData(needSyncData);
+	await setSyncData({ ...DefaultData, ...needSyncData });
 };
 
-// 添加默认值
-const initSyncData = async () => {
-	await setSyncData(DefaultData);
-
-	if (version === '1.0.3') {
-		fixMyFault();
-	}
-};
-
-initSyncData();
+fixMyFault();

@@ -1,20 +1,21 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 15:40:48
+ * @LastEditTime: 2021-05-28 14:16:08
  * @Description: 通知管理
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeType, NoticeBlockType } from '@InterFace/index';
 import { getDetailXHR } from '@Api/index';
 import { CMDS } from '@Const/commands';
+import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
+import { setSyncData, getSyncData } from '@Utils/chrome';
 import { uniqueData, convertCNUnit } from '@Utils/index';
 import Store from '../store';
 
 const getLocalNotify: BackgroundAsyncMethod = async (send) => {
-	// const { code, timestamp } = decode();
-	const notify = Store.get('notifications');
-	// const list = uniqueData(notify, 'id');
+	const syncData = await getSyncData(SyncKey.Notifications);
+	const notify = syncData[SyncKey.Notifications];
 
 	const blockList = notify.reduce((arr, item) => {
 		const idx = arr.findIndex((v) => v.id === item.id);
@@ -52,16 +53,18 @@ const delNotify: BackgroundAsyncMethod = async (send, data) => {
 };
 
 const addNotify: BackgroundAsyncMethod = async (send, data) => {
-	const notify = Store.get('notifications');
+	const syncData = await getSyncData(SyncKey.Notifications);
+	const notify = syncData[SyncKey.Notifications];
 	notify.push(data);
-	Store.set('notifications', notify);
+	await setSyncData({ [SyncKey.Notifications]: notify });
 
 	send(true);
 };
 
 const getSingleInfo: BackgroundAsyncMethod = async (send, d) => {
 	const { code, timestamp } = decode();
-	const notify = Store.get('notifications');
+	const syncData = await getSyncData(SyncKey.Notifications);
+	const notify = syncData[SyncKey.Notifications];
 	const list = notify.filter((v) => v.id === d).reverse();
 
 	try {
