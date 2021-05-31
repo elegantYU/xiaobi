@@ -31,6 +31,8 @@ p {
 	font-family: 'Abel', sans-serif;
 	-webkit-font-smooth: antialiased;
 	-moz-osx-font-smoothing: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 	transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -73,6 +75,7 @@ img:not([src]) {
 }
 
 ::-webkit-scrollbar {
+	display: none;
 	width: 0;
 	height: 0;
 	background-color: transparent !important;

@@ -136,3 +136,21 @@ export type PageCmdMap = [string, PageAsyncMethod][];
 
 // 请求方法
 export type XHR<T> = (params: T) => Promise<any>;
+
+export type SettingType = {
+	theme: 0 | 1 | 2;
+	crease: 0 | 2;
+	nav: 0 | 1;
+	viewport: 0 | 1 | 2 | 3;
+	homeTab: 0 | 1 | 2 | 3;
+};
+
+// Sync key 数据结构
+export type SyncDataType = {
+	MyFault: boolean;
+	BannerCoins: number[];
+	Badge: string;
+	Notifications: NoticeType[];
+	FollowCodes: string[];
+	Settings: SettingType;
+};

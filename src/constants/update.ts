@@ -1,33 +1,110 @@
-export default [
+export type ListType = {
+	text: string;
+	type: 0 | 1;
+	href?: string;
+};
+
+export type ContentType = {
+	title: string;
+	list: ListType[];
+};
+
+export type UpdateType = {
+	version: string;
+	content: ContentType[];
+}[];
+
+export const Update: UpdateType = [
+	{
+		version: '1.1.1',
+		content: [
+			{
+				title: '新增:',
+				list: [
+					{
+						text: '- 小窗模式(独立窗口，摸鱼更隐蔽)',
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '- 去除数据四舍五入，还原精度',
+						type: 0,
+					},
+					{
+						text: '- 浏览器清除缓存导致数据丢失',
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '更多信息:',
+				list: [
+					{
+						text: 'https://github.com/elegantYU/xiaobi/issues/9',
+						href: 'https://github.com/elegantYU/xiaobi/issues/9',
+						type: 1,
+					},
+				],
+			},
+		],
+	},
 	{
 		version: '1.0.2',
 		content: [
-			'修复：',
-			'- 特殊关注角标数据粗略化展示',
-			'- 特殊关注精确数据显示在图标title内，鼠标放置图标一会可显示',
-			'- 行情页默认tab类型，可在设置中选择，当前默认为(自选)',
-			'- 快捷模式切换后显示问题',
-			'- 行情页24H成交量排序无效',
-			'- 自选列表中取消自选，刷新列表',
-			'',
-			'更新详情',
-			'<a href="https://github.com/elegantYU/xiaobi/issues/5" target="_blank" rel="noreferrer">https://github.com/elegantYU/xiaobi/issues/5</a>',
+			{
+				title: '修复:',
+				list: [
+					{ text: '- 特殊关注角标数据粗略化展示', type: 0 },
+					{ text: '- 特殊关注精确数据显示在图标title内，鼠标放置图标一会可显示', type: 0 },
+					{ text: '- 行情页默认tab类型，可在设置中选择，当前默认为', type: 0 },
+					{ text: '- 快捷模式切换后显示问题', type: 0 },
+					{ text: '- 行情页24H成交量排序无效', type: 0 },
+					{ text: '- 自选列表中取消自选，刷新列表', type: 0 },
+				],
+			},
+			{
+				title: '更多信息:',
+				list: [
+					{
+						text: 'https://github.com/elegantYU/xiaobi/issues/5',
+						type: 1,
+						href: 'https://github.com/elegantYU/xiaobi/issues/5',
+					},
+				],
+			},
 		],
 	},
 	{
 		version: '1.0.1',
-		content: ['修复：', '- 通知文案有误', '- 币种详情页通知无法跳转', '- 通知详情返回页面错误'],
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{ text: '- 通知文案有误', type: 0 },
+					{ text: '- 币种详情页通知无法跳转', type: 0 },
+					{ text: '- 通知详情返回页面错误', type: 0 },
+				],
+			},
+		],
 	},
 	{
 		version: '1.0.0',
 		content: [
-			'功能：',
-			'- 快捷浏览区块链行情列表，掌握行情',
-			'- 搜索心仪的币种加入自选，更方便查看',
-			'- 币种自身简介及相关资讯快速了解，配合K线图判断更准确',
-			'- 添加币种通知，插件会实时提醒你价格变化是否到达阈值',
-			'- 金色财经新闻快速浏览，把握一手币圈资讯',
-			'- 自定义界面主题更换、涨跌颜色等',
+			{
+				title: '功能:',
+				list: [
+					{ text: '- 快捷浏览区块链行情列表，掌握行情', type: 0 },
+					{ text: '- 搜索心仪的币种加入自选，更方便查看', type: 0 },
+					{ text: '- 币种自身简介及相关资讯快速了解，配合K线图判断更准确', type: 0 },
+					{ text: '- 添加币种通知，插件会实时提醒你价格变化是否到达阈值', type: 0 },
+					{ text: '- 金色财经新闻快速浏览，把握一手币圈资讯', type: 0 },
+					{ text: '- 自定义界面主题更换、涨跌颜色等', type: 0 },
+				],
+			},
 		],
 	},
 ];

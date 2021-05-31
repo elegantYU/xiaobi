@@ -3,11 +3,19 @@ import { dark, light, lightReverse, darkReverse } from '@Styles/theme';
 import { getManifest } from './chrome';
 import { getStorage } from './localStorage';
 
-type MatchCoinData<T, P extends keyof T> = (keys: string[], list: T[], key: P) => T[];
-
 type UniqueData<T, P extends keyof T> = (arr: T[], key: P) => T[];
 
 type ConvertCNUnit = (origin: string | number) => string | number;
+
+type AccuracyData = (num: string | number, bit: number) => string;
+
+// 数据完整且保留精度
+export const accuracyData: AccuracyData = (num, bit) => {
+	const n = +num;
+	const m = 10 ** bit;
+
+	return (Math.floor(n * m) / m).toFixed(bit);
+};
 
 // 币种过滤
 export const coinTypeFilter = (s: string) => {
@@ -45,23 +53,21 @@ export const uniqueData: UniqueData<any, any> = (arr, key) => [
 // 中文单位数据换算
 export const convertCNUnit: ConvertCNUnit = (origin) => {
 	const ori = Number(origin);
+	const ruleMap: [number, (n: number) => string | number][] = [
+		[1, (n) => convertNumber(Number(accuracyData(n, 10)))],
+		[10, (n) => convertNumber(Number(accuracyData(n, 6)))],
+		[1000, (n) => convertNumber(Number(accuracyData(n, 4)))],
+		[1000000, (n) => convertNumber(Number(accuracyData(n, 2)))],
+		[100000000, (n) => `${Number(accuracyData(n / 10000, 2))}万`],
+	];
 
-	if (ori < 1) {
-		return convertNumber(Number(ori.toFixed(10)));
+	const current = ruleMap.find(([r]) => ori < r);
+
+	if (current) {
+		return current[1](ori);
 	}
-	if (ori < 10) {
-		return convertNumber(Number(ori.toFixed(6)));
-	}
-	if (ori < 1000) {
-		return convertNumber(Number(ori.toFixed(4)));
-	}
-	if (ori < 1000000) {
-		return convertNumber(Number(ori.toFixed(2)));
-	}
-	if (ori < 100000000) {
-		return `${Number((ori / 10000).toFixed(2))}万`;
-	}
-	return `${Number((ori / 100000000).toFixed(2))}亿`;
+
+	return `${Number(accuracyData(ori / 100000000, 2))}亿`;
 };
 
 // 获取主题
@@ -147,11 +153,13 @@ export const changeViewPort = (multiple: number) => {
 // badge单位
 export const formatBadge = (num: number) => {
 	const rulesMap: [number, (n: number) => string][] = [
-		[1, (n: number) => n.toFixed(3)],
-		[10, (n: number) => n.toFixed(2)],
-		[100, (n: number) => n.toFixed(1)],
-		[100000, (n: number) => `${(n / 1000).toFixed(1)}k`],
-		[1000000, (n: number) => `${(n / 10000).toFixed(1)}w`],
+		[1, (n) => accuracyData(n, 3)],
+		[10, (n) => accuracyData(n, 2)],
+		[100, (n) => accuracyData(n, 1)],
+		[10000, (n) => `${accuracyData(n / 1000, 1)}k`],
+		[100000, (n) => `${accuracyData(n / 1000, 0)}k`],
+		[1000000, (n) => `${accuracyData(n / 10000, 1)}w`],
+		[10000000, (n) => `${accuracyData(n / 10000, 0)}w`],
 	];
 
 	const current = rulesMap.find(([r]) => num < r);

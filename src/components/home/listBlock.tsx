@@ -101,7 +101,7 @@ const MaskUI = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	backdrop-filter: blur(4px);
+	backdrop-filter: blur(5px);
 	opacity: 0;
 	pointer-events: none;
 	display: flex;

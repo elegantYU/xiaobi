@@ -1,24 +1,24 @@
 /*
  * @Date: 2021-03-23 14:23:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-18 10:51:00
+ * @LastEditTime: 2021-05-28 14:59:26
  * @Description: 从store获取数据
  */
-import Store from '@Services/store';
-import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeType } from '@InterFace/index';
+import { BackgroundAsyncMethod, BackgroundCmdMap } from '@InterFace/index';
 import { CMDS, CMDS_PAGE } from '@Const/commands';
-import { sendMessage } from '@Utils/chrome';
+import { SyncKey } from '@Const/local';
+import { sendMessage, getSyncData, setSyncData } from '@Utils/chrome';
 
 // store获取Symbols，没有则请求
 const getSetting: BackgroundAsyncMethod = async (sendResponse) => {
-	const settings = Store.get('settings');
+	const syncData = await getSyncData(SyncKey.Settings);
 
-	return sendResponse(settings);
+	return sendResponse(syncData[SyncKey.Settings]);
 };
 
 // 更新setting配置
 const changeSetting: BackgroundAsyncMethod = async (sendResponse, data) => {
-	Store.set('settings', { ...data });
+	await setSyncData({ [SyncKey.Settings]: data });
 
 	sendMessage({ command: CMDS_PAGE.CMD_GET_SETTING, data });
 	sendResponse(true);
@@ -26,13 +26,14 @@ const changeSetting: BackgroundAsyncMethod = async (sendResponse, data) => {
 
 // 获取币种状态
 const getCoinState: BackgroundAsyncMethod = async (send, id) => {
-	const selfCoins = Store.get('selfCoins');
-	const follow = Store.get('follow');
-	const notices = Store.get('notifications');
+	const syncData = await getSyncData([SyncKey.FollowCodes, SyncKey.Badge, SyncKey.Notifications]);
+	const followCodes = syncData[SyncKey.FollowCodes];
+	const badge = syncData[SyncKey.Badge];
+	const notices = syncData[SyncKey.Notifications];
 
 	const res = {
-		self: selfCoins.some((d) => d == id),
-		follow: follow == id,
+		self: followCodes.some((d) => d == id),
+		follow: badge == id,
 		notice: notices.some((d) => d.id == id),
 	};
 
@@ -41,25 +42,26 @@ const getCoinState: BackgroundAsyncMethod = async (send, id) => {
 
 // 根据id判断是否是自选
 const changeSelf: BackgroundAsyncMethod = async (send, id) => {
-	const selfCoins = Store.get('selfCoins');
-	const idx = selfCoins.findIndex((d) => d == id);
+	const syncData = await getSyncData(SyncKey.FollowCodes);
+	const followCodes = syncData[SyncKey.FollowCodes];
+	const idx = followCodes.findIndex((d) => d == id);
 
 	if (idx !== -1) {
-		selfCoins.splice(idx, 1);
+		followCodes.splice(idx, 1);
 	} else {
-		selfCoins.push(id);
+		followCodes.push(id);
 	}
 
-	Store.set('selfCoins', selfCoins);
+	await setSyncData({ [SyncKey.FollowCodes]: followCodes });
 
 	send(true);
 };
 // 直接替换特殊关注
 const changeFollow: BackgroundAsyncMethod = async (send, id) => {
-	const follow = Store.get('follow');
-	const res = follow == id ? '6306516' : id;
+	const badge = await getSyncData(SyncKey.Badge);
+	const res = badge[SyncKey.Badge] == id ? '6306516' : id;
 
-	Store.set('follow', res);
+	await setSyncData({ [SyncKey.Badge]: res });
 
 	send(true);
 };

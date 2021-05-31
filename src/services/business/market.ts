@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-27 10:15:56
+ * @LastEditTime: 2021-05-28 14:11:46
  * @Description: 市场行情相关接口
  */
 import {
@@ -13,7 +13,8 @@ import {
 	getTrendLineXHR,
 } from '@Api/index';
 import { BackgroundAsyncMethod, BackgroundCmdMap, BannerItem, TableList, SortData } from '@InterFace/index';
-import Store from '@Services/store';
+import { SyncKey } from '@Const/local';
+import { getSyncData } from '@Utils/chrome';
 import { CMDS } from '@Const/commands';
 import decode from '@Utils/crypto';
 import { convertCNUnit } from '@Utils/index';
@@ -128,7 +129,8 @@ const getIncreaseList: BackgroundAsyncMethod = async (sendResponse, { field, sor
 
 // banner
 const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
-	const symbols = Store.get('bannerCoin');
+	const syncData = await getSyncData(SyncKey.BannerCoins);
+	const symbols = syncData[SyncKey.BannerCoins];
 	const { code, timestamp } = decode();
 
 	Promise.all(symbols.map((id) => getDetailXHR({ code, timestamp, currency_on_market_id: id })))
@@ -155,14 +157,15 @@ const getBannerData: BackgroundAsyncMethod = async (sendResponse) => {
 
 // 自选列表
 const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
-	const selfCoins = Store.get('selfCoins');
+	const syncData = await getSyncData(SyncKey.FollowCodes);
+	const followCodes = syncData[SyncKey.FollowCodes];
 	const { code, timestamp } = decode();
 
-	if (selfCoins.length === 0) {
+	if (followCodes.length === 0) {
 		return sendResponse([]);
 	}
 
-	Promise.all(selfCoins.map((id) => getDetailXHR({ code, timestamp, currency_on_market_id: id })))
+	Promise.all(followCodes.map((id) => getDetailXHR({ code, timestamp, currency_on_market_id: id })))
 		.then((_) => {
 			const result: TableList[] = data
 				? sortList(
