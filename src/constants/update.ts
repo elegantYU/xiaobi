@@ -16,6 +16,20 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.1.2',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '- 删除通知和badge颜色配置未使用Storage存储',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.1.1',
 		content: [
 			{
