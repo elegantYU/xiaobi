@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { isFireFox } from '@Utils/index';
 
 interface Props {
 	value: number;
@@ -95,7 +96,7 @@ const Process: React.FC<Props> = ({ value, changeEvent }) => {
 		if (BtnEl.current) {
 			const { left, width: w } = BtnEl.current.getBoundingClientRect();
 			const l = +BtnEl.current.style.left.replace('px', '');
-			const realX = e.clientX / Points[value].zoom;
+			const realX = isFireFox ? e.clientX : e.clientX / Points[value].zoom;
 
 			if (realX >= left && realX <= w + left) {
 				setStartX(realX);
@@ -106,7 +107,7 @@ const Process: React.FC<Props> = ({ value, changeEvent }) => {
 	};
 	const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
 		if (isDrag && BtnEl.current) {
-			const barleft = e.clientX / Points[value].zoom - startX;
+			const barleft = isFireFox ? e.clientX - startX : e.clientX / Points[value].zoom - startX;
 			let lastleft = originLeft + barleft;
 			if (lastleft <= 0) lastleft = 0;
 			if (lastleft >= WIDTH) lastleft = WIDTH;
@@ -116,7 +117,8 @@ const Process: React.FC<Props> = ({ value, changeEvent }) => {
 		}
 	};
 	const handleMouseUp: React.MouseEventHandler<HTMLDivElement> = (e) => {
-		setStartX(e.clientX / Points[value].zoom);
+		const resX = isFireFox ? e.clientX : e.clientX / Points[value].zoom;
+		setStartX(resX);
 		setDrag(false);
 
 		if (BtnEl.current) {
@@ -130,9 +132,8 @@ const Process: React.FC<Props> = ({ value, changeEvent }) => {
 
 				if (nowLeft >= rangeX && nowLeft <= rangeY) {
 					return point;
-				} 
+				}
 				return res;
-				
 			}, 0);
 
 			setWidth(fixPoint);

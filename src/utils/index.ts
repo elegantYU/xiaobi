@@ -3,11 +3,17 @@ import { dark, light, lightReverse, darkReverse } from '@Styles/theme';
 import { getManifest } from './chrome';
 import { getStorage } from './localStorage';
 
+declare const InstallTrigger: any;
+
 type UniqueData<T, P extends keyof T> = (arr: T[], key: P) => T[];
 
 type ConvertCNUnit = (origin: string | number) => string | number;
 
 type AccuracyData = (num: string | number, bit: number) => string;
+
+// 判断是什么浏览器
+export const isFireFox = typeof InstallTrigger !== 'undefined';
+export const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
 // 数据完整且保留精度
 export const accuracyData: AccuracyData = (num, bit) => {
@@ -144,10 +150,19 @@ export const checkUpdate = () => {
 
 //	控制body的zoom
 export const changeViewPort = (multiple: number) => {
-	const map = ['0.9', '1', '1.1', '1.2'];
+	const map = [0.9, 1, 1.1, 1.2];
 	const res = map[multiple];
+	const width = 500;
+	const height = 500;
 
-	document.body.style.zoom = res;
+	if (isFireFox) {
+		document.body.style.width = `${width * res  }px`;
+		document.body.style.height = `${height * res  }px`;
+		document.body.style.transform = `scale(${res}, ${res})`;
+		document.body.style.transformOrigin = 'left top';
+	} else {
+		document.body.style.zoom = res.toString();
+	}
 };
 
 // badge单位

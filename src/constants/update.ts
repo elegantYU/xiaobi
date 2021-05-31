@@ -25,6 +25,10 @@ export const Update: UpdateType = [
 						text: '- 删除通知和badge颜色配置未使用Storage存储',
 						type: 0,
 					},
+					{
+						text: '- 火狐调节窗口失效',
+						type: 0,
+					},
 				],
 			},
 		],
