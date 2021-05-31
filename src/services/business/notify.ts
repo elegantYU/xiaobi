@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-31 09:58:01
+ * @LastEditTime: 2021-05-31 11:23:41
  * @Description: 通知管理
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeBlockType } from '@InterFace/index';
@@ -11,7 +11,6 @@ import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
 import { setSyncData, getSyncData } from '@Utils/chrome';
 import { convertCNUnit } from '@Utils/index';
-import Store from '../store';
 
 const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 	const syncData = await getSyncData(SyncKey.Notifications);
@@ -43,11 +42,12 @@ const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 };
 
 const delNotify: BackgroundAsyncMethod = async (send, data) => {
-	const notify = Store.get('notifications');
+	const syncData = await getSyncData(SyncKey.Notifications);
+	const notify = syncData[SyncKey.Notifications];
 	const idx = notify.findIndex(({ uid }) => uid === data);
 
 	notify.splice(idx, 1);
-	Store.set('notifications', notify);
+	await setSyncData({ [SyncKey.Notifications]: notify });
 
 	send(true);
 };

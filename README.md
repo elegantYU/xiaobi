@@ -20,7 +20,7 @@
 
 ## 下载
 
-目前只上架了谷歌市场，无科学上网可下载安装包手动安装，Firefox 及 Edge 浏览器正在适配中。
+目前上架了谷歌和火狐商店，无科学上网可下载安装包手动安装，Firefox 及 Edge 浏览器正在适配中。
 
 [谷歌浏览器](https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh)
 

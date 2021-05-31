@@ -1,11 +1,18 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 14:56:54
+ * @LastEditTime: 2021-05-31 11:25:43
  * @Description: 轮询store通知，及插件badge轮询
  */
-import Store from '@Services/store';
-import { setBadgeBackground, setBadgeText, setBadgeTitle, createNotify, getExtURL , getSyncData, setSyncData } from '@Utils/chrome';
+import {
+	setBadgeBackground,
+	setBadgeText,
+	setBadgeTitle,
+	createNotify,
+	getExtURL,
+	getSyncData,
+	setSyncData,
+} from '@Utils/chrome';
 import { getDetailXHR } from '@Api/coin';
 import { convertCNUnit, uniqueData, formatBadge } from '@Utils/index';
 
@@ -27,12 +34,13 @@ const badgeLoop = async () => {
 };
 
 const badgeSaga = new Saga(badgeLoop);
-badgeSaga.start((data: any) => {
+badgeSaga.start(async (data: any) => {
 	const d = data?.[0] ?? data;
 
 	if (!d) return;
 
-	const { crease } = Store.get('settings');
+	const syncData = await getSyncData(SyncKey.Settings);
+	const { crease } = syncData[SyncKey.Settings];
 	const { percent_change_utc0, price_usd, pair } = d;
 	const status = percent_change_utc0 > 0;
 	const up = crease ? '#c35466' : '#4aaa91';
