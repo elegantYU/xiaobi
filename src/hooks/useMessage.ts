@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-05-16 13:25:30
  * @Description: chrome sendMessage
  */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sendMessage } from '@Utils/chrome';
 
 interface Props {

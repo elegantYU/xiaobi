@@ -1,14 +1,10 @@
 /*
  * @Date: 2021-03-15 09:29:20
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 16:20:39
+ * @LastEditTime: 2021-05-31 09:58:20
  * @Description: fetch 封装
  */
 import { DefaultObject } from '@InterFace/index';
-
-interface API {
-	'https://www.huobi.com/-/x/pro/v2/beta/common/symbols': { data: Array<any>; status: string };
-}
 
 type Options = {
 	method: 'GET' | 'POST' | 'DELETE' | 'PUT';
@@ -24,19 +20,19 @@ const xhr = (options: Options) => {
 	const opt: RequestInit =
 		method !== 'GET'
 			? {
-				method,
-				body: params,
-				headers: new Headers(headers),
+					method,
+					body: params,
+					headers: new Headers(headers),
 			  }
 			: {};
 	const api =
 		method === 'GET'
 			? `${url}?${
-				params
-					? Object.keys(params)
-						.map((k) => `${k}=${params[k]}`)
-						.join('&')
-					: ''
+					params
+						? Object.keys(params)
+								.map((k) => `${k}=${params[k]}`)
+								.join('&')
+						: ''
 			  }`
 			: url;
 

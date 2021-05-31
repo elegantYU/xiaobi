@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { SearchData } from '@InterFace/index';
 
@@ -53,16 +53,6 @@ const MarketUI = styled.div`
 	color: ${(p) => p.theme.tdTitle};
 	justify-self: flex-end;
 `;
-const KlineUI = styled.i`
-	width: 100%;
-	height: 100%;
-	font-size: 18px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: ${(p) => p.theme.tdTitle};
-	cursor: pointer;
-`;
 const StarUI = styled.i`
 	width: 100%;
 	height: 100%;
@@ -81,7 +71,6 @@ const StarUI = styled.i`
 const ListBlock: React.FC<Props> = ({ data, onClick }) => {
 	const { id, pair, logo, marketName, active, symbol, kline } = data;
 	const starClass = `iconfont ${active ? 'iconshoucang active' : 'iconshoucang1'}`;
-	const klineClass = `iconfont ${kline ? 'iconshuju1' : ''}`;
 
 	const openCoinPage = () => {
 		const link = `https://www.mytokencap.com/currency/${symbol}/${id}`;

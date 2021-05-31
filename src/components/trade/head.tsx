@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { TableList } from '@InterFace/index';
 import Loading from '@Components/loading/tradeBannerLoading';
@@ -69,7 +69,7 @@ const Head: React.FC<Props> = ({ data }) => {
 		);
 	}
 
-	const { currency, anchor, percent, cny, usd, volume, high_24h, low_24h } = data;
+	const { percent, cny, usd, volume, high_24h, low_24h } = data;
 	const numSymbol = Number(percent);
 	const symbol = numSymbol > 0 ? '+' : '';
 	const className = numSymbol > 0 ? 'increase' : 'decrease';

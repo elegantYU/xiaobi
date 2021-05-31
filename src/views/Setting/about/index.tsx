@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { getExtURL, getManifest } from '@Src/utils/chrome';
 import { Context } from '@Src/context';

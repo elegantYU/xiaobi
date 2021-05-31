@@ -2,10 +2,10 @@
 /*
  * @Date: 2021-03-15 09:52:15
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-10 15:00:26
+ * @LastEditTime: 2021-05-31 09:57:27
  * @Description: websocket hooks
  */
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { convertCNUnit } from '@Utils/index';
 
 const useSocket = ({ url, data }) => {

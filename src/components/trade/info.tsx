@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { formatTime } from '@Utils/index';
 
@@ -110,34 +110,34 @@ const Info: React.FC<Props> = ({ data }) => {
 			const item = (list as any[]).find((val) => val.key === v.key);
 
 			switch (v.key) {
-			case 'link':
-				return LinkList.map((val) => {
-					const curr = (item?.content as any[]).find((l) => val.key === l.key);
+				case 'link':
+					return LinkList.map((val) => {
+						const curr = (item?.content as any[]).find((l) => val.key === l.key);
 
+						return (
+							<LabelUI key={val.key}>
+								<label>{val.value}</label>
+								<a href={curr?.link} target='_blank' rel='noreferrer'>
+									{curr?.link || '--'}
+								</a>
+							</LabelUI>
+						);
+					});
+
+				case 'start_date':
 					return (
-						<LabelUI key={val.key}>
-							<label>{val.value}</label>
-							<a href={curr?.link} target='_blank' rel='noreferrer'>
-								{curr?.link || '--'}
-							</a>
+						<LabelUI key={v.key}>
+							<label>{v.value}</label>
+							<p>{item ? formatTime(item.content, '{y}/{m}/{d}') : '--'}</p>
 						</LabelUI>
 					);
-				});
-
-			case 'start_date':
-				return (
-					<LabelUI key={v.key}>
-						<label>{v.value}</label>
-						<p>{item ? formatTime(item.content, '{y}/{m}/{d}') : '--'}</p>
-					</LabelUI>
-				);
-			default:
-				return (
-					<LabelUI key={v.key}>
-						<label>{v.value}</label>
-						<p>{item?.content || '--'}</p>
-					</LabelUI>
-				);
+				default:
+					return (
+						<LabelUI key={v.key}>
+							<label>{v.value}</label>
+							<p>{item?.content || '--'}</p>
+						</LabelUI>
+					);
 			}
 		});
 

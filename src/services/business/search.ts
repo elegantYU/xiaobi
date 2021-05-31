@@ -1,12 +1,11 @@
 /*
  * @Date: 2021-04-10 16:01:45
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 14:18:40
+ * @LastEditTime: 2021-05-31 09:58:09
  * @Description: 搜索 添加 删除自选
  */
 import { getSearchXHR } from '@Api/index';
 import { BackgroundAsyncMethod, BackgroundCmdMap, SearchData } from '@InterFace/index';
-import Store from '@Services/store';
 import { CMDS } from '@Const/commands';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';

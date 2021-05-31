@@ -1,16 +1,16 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 14:16:08
+ * @LastEditTime: 2021-05-31 09:58:01
  * @Description: 通知管理
  */
-import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeType, NoticeBlockType } from '@InterFace/index';
+import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeBlockType } from '@InterFace/index';
 import { getDetailXHR } from '@Api/index';
 import { CMDS } from '@Const/commands';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
 import { setSyncData, getSyncData } from '@Utils/chrome';
-import { uniqueData, convertCNUnit } from '@Utils/index';
+import { convertCNUnit } from '@Utils/index';
 import Store from '../store';
 
 const getLocalNotify: BackgroundAsyncMethod = async (send) => {

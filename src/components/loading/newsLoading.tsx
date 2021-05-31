@@ -3,23 +3,6 @@ import ContentLoader from 'react-content-loader';
 import useTheme from '@Src/hooks/useTheme';
 import { Context } from '@Src/context';
 
-import styled from 'styled-components';
-
-const WrapperUI = styled.div`
-	position: relative;
-
-	&::before {
-		position: absolute;
-		content: '';
-		width: calc(100% - 16px);
-		height: 1px;
-		bottom: 0px;
-		left: 50%;
-		transform: translateX(-50%);
-		background-color: ${(p) => p.theme.tabBorder};
-	}
-`;
-
 const Loading: React.FC = () => {
 	const { theme } = useTheme();
 	const { config } = useContext(Context);

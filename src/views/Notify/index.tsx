@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import useMessage from '@Src/hooks/useMessage';
 import { CMDS } from '@Src/constants/commands';
 import type { NoticeBlockType } from '@InterFace/index';
 import useLoop from '@Src/hooks/useLoop';

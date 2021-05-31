@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import RateBlock from '@Components/home/rateBlock';
 import { TableList } from '@InterFace/index';

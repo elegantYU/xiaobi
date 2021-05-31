@@ -1,4 +1,4 @@
-import React, { useState, useRef, memo, useCallback, RefObject } from 'react';
+import React, { useCallback, RefObject } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 import Loading from '@Components/loading/newsLoading';

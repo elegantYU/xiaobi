@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { sendMessage } from '@Src/utils/chrome';
-import { CMDS } from '@Src/constants/commands';
 
 interface Props {
 	uid: string;

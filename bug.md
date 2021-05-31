@@ -32,3 +32,21 @@
   改，一定要改！要让人民满意。
 
   用 storage.sync 吧，蛋疼
+
+- eslint no-unuse-vars 对 ts enum 报错
+
+  ```ts
+  enum Type {
+  	Tom: 'Tom',
+  	Jack: 'Jack'
+  }
+  ```
+
+  会报错 Tom Jack is defined but never used
+
+  改规则为
+
+  ```
+  no-unused-vars: "off",
+  @typescript-eslint/no-unused-vars: ['warn', { argsIgnorePattern: '^_' }]
+  ```

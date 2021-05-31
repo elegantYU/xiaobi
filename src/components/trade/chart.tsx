@@ -151,11 +151,11 @@ const ChartView: React.FC<Props> = ({ data, loading }) => {
 			.position('time*range')
 			.color('trend', (val: string) => {
 				switch (val) {
-				case '上涨':
-					return increase;
-				case '下跌':
-				default:
-					return decrease;
+					case '上涨':
+						return increase;
+					case '下跌':
+					default:
+						return decrease;
 				}
 			})
 			.shape('candle')
@@ -232,7 +232,7 @@ const ChartView: React.FC<Props> = ({ data, loading }) => {
 
 	useEffect(() => {
 		if (response) {
-			const { status, kline } = response;
+			const { status } = response;
 
 			if (!chartEl.current) {
 				!status ? klineCreate() : lineCreate();

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { creaseState, themeState, NavMode, HomeTabState } from '@Const/setting';
 import { setSettingSM } from '@Api/setting';
