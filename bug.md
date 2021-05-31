@@ -50,3 +50,7 @@
   no-unused-vars: "off",
   @typescript-eslint/no-unused-vars: ['warn', { argsIgnorePattern: '^_' }]
   ```
+
+- 火狐调整窗口大小无效
+
+  css zoom 属性的不支持导致的，改成了宽高和 transform/scale 同时修改
