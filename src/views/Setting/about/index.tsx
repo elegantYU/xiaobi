@@ -6,6 +6,8 @@ import { Context } from '@Src/context';
 const WrapperUI = styled.div`
 	height: 100%;
 	overflow: auto;
+	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.panelBg};
 `;
 
 const BannerUI = styled.div`

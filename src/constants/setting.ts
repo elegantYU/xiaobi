@@ -21,6 +21,17 @@ export const HomeTabState = [
 	{ label: '关注榜', value: 3 },
 ];
 
+export const BadgeDataType = [
+	{ label: '现价', value: 'price' },
+	{ label: '涨跌幅', value: 'percent' },
+	{ label: '换手率', value: 'turnover' },
+];
+
+export const BadgeObserve = [
+	{ label: '关闭', value: false },
+	{ label: '开启', value: true },
+];
+
 export const Help = [
 	{
 		question: '这个插件怎么使用',

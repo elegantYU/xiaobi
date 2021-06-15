@@ -14,6 +14,8 @@ import Process from '@Components/setting/progress';
 const WrapperUI = styled.div`
 	width: 100%;
 	height: auto;
+	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.panelBg};
 `;
 
 const Base = () => {

@@ -1,10 +1,10 @@
-import Store from '@Services/store';
 import { getSyncData, setSyncData } from '@Utils/chrome';
 import { SyncKey } from '@Const/local';
+import Observer from '@Services/store';
 
 const DefaultData = {
-	[SyncKey.Badge]: '6306516',
-	[SyncKey.BannerCoins]: [6306516, 1334942, 821701822, 821698840],
+	[SyncKey.Badge]: '1334945',
+	[SyncKey.BannerCoins]: [1334945, 1334942, 1430750, 821714640],
 	[SyncKey.FollowCodes]: [],
 	[SyncKey.Notifications]: [],
 	[SyncKey.Settings]: {
@@ -22,17 +22,15 @@ const fixMyFault = async () => {
 
 	if (syncData[SyncKey.MyFault]) return;
 
-	const selfCoins = Store.get('selfCoins');
-	const follow = Store.get('follow');
-	const notifications = Store.get('notifications');
 	const needSyncData = {
-		[SyncKey.Badge]: follow,
-		[SyncKey.FollowCodes]: selfCoins,
-		[SyncKey.Notifications]: notifications,
 		[SyncKey.MyFault]: true,
 	};
 
 	await setSyncData({ ...DefaultData, ...needSyncData });
 };
 
-fixMyFault();
+fixMyFault()
+	.then((_) => {
+		Observer.init();
+	})
+	.catch((error) => error);

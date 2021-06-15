@@ -7,6 +7,8 @@ import { Help } from '@Const/setting';
 const WrapperUI = styled.div`
 	height: 450px;
 	overflow: auto;
+	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.panelBg};
 `;
 const GroupUI = styled.div`
 	margin-bottom: 20px;

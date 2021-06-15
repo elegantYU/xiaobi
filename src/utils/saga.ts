@@ -7,21 +7,23 @@ const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
 type Fns = ((...args: any[]) => any)[];
 
-type Saga = {
+export type Saga = {
 	new (...fns: Fns): Saga;
 
-	start(a: (a: any) => any, b: number | undefined): any;
+	time: number;
+	start(a: (a: any) => any, b?: number | undefined): any;
 	stop(): void;
 };
 
 const Saga = function Saga(...fns): Saga {
 	this.fns = fns;
 	this.pause = false;
+	this.time = 5000;
 } as Saga;
 
 const self = (_) => _?.();
 
-Saga.prototype.start = async function (callback, time = 5000) {
+Saga.prototype.start = async function (callback, time) {
 	while (!this.pause) {
 		if (this.pause) break;
 
@@ -31,7 +33,7 @@ Saga.prototype.start = async function (callback, time = 5000) {
 			console.log('网络错误，但是keep going', error, this.fns);
 		}
 
-		await delay(time);
+		await delay(this.time);
 	}
 };
 

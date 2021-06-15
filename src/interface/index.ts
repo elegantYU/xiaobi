@@ -125,6 +125,17 @@ export interface SortData {
 	sort: 0 | 1 | 2 | number;
 }
 
+// badge send to popup
+export interface BadgeData {
+	alias: string;
+	pair: string;
+	price: number;
+	percent: number;
+	turnover: string;
+	market: string;
+	logo?: string;
+}
+
 // background sendResponse
 export type BackgroundAsyncMethod = (sendResponse: (arg?: any) => void, data?: any) => Promise<any>;
 // background export map
@@ -132,7 +143,6 @@ export type BackgroundCmdMap = [string, BackgroundAsyncMethod][];
 
 // 页面监听指令
 export type PageAsyncMethod = (data?: any) => void;
-export type PageCmdMap = [string, PageAsyncMethod][];
 
 // 请求方法
 export type XHR<T> = (params: T) => Promise<any>;
@@ -145,6 +155,13 @@ export type SettingType = {
 	homeTab: 0 | 1 | 2 | 3;
 };
 
+export type BadgeSettingType = {
+	dataType: 'price' | 'percent' | 'turnover';
+	observe: boolean;
+	viewType: boolean; //	true 格式化后数据
+	speed: number;
+};
+
 // Sync key 数据结构
 export type SyncDataType = {
 	MyFault: boolean;
@@ -153,4 +170,5 @@ export type SyncDataType = {
 	Notifications: NoticeType[];
 	FollowCodes: string[];
 	Settings: SettingType;
+	BadgeSetting: BadgeSettingType;
 };

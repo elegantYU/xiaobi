@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-31 11:23:41
+ * @LastEditTime: 2021-06-15 16:46:41
  * @Description: 通知管理
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeBlockType } from '@InterFace/index';
@@ -9,8 +9,74 @@ import { getDetailXHR } from '@Api/index';
 import { CMDS } from '@Const/commands';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
-import { setSyncData, getSyncData } from '@Utils/chrome';
-import { convertCNUnit } from '@Utils/index';
+import { setSyncData, getSyncData, getExtURL, createNotify } from '@Utils/chrome';
+import { convertCNUnit, isWindows, img2base } from '@Utils/index';
+import Observer from '@Services/store';
+import Saga from '@Utils/saga';
+
+const LOGO = getExtURL('./static/icons/icon.png');
+
+const loopFn = async (id: string) => {
+	const { code, timestamp } = decode();
+	return getDetailXHR({ code, timestamp, currency_on_market_id: id });
+};
+// 创建通知
+export const createCoinNotify = (id: string) => {
+	const noticeSaga = new Saga(() => loopFn(id));
+	noticeSaga.start(async (data) => {
+		const d = data?.[0] ?? data;
+
+		if (!d) return;
+
+		const syncData = await getSyncData(SyncKey.Notifications);
+		const notices = syncData[SyncKey.Notifications];
+		const { currency_on_market_id, logo, price_usd, symbol, pair, alias, market_name } = d;
+		const currentLists = notices.filter(({ id }) => id == currency_on_market_id);
+		let coinLogo = '';
+
+		if (isWindows()) {
+			coinLogo = await img2base(logo);
+		}
+
+		currentLists.forEach((current) => {
+			const { uid, rule, type, sound, compare, ignore } = current;
+			const options: chrome.notifications.NotificationOptions = {
+				iconUrl: LOGO,
+				contextMessage: `${pair} = ${price_usd} USD`,
+				message: `通知规则：价格${compare ? '大于' : '小于'} ${rule}`,
+				type: 'basic',
+			};
+
+			if (isWindows()) {
+				options.imageUrl = coinLogo;
+			}
+
+			if (!ignore) {
+				let title;
+				if (compare && price_usd > rule) {
+					title = `${symbol} 正在上涨`;
+				}
+				if (!compare && price_usd < rule) {
+					title = `${symbol} 正在上涨`;
+				}
+				if ((compare && price_usd > rule) || (!compare && price_usd < rule)) {
+					options.title = title;
+					createNotify(options);
+					const newList = notices.map((v) => (v.uid === uid ? { ...v, ignore: true } : { ...v }));
+
+					setSyncData({ [SyncKey.Notifications]: newList });
+				}
+			} else if ((compare && price_usd < rule) || (!compare && price_usd > rule)) {
+				// 已通知过(上涨、下跌) 若价格(下跌、上涨) 则再次启用通知，等待下次价格变化
+				const newList = notices.map((v) => (v.uid === uid ? { ...v, ignore: false } : { ...v }));
+
+				setSyncData({ [SyncKey.Notifications]: newList });
+			}
+		});
+	});
+
+	return noticeSaga;
+};
 
 const getLocalNotify: BackgroundAsyncMethod = async (send) => {
 	const syncData = await getSyncData(SyncKey.Notifications);
@@ -49,6 +115,9 @@ const delNotify: BackgroundAsyncMethod = async (send, data) => {
 	notify.splice(idx, 1);
 	await setSyncData({ [SyncKey.Notifications]: notify });
 
+	//	取消订阅
+	Observer.remove(data);
+
 	send(true);
 };
 
@@ -57,6 +126,9 @@ const addNotify: BackgroundAsyncMethod = async (send, data) => {
 	const notify = syncData[SyncKey.Notifications];
 	notify.push(data);
 	await setSyncData({ [SyncKey.Notifications]: notify });
+
+	// 订阅通知
+	Observer.add(data.id, createCoinNotify(data.id));
 
 	send(true);
 };
