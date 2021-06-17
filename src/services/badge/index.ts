@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-16 10:30:15
+ * @LastEditTime: 2021-06-17 21:42:17
  * @Description: 轮询store通知，及插件badge轮询
  */
 import {
@@ -15,7 +15,7 @@ import {
 	sendMessage,
 } from '@Utils/chrome';
 import { getDetailXHR } from '@Api/coin';
-import { convertCNUnit, formatBadge } from '@Utils/index';
+import { convertCNUnit, formatBadge, isWindows } from '@Utils/index';
 import { BackgroundCmdMap, BackgroundAsyncMethod, BadgeData } from '@InterFace/index';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
@@ -87,10 +87,14 @@ badgeSaga.start(async (data: any) => {
 
 	if (observe && lastStatus !== status) {
 		lastStatus = status;
+		const ctxMsg = `${pair} = ${price_usd} USD`;
+		const msg = `特殊关注：${pair} 正在${status ? '上涨' : '下跌'}!`;
+		const isWin = isWindows();
+
 		const notifyOpts: chrome.notifications.NotificationOptions = {
 			iconUrl: LOGO,
-			contextMessage: `${pair} = ${price_usd} USD`,
-			message: `特殊关注：${pair} 正在${status ? '上涨' : '下跌'}!`,
+			contextMessage: isWin ? msg : ctxMsg,
+			message: isWin ? ctxMsg : msg,
 			title: `"币"浏览器插件`,
 			type: 'basic',
 		};
