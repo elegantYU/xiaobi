@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-24 21:46:01
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-15 16:46:41
+ * @LastEditTime: 2021-06-16 10:30:53
  * @Description: 通知管理
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap, NoticeBlockType } from '@InterFace/index';
@@ -10,7 +10,7 @@ import { CMDS } from '@Const/commands';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
 import { setSyncData, getSyncData, getExtURL, createNotify } from '@Utils/chrome';
-import { convertCNUnit, isWindows, img2base } from '@Utils/index';
+import { convertCNUnit } from '@Utils/index';
 import Observer from '@Services/store';
 import Saga from '@Utils/saga';
 
@@ -32,11 +32,6 @@ export const createCoinNotify = (id: string) => {
 		const notices = syncData[SyncKey.Notifications];
 		const { currency_on_market_id, logo, price_usd, symbol, pair, alias, market_name } = d;
 		const currentLists = notices.filter(({ id }) => id == currency_on_market_id);
-		let coinLogo = '';
-
-		if (isWindows()) {
-			coinLogo = await img2base(logo);
-		}
 
 		currentLists.forEach((current) => {
 			const { uid, rule, type, sound, compare, ignore } = current;
@@ -44,12 +39,9 @@ export const createCoinNotify = (id: string) => {
 				iconUrl: LOGO,
 				contextMessage: `${pair} = ${price_usd} USD`,
 				message: `通知规则：价格${compare ? '大于' : '小于'} ${rule}`,
+				title: `"币"浏览器插件`,
 				type: 'basic',
 			};
-
-			if (isWindows()) {
-				options.imageUrl = coinLogo;
-			}
 
 			if (!ignore) {
 				let title;

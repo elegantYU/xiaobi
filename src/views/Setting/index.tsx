@@ -22,13 +22,14 @@ const PageUI = styled.div`
 	width: 100%;
 	height: 500px;
 	background-color: ${(p) => p.theme.bg};
+	overflow: auto;
 `;
 
 const Setting = () => (
 	<WrapperUI>
 		<SideBar />
 		<PageUI>
-			<Redirect to={StaticRoutes.SettingBadge} from={StaticRoutes.Setting} />
+			<Redirect to={StaticRoutes.SettingBase} from={StaticRoutes.Setting} />
 			<Switch>
 				<Route path={StaticRoutes.SettingBase} component={Base} />
 				<Route path={StaticRoutes.SettingBadge} component={Badge} />

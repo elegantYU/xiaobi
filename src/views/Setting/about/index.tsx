@@ -116,6 +116,8 @@ const Base = () => {
 		if (DivEl.current) {
 			const { transform } = DivEl.current.style;
 			DivEl.current.style.transform = transform.replace('translateZ(-25px)', 'translateZ(-12px)');
+
+			window.open('https://github.com/elegantYU/xiaobi');
 		}
 	};
 	const handleDown: React.MouseEventHandler<HTMLImageElement> = (e) => {

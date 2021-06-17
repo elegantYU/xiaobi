@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-02 11:23:15
+ * @LastEditTime: 2021-06-16 16:24:33
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -96,6 +96,7 @@ export const light = {
 	badgeBg: colour.whiteee,
 	badgeColor: colour.white,
 	badgeActive: colour.blue00,
+	badgeTextColor: colour.black15,
 
 	aboutTitle: colour.black15,
 
@@ -213,6 +214,7 @@ export const dark = {
 	badgeBg: colour.white,
 	badgeColor: colour.white,
 	badgeActive: colour.blue00,
+	badgeTextColor: colour.white,
 
 	aboutTitle: colour.whitede,
 

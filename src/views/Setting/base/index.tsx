@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { creaseState, themeState, NavMode, HomeTabState } from '@Const/setting';
-import { setSettingSM } from '@Api/setting';
+import { getAllConfig, setAllConfig, setSettingSM } from '@Api/setting';
 import { Context } from '@Src/context';
 import { LocalKey } from '@Const/local';
 import { setStorage, getStorage } from '@Src/utils/localStorage';
@@ -10,6 +10,8 @@ import Title from '@Components/setting/title';
 import Operation from '@Components/setting/operation';
 import RatioGroup from '@Components/setting/ratioGroup';
 import Process from '@Components/setting/progress';
+import { RatioBtnUI, FileBtn } from '@Components/button';
+import message from '@Src/components/message';
 
 const WrapperUI = styled.div`
 	width: 100%;
@@ -17,6 +19,26 @@ const WrapperUI = styled.div`
 	padding: 0 10px 10px;
 	background-color: ${(p) => p.theme.panelBg};
 `;
+
+const CombinUI = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 4px;
+`;
+
+const downloadJSON = async () => {
+	const json = await getAllConfig();
+	const a = document.createElement('a');
+	a.download = 'config.json';
+	a.href = `data:text/plain,${json}`;
+	a.click();
+	a.remove();
+};
+
+const uploadJSON = async (data: any) => {
+	await setAllConfig(data);
+	message.info('同步成功 重启生效');
+};
 
 const Base = () => {
 	const [homeTab, setHomeTab] = useState(getStorage(LocalKey.HomeTab) ?? 0);
@@ -54,6 +76,14 @@ const Base = () => {
 			</Operation>
 			<Operation title='首页自定Tab' desc='选择首页默认类型'>
 				<RatioGroup data={HomeTabState} active={homeTab} field={LocalKey.HomeTab} clickEvent={handleHomeTabChange} />
+			</Operation>
+			<Operation title='数据同步' desc='下载配置数据到本地，或同步配置'>
+				<CombinUI>
+					<FileBtn changeEvent={uploadJSON}>上传配置</FileBtn>
+					<RatioBtnUI className='active' onClick={downloadJSON}>
+						下载配置
+					</RatioBtnUI>
+				</CombinUI>
 			</Operation>
 		</WrapperUI>
 	);

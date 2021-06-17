@@ -5,6 +5,13 @@ import Title from '@Components/setting/title';
 import { Help } from '@Const/setting';
 
 const WrapperUI = styled.div`
+	width: 100%;
+	height: auto;
+	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.panelBg};
+`;
+
+const ContentUI = styled.div`
 	height: 450px;
 	overflow: auto;
 	padding: 0 10px 10px;
@@ -36,10 +43,10 @@ const renderListJSX = () =>
 		</GroupUI>
 	));
 const Base = () => (
-	<>
+	<WrapperUI>
 		<Title>Q&A</Title>
-		<WrapperUI>{renderListJSX()}</WrapperUI>
-	</>
+		<ContentUI>{renderListJSX()}</ContentUI>
+	</WrapperUI>
 );
 
 export default Base;

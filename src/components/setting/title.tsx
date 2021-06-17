@@ -6,7 +6,7 @@ const WrapperUI = styled.p`
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
-	font-size: 14px;
+	font-size: 15px;
 	color: ${(p) => p.theme.title};
 	border-bottom: 1px solid ${(p) => p.theme.titleBorder};
 `;

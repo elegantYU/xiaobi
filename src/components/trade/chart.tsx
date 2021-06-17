@@ -46,7 +46,7 @@ const TabUI = styled.div`
 `;
 
 const PanelUI = styled.div.attrs({ id: 'container' })`
-	height: 350px;
+	height: 280px;
 `;
 
 const TabList1 = [
@@ -124,7 +124,7 @@ const ChartView: React.FC<Props> = ({ data, loading }) => {
 		chartEl.current = new Chart({
 			container: 'container',
 			autoFit: true,
-			height: 350,
+			height: 280,
 			padding: [15, 10, 30, 40],
 		});
 		const chart = chartEl.current;
@@ -185,7 +185,7 @@ const ChartView: React.FC<Props> = ({ data, loading }) => {
 		chartEl.current = new Chart({
 			container: 'container',
 			autoFit: true,
-			height: 350,
+			height: 280,
 			padding: [15, 10, 30, 40],
 		});
 		const chart = chartEl.current;

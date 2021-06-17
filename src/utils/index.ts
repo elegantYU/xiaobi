@@ -204,21 +204,27 @@ export const formatBadge = (num: number | string, key: string, type: boolean) =>
 	return `${str}%`;
 };
 
-// 图片转换
-export const img2base: (u: string) => Promise<string> = (url) =>
-	new Promise((resolve) => {
-		const img = new Image();
-		img.crossOrigin = 'Annoymous';
-		img.onload = function () {
-			const canvas = document.createElement('canvas');
-			const ctx = canvas.getContext('2d');
-			canvas.width = img.width;
-			canvas.height = img.height;
-			ctx?.drawImage(img, 0, 0);
-			const base = canvas.toDataURL('image/jpeg');
+// 拼接交易所地址
+export const composeLink: (c: any, a: number) => string = ({ market_name, currency, anchor }, id) => {
+	const lowerCurrency = currency.toLowerCase();
+	const lowerAnchor = anchor.toLowerCase();
 
-			resolve(base);
-		};
+	const marketMap: { [key: string]: string } = {
+		'Huobi Korea': `https://www.hb.co.kr/zh-cn/exchange/${lowerCurrency}_${lowerAnchor}`,
+		'Huobi Global': `https://www.huobi.com/zh-cn/exchange/${lowerCurrency}_${lowerAnchor}`,
+		'Gate.io': `https://www.gate.io/trade/${currency}_${anchor}`,
+		BCEX: `https://www.bcex.online/trade/${lowerCurrency}_${lowerAnchor}`,
+		Liquid: `https://app.liquid.com/exchange/${currency}${anchor}`,
+		Bitfinex: `https://trading.bitfinex.com/t/${currency}:${anchor}?type=exchange`,
+		'Binance JEX': 'https://www.jex.com/cn/spot',
+		SouthXchange: `https://main.southxchange.com/Market/Book/${currency}/${anchor}`,
+		Binance: `https://www.binance.com/zh-CN/trade/${currency}_${anchor}?layout=pro&type=spot`,
+		CoinEx: `https://www.coinex.com/info/${currency}`,
+		BitZ: `https://www.bitz.com/exchange/${lowerCurrency}_${lowerAnchor}`,
+		Kraken: `https://www.kraken.com/prices/${lowerCurrency}-bitcoin-price-chart/eur-euro?interval=1m`,
+	};
 
-		img.src = url;
-	});
+	const mytokenLink = `https://www.mytokencap.com/currency/${currency}/${id}`;
+
+	return marketMap[market_name] ?? mytokenLink;
+};

@@ -97,6 +97,8 @@ const LinkList = [
 
 const Info: React.FC<Props> = ({ data }) => {
 	const {
+		market_alias,
+		market_name,
 		project_info: {
 			content: [info],
 		},
@@ -104,6 +106,8 @@ const Info: React.FC<Props> = ({ data }) => {
 	const { list } = info;
 	const desc = (list as any[]).find((v) => v.key === 'description')?.content || '--';
 	const alias = data.alias ? `(${data.alias})` : '';
+
+	console.log('data', data);
 
 	const renderLabelJSX = () =>
 		ItemList.map((v) => {
@@ -149,6 +153,10 @@ const Info: React.FC<Props> = ({ data }) => {
 					{data.pair} {alias}
 				</p>
 			</TitleUI>
+			<LabelUI>
+				<label>交易平台</label>
+				<p>{market_alias || market_name}</p>
+			</LabelUI>
 			{renderLabelJSX()}
 			<DescUI>
 				<p className='title'>简介</p>

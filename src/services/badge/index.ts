@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-05-12 20:41:16
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-15 16:52:27
+ * @LastEditTime: 2021-06-16 10:30:15
  * @Description: 轮询store通知，及插件badge轮询
  */
 import {
@@ -15,14 +15,14 @@ import {
 	sendMessage,
 } from '@Utils/chrome';
 import { getDetailXHR } from '@Api/coin';
-import { convertCNUnit, formatBadge, img2base, isWindows } from '@Utils/index';
+import { convertCNUnit, formatBadge } from '@Utils/index';
 import { BackgroundCmdMap, BackgroundAsyncMethod, BadgeData } from '@InterFace/index';
 import { SyncKey } from '@Const/local';
 import decode from '@Utils/crypto';
 import Saga from '@Utils/saga';
 import { CMDS_PAGE, CMDS } from '@Src/constants/commands';
 
-const lastStatus = false; //	上次百分比动态
+let lastStatus = false; //	上次百分比动态
 const LOGO = getExtURL('./static/icons/icon.png');
 const defaultSetting = {
 	dataType: 'price',
@@ -68,7 +68,6 @@ badgeSaga.start(async (data: any) => {
 	const up = crease ? '#c35466' : '#4aaa91';
 	const down = crease ? '#4aaa91' : '#c35466';
 	const color = status ? up : down;
-	const coinLogo = await img2base(logo);
 	const title = `  特殊关注:
   ${pair}    ${convertCNUnit(price_usd).toString()}
   涨跌幅    ${percent_change_utc0}%
@@ -87,17 +86,14 @@ badgeSaga.start(async (data: any) => {
 	const realText = formatBadge(tempText, dataType, viewType)?.toString();
 
 	if (observe && lastStatus !== status) {
-		console.log('涨跌变化');
+		lastStatus = status;
 		const notifyOpts: chrome.notifications.NotificationOptions = {
 			iconUrl: LOGO,
 			contextMessage: `${pair} = ${price_usd} USD`,
 			message: `特殊关注：${pair} 正在${status ? '上涨' : '下跌'}!`,
+			title: `"币"浏览器插件`,
 			type: 'basic',
 		};
-
-		if (isWindows()) {
-			notifyOpts.imageUrl = coinLogo;
-		}
 
 		createNotify(notifyOpts);
 	}

@@ -9,6 +9,7 @@ import { formatBadge } from '@Utils/index';
 
 import Operation from '@Components/setting/operation';
 import RatioGroup from '@Components/setting/ratioGroup';
+import HeadLoading from '@Components/loading/badgeLoading';
 
 const WrapperUI = styled.div`
 	height: auto;
@@ -26,6 +27,7 @@ const HeadUI = styled.div`
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		color: ${(p) => p.theme.badgeTextColor};
 
 		span {
 			font-size: 12px;
@@ -50,6 +52,7 @@ const HeadUI = styled.div`
 		justify-content: center;
 		align-items: flex-end;
 		gap: 4px;
+		color: ${(p) => p.theme.badgeTextColor};
 
 		.name {
 			font-size: 16px;
@@ -163,22 +166,22 @@ const Badge = () => {
 		}
 	}, [setting, badgeData]);
 
-	if (!badgeData) {
-		return null;
-	}
-
 	return (
 		<WrapperUI>
-			<HeadUI>
-				{renderDataJSX()}
-				<div className='title'>
-					<div className='name'>
-						<img src={logo} alt='' />
-						{pair}
+			{!badgeData ? (
+				<HeadLoading />
+			) : (
+				<HeadUI>
+					{renderDataJSX()}
+					<div className='title'>
+						<div className='name'>
+							<img src={logo} alt='' />
+							{pair}
+						</div>
+						<p className='alias'>{alias}</p>
 					</div>
-					<p className='alias'>{alias}</p>
-				</div>
-			</HeadUI>
+				</HeadUI>
+			)}
 			<ContentUI>
 				<Operation title='数据类型'>
 					<RatioGroup data={BadgeDataType} active={dataType} field='dataType' clickEvent={handleRatioChange} />
