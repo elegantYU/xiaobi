@@ -16,6 +16,37 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.2.0',
+		content: [
+			{
+				title: '重要:',
+				list: [
+					{
+						text: `"币"插件改名啦~ 现更名为："币" 浏览器插件`,
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '新增:',
+				list: [
+					{
+						text: '- 特殊关注配置区域(设置 -> 角标)',
+						type: 0,
+					},
+					{
+						text: '- 本地配置文件可下载/同步',
+						type: 0,
+					},
+					{
+						text: '- 币种详情页可以直接跳转对应交易平台',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.1.2',
 		content: [
 			{

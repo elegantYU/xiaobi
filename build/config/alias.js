@@ -1,16 +1,10 @@
 const path = require('path');
-const resolve = p => path.resolve(__dirname, p)
+const paths = require('../../tsconfig.json').compilerOptions.paths
 
-module.exports = {
-	"@Src": resolve('../../src'),
-	"@Api": resolve('../../src/api'),
-	"@Utils": resolve('../../src/utils'),
-	"@Hooks": resolve('../../src/hooks'),
-	"@Images": resolve('../../src/images'),
-	"@Styles": resolve('../../src/styles'),
-	"@Const": resolve("../../src/constants"),
-	"@Services": resolve('../../src/services'),
-	"@Inject": resolve('../../src/injectScripts'),
-	"@InterFace": resolve('../../src/interface'),
-	"@Components": resolve('../../src/components'),
-}
+const resolve = p => path.resolve(__dirname, path.join('../../', p))
+const removeMatchExp = p => p.replace('/*', '')
+
+module.exports =  Object.keys(paths).reduce((als, k) => ({
+	...als,
+	[removeMatchExp(k)]: resolve(removeMatchExp(paths[k][0]))
+}), {})

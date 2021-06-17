@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-27 13:55:22
+ * @LastEditTime: 2021-06-16 16:24:33
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -93,6 +93,10 @@ export const light = {
 	progressBtn: colour.white,
 	progressActive: colour.blue00,
 	progressText: colour.grey99,
+	badgeBg: colour.whiteee,
+	badgeColor: colour.white,
+	badgeActive: colour.blue00,
+	badgeTextColor: colour.black15,
 
 	aboutTitle: colour.black15,
 
@@ -207,6 +211,10 @@ export const dark = {
 	progressBtn: colour.white,
 	progressActive: colour.blue00,
 	progressText: colour.grey99,
+	badgeBg: colour.white,
+	badgeColor: colour.white,
+	badgeActive: colour.blue00,
+	badgeTextColor: colour.white,
 
 	aboutTitle: colour.whitede,
 

@@ -6,6 +6,8 @@ import { Context } from '@Src/context';
 const WrapperUI = styled.div`
 	height: 100%;
 	overflow: auto;
+	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.panelBg};
 `;
 
 const BannerUI = styled.div`
@@ -114,6 +116,8 @@ const Base = () => {
 		if (DivEl.current) {
 			const { transform } = DivEl.current.style;
 			DivEl.current.style.transform = transform.replace('translateZ(-25px)', 'translateZ(-12px)');
+
+			window.open('https://github.com/elegantYU/xiaobi');
 		}
 	};
 	const handleDown: React.MouseEventHandler<HTMLImageElement> = (e) => {
@@ -205,7 +209,7 @@ const Base = () => {
 				<label>支持一下</label>
 				<BtnUI onClick={handleOpenReward}>查看</BtnUI>
 			</GroupUI>
-			<DescUI>”小币“浏览器插件作为币圈数据聚合的工具，不提供任何投资理财建议，希望大家理性投资，早日上岸。</DescUI>
+			<DescUI>”币“浏览器插件作为币圈数据聚合的工具，不提供任何投资理财建议，希望大家理性投资，早日上岸。</DescUI>
 		</WrapperUI>
 	);
 };

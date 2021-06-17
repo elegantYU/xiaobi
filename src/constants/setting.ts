@@ -21,6 +21,17 @@ export const HomeTabState = [
 	{ label: '关注榜', value: 3 },
 ];
 
+export const BadgeDataType = [
+	{ label: '现价', value: 'price' },
+	{ label: '涨跌幅', value: 'percent' },
+	{ label: '换手率', value: 'turnover' },
+];
+
+export const BadgeObserve = [
+	{ label: '关闭', value: false },
+	{ label: '开启', value: true },
+];
+
 export const Help = [
 	{
 		question: '这个插件怎么使用',
@@ -58,16 +69,17 @@ export const Help = [
 	},
 	{
 		question: '特别关注是什么',
-		answer: '特别关注是可以让选定的币种，在插件logo的角标(badge)中显示。</br>(暂时无详细设置的功能)',
+		answer: '特别关注是可以让选定的币种，在插件logo的角标(badge)中显示。</br>可以选择数据类型、显示格式、实时提醒等',
 	},
 	{
 		question: '为什么插件需要’所有网站‘的权限，是否会有什么不合理的操作',
 		answer:
-			'获取所有网站的权限，主要是因为小币需要请求多个网站的接口(目前是两个)，</br>为了后续的扩展性考虑(可能会加入其它网站的数据请求)，选择了"all_urls"权限。</br>若是逐条添加网站，插件每次更新都会弹出”新权限请求“对话框，这样会引起很多用户的误会。</br></br>小币代码已开源，大家可随意查看代码，若有其他的安全疑虑可提issue',
+			'获取所有网站的权限，主要是因为币需要请求多个网站的接口(目前是两个)，</br>为了后续的扩展性考虑(可能会加入其它网站的数据请求)，选择了"all_urls"权限。</br>若是逐条添加网站，插件每次更新都会弹出”新权限请求“对话框，这样会引起很多用户的误会。</br></br>币代码已开源，大家可随意查看代码，若有其他的安全疑虑可提issue',
 	},
 	{
 		question: '我的数据存放在哪里，怎么做同步',
-		answer: '目前插件所有数据都存放在本地，若卸载重装或关闭插件都会导致数据丢失。</br>数据同步功能后续版本会推出',
+		answer:
+			'目前插件所有数据都存放在插件的远程存储路径中，可通过google账号进行多端同步</br>也可以在 设置 -> 基础 中下载或同步本地数据',
 	},
 	{
 		question: '作者什么时候更新',

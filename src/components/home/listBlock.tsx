@@ -150,9 +150,10 @@ const ListBlock: React.FC<Props> = ({ data, shortcut, onClick, refresh }) => {
 	const [selfState, setSelfState] = useState(false);
 	const [followState, setFollowState] = useState(false);
 	const [noticeState, setNoticeState] = useState(false);
-	const { id, alias, anchor, currency, pair, usd, cny, percent, turnover, volume } = data;
+	const { id, alias, anchor, currency, pair, usd, cny, percent, turnover, volume, market_alias, market_name } = data;
 	const { data: request } = useMessage({ command: CMDS.CMD_COINTSTATE, data: id });
 
+	const cursorTitle = `${alias} ${market_alias || market_name}`;
 	const selfClass = `iconfont ${selfState ? 'iconshoucang' : 'iconshoucang1'} yellow`;
 	const followClass = `iconfont ${followState ? 'iconxinaixin1' : 'iconxinaixin2'} pink`;
 	const noticeClass = `iconfont ${noticeState ? 'icontongzhi1' : 'icontongzhi2'} blue`;
@@ -207,7 +208,7 @@ const ListBlock: React.FC<Props> = ({ data, shortcut, onClick, refresh }) => {
 	}, [shortcut]);
 
 	return (
-		<WrapperUI title={alias} onClick={onClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+		<WrapperUI title={cursorTitle} onClick={onClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 			<TitleUI>
 				<div className='title'>
 					<b>{currency}</b>

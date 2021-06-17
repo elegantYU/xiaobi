@@ -14,6 +14,13 @@ type AccuracyData = (num: string | number, bit: number) => string;
 // 判断是什么浏览器
 export const isFireFox = typeof InstallTrigger !== 'undefined';
 export const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+// 判断操作系统
+export const isWindows = () => {
+	const agent = navigator.userAgent.toLowerCase();
+	const version = ['win32', 'win64', 'wow32', 'wow64'];
+
+	return version.some((v) => agent.includes(v));
+};
 
 // 数据完整且保留精度
 export const accuracyData: AccuracyData = (num, bit) => {
@@ -156,8 +163,8 @@ export const changeViewPort = (multiple: number) => {
 	const height = 500;
 
 	if (isFireFox) {
-		document.body.style.width = `${width * res  }px`;
-		document.body.style.height = `${height * res  }px`;
+		document.body.style.width = `${width * res}px`;
+		document.body.style.height = `${height * res}px`;
 		document.body.style.transform = `scale(${res}, ${res})`;
 		document.body.style.transformOrigin = 'left top';
 	} else {
@@ -165,22 +172,59 @@ export const changeViewPort = (multiple: number) => {
 	}
 };
 
-// badge单位
-export const formatBadge = (num: number) => {
-	const rulesMap: [number, (n: number) => string][] = [
-		[1, (n) => accuracyData(n, 3)],
-		[10, (n) => accuracyData(n, 2)],
-		[100, (n) => accuracyData(n, 1)],
-		[10000, (n) => `${accuracyData(n / 1000, 1)}k`],
-		[100000, (n) => `${accuracyData(n / 1000, 0)}k`],
-		[1000000, (n) => `${accuracyData(n / 10000, 1)}w`],
-		[10000000, (n) => `${accuracyData(n / 10000, 0)}w`],
-	];
+const sliceStr = (n: string | number, l: number) => n.toString().slice(0, l);
 
-	const current = rulesMap.find(([r]) => num < r);
-	if (current) {
-		return current[1](num);
+// badge单位
+export const formatBadge = (num: number | string, key: string, type: boolean) => {
+	if (key === 'price') {
+		if (!type) return sliceStr(num, 4);
+
+		const rulesMap: [number, (n: number | string) => string][] = [
+			[1, (n) => accuracyData(n, 3)],
+			[10, (n) => accuracyData(n, 2)],
+			[100, (n) => accuracyData(n, 1)],
+			[10000, (n) => `${accuracyData(+n / 1000, 1)}k`],
+			[100000, (n) => `${accuracyData(+n / 1000, 0)}k`],
+			[1000000, (n) => `${accuracyData(+n / 10000, 1)}w`],
+			[10000000, (n) => `${accuracyData(+n / 10000, 0)}w`],
+		];
+
+		const current = rulesMap.find(([r]) => num < r);
+		if (current) {
+			return current[1](num);
+		}
+
+		return '';
 	}
 
-	return '';
+	const str = sliceStr(num.toString().replace(/-|%/g, ''), 3);
+
+	if (!type) return `${str}%`;
+
+	return `${str}%`;
+};
+
+// 拼接交易所地址
+export const composeLink: (c: any, a: number) => string = ({ market_name, currency, anchor }, id) => {
+	const lowerCurrency = currency.toLowerCase();
+	const lowerAnchor = anchor.toLowerCase();
+
+	const marketMap: { [key: string]: string } = {
+		'Huobi Korea': `https://www.hb.co.kr/zh-cn/exchange/${lowerCurrency}_${lowerAnchor}`,
+		'Huobi Global': `https://www.huobi.com/zh-cn/exchange/${lowerCurrency}_${lowerAnchor}`,
+		'Gate.io': `https://www.gate.io/trade/${currency}_${anchor}`,
+		BCEX: `https://www.bcex.online/trade/${lowerCurrency}_${lowerAnchor}`,
+		Liquid: `https://app.liquid.com/exchange/${currency}${anchor}`,
+		Bitfinex: `https://trading.bitfinex.com/t/${currency}:${anchor}?type=exchange`,
+		'Binance JEX': 'https://www.jex.com/cn/spot',
+		SouthXchange: `https://main.southxchange.com/Market/Book/${currency}/${anchor}`,
+		Binance: `https://www.binance.com/zh-CN/trade/${currency}_${anchor}?layout=pro&type=spot`,
+		CoinEx: `https://www.coinex.com/info/${currency}`,
+		BitZ: `https://www.bitz.com/exchange/${lowerCurrency}_${lowerAnchor}`,
+		Kraken: `https://www.kraken.com/prices/${lowerCurrency}-bitcoin-price-chart/eur-euro?interval=1m`,
+	};
+
+	const mytokenLink = `https://www.mytokencap.com/currency/${currency}/${id}`;
+
+	return marketMap[market_name] ?? mytokenLink;
 };

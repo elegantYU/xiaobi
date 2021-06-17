@@ -8,6 +8,7 @@ import Base from './base';
 import Notify from './notify';
 import Help from './help';
 import About from './about';
+import Badge from './badge';
 
 const WrapperUI = styled.div`
 	display: grid;
@@ -20,8 +21,8 @@ const WrapperUI = styled.div`
 const PageUI = styled.div`
 	width: 100%;
 	height: 500px;
-	background-color: ${(p) => p.theme.panelBg};
-	padding: 0 10px 10px;
+	background-color: ${(p) => p.theme.bg};
+	overflow: auto;
 `;
 
 const Setting = () => (
@@ -31,6 +32,7 @@ const Setting = () => (
 			<Redirect to={StaticRoutes.SettingBase} from={StaticRoutes.Setting} />
 			<Switch>
 				<Route path={StaticRoutes.SettingBase} component={Base} />
+				<Route path={StaticRoutes.SettingBadge} component={Badge} />
 				<Route path={StaticRoutes.SettingNotify} component={Notify} />
 				<Route path={StaticRoutes.SettingHelp} component={Help} />
 				<Route path={StaticRoutes.SettingAbout} component={About} />

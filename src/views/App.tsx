@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { StaticRoutes } from '@Const/routes';
 import { CMDS_PAGE, CMDS } from '@Const/commands';
-import { PageCmdMap, DefaultObject } from '@InterFace/index';
+import { PageAsyncMethod, DefaultObject } from '@InterFace/index';
 import { matchTheme, checkUpdate, changeViewPort } from '@Utils/index';
 import { light } from '@Styles/theme';
 import { Context } from '@Src/context';
@@ -65,14 +65,14 @@ const App: React.FC = () => {
 
 	const onMessageListener = (msg: any) => {
 		const { command, data } = msg;
-		const cmdMap = new Map([
+		const cmdMap = new Map<string, PageAsyncMethod>([
 			[
 				CMDS_PAGE.CMD_GET_SETTING,
 				(data) => {
 					setTheme(matchTheme(data));
 				},
 			],
-		] as PageCmdMap);
+		]);
 
 		if (cmdMap.has(command)) {
 			cmdMap.get(command)?.(data);
