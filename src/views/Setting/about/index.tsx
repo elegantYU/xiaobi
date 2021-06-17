@@ -209,7 +209,7 @@ const Base = () => {
 				<label>支持一下</label>
 				<BtnUI onClick={handleOpenReward}>查看</BtnUI>
 			</GroupUI>
-			<DescUI>”小币“浏览器插件作为币圈数据聚合的工具，不提供任何投资理财建议，希望大家理性投资，早日上岸。</DescUI>
+			<DescUI>”币“浏览器插件作为币圈数据聚合的工具，不提供任何投资理财建议，希望大家理性投资，早日上岸。</DescUI>
 		</WrapperUI>
 	);
 };

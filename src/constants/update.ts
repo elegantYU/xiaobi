@@ -22,7 +22,7 @@ export const Update: UpdateType = [
 				title: '重要:',
 				list: [
 					{
-						text: `"小币"插件改名啦~ 现更名为："币" 浏览器插件`,
+						text: `"币"插件改名啦~ 现更名为："币" 浏览器插件`,
 						type: 0,
 					},
 				],
