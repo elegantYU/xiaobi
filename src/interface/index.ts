@@ -171,4 +171,5 @@ export type SyncDataType = {
 	FollowCodes: string[];
 	Settings: SettingType;
 	BadgeSetting: BadgeSettingType;
+	[key: string]: any;
 };

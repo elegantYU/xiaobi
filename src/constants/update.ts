@@ -16,6 +16,30 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.2.3',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '插件无法打开问题',
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '详情:',
+				list: [
+					{
+						text: '',
+						href: '',
+						type: 1,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.2.0',
 		content: [
 			{
@@ -90,7 +114,7 @@ export const Update: UpdateType = [
 				],
 			},
 			{
-				title: '更多信息:',
+				title: '详情:',
 				list: [
 					{
 						text: 'https://github.com/elegantYU/xiaobi/issues/9',
@@ -116,7 +140,7 @@ export const Update: UpdateType = [
 				],
 			},
 			{
-				title: '更多信息:',
+				title: '详情:',
 				list: [
 					{
 						text: 'https://github.com/elegantYU/xiaobi/issues/5',

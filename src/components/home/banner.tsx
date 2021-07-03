@@ -101,7 +101,7 @@ const Banner = () => {
 	const [bannerData, setBannerData] = useState(null);
 
 	useEffect(() => {
-		if (data) {
+		if (data && !data.code) {
 			if (!wsData) {
 				setBannerData(data);
 			} else {

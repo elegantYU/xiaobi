@@ -1,6 +1,7 @@
-import { getSyncData, setSyncData } from '@Utils/chrome';
+import { getManifest, getSyncData, setSyncData } from '@Utils/chrome';
 import { SyncKey } from '@Const/local';
 import Observer from '@Services/store';
+import { SyncDataType } from '../../interface';
 
 const DefaultData = {
 	[SyncKey.Badge]: '1334945',
@@ -34,3 +35,16 @@ fixMyFault()
 		Observer.init();
 	})
 	.catch((error) => error);
+
+// 强制用户配置更新
+const forceUpdate: (key: keyof SyncDataType, value: any) => void = async (key, value) => {
+	const syncData = await getSyncData(null);
+	const { version } = getManifest();
+	const isUpdate = syncData[`${version}_force`];
+
+	if (isUpdate) return;
+
+	setSyncData({ [key]: value });
+};
+// 1.2.3版本更新用户的 banner
+forceUpdate(SyncKey.BannerCoins, DefaultData[SyncKey.BannerCoins]);
