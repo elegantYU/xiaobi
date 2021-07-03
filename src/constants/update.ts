@@ -31,8 +31,8 @@ export const Update: UpdateType = [
 				title: '详情:',
 				list: [
 					{
-						text: '',
-						href: '',
+						text: 'https://github.com/elegantYU/xiaobi/releases/tag/1.2.3',
+						href: 'https://github.com/elegantYU/xiaobi/releases/tag/1.2.3',
 						type: 1,
 					},
 				],

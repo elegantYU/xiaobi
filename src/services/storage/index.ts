@@ -37,9 +37,8 @@ fixMyFault()
 	.catch((error) => error);
 
 // 强制用户配置更新
-const forceUpdate: (key: keyof SyncDataType, value: any) => void = async (key, value) => {
+const forceUpdate: (key: keyof SyncDataType, value: any, version: string) => void = async (key, value, version) => {
 	const syncData = await getSyncData(null);
-	const { version } = getManifest();
 	const isUpdate = syncData[`${version}_force`];
 
 	if (isUpdate) return;
@@ -47,4 +46,4 @@ const forceUpdate: (key: keyof SyncDataType, value: any) => void = async (key, v
 	setSyncData({ [key]: value });
 };
 // 1.2.3版本更新用户的 banner
-forceUpdate(SyncKey.BannerCoins, DefaultData[SyncKey.BannerCoins]);
+forceUpdate(SyncKey.BannerCoins, DefaultData[SyncKey.BannerCoins], '1.2.3');
