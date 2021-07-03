@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
+	style?: { [key: string]: string };
 	changeEvent: (p: any) => void;
 }
 
@@ -38,7 +39,7 @@ export const RatioBtnUI = styled.button`
 	}
 `;
 
-export const FileBtn: React.FC<Props> = ({ changeEvent, children }) => {
+export const FileBtn: React.FC<Props> = ({ changeEvent, children, style }) => {
 	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
 		const { files } = e.target;
 		if (files) {
@@ -54,7 +55,7 @@ export const FileBtn: React.FC<Props> = ({ changeEvent, children }) => {
 	};
 
 	return (
-		<RatioBtnUI className='active'>
+		<RatioBtnUI className='active' style={style}>
 			{children}
 			<input type='file' onChange={handleChange} accept='.json' />
 		</RatioBtnUI>

@@ -4,7 +4,7 @@ import useMessage from '@Src/hooks/useMessage';
 import { CMDS } from '@Const/commands';
 import { StaticRoutes } from '@Const/routes';
 import { setSelfCoinSM } from '@Api/setting';
-import { SearchData } from '@InterFace/index';
+import { PlatSearchDataType, SearchData } from '@InterFace/index';
 import debounce from 'lodash.debounce';
 
 import List from '@Components/search/list';
@@ -71,13 +71,20 @@ const SearchBoxUI = styled.div`
 const Search: React.FC<Props> = ({ history }) => {
 	const [keywords, setKeyWords] = useState('');
 	const { data } = useMessage({ command: CMDS.CMD_SEARCH, data: keywords });
-	const [listData, setListData] = useState(data);
+	const [listData, setListData] = useState<PlatSearchDataType>(data);
 
 	const handleChange = useMemo(() => debounce((e) => setKeyWords(e.target.value), 500), []);
 	const goBack = () => history.push(StaticRoutes.Home);
 
 	const handleChangeSelfCoin = (d: SearchData) => {
-		const temp = (listData as any[]).map((v) => ({ ...v, active: v.id === d.id ? !v.active : v.active }));
+		const temp = Object.keys(listData).reduce((obj, k) => {
+			const r = listData[k].map((v) => ({
+				...v,
+				active: v.id === d.id ? !v.active : v.active,
+			}));
+
+			return { ...obj, [k]: r };
+		}, {});
 		setSelfCoinSM({ ...d, active: !d.active });
 		setListData(temp);
 	};

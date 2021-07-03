@@ -69,13 +69,4 @@
 [我要去商店给好评！](https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh)
 [直接 Star!](#)
 
-## 打赏
-
-请用金钱狠狠地羞辱我吧！！
-
-<p align="left">
-	<img src="./public/images/alibaba.jpg" width="200px" />
-	<img src="./public/images/wechat.jpg" width="200px" />
-</p>
-
 > 提示：未经同意禁止商用，我都没商用

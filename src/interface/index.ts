@@ -171,5 +171,9 @@ export type SyncDataType = {
 	FollowCodes: string[];
 	Settings: SettingType;
 	BadgeSetting: BadgeSettingType;
+	PlatCode: { name: string; id: string }[];
 	[key: string]: any;
 };
+
+// plat search data type
+export type PlatSearchDataType = { [key: string]: SearchData[] };

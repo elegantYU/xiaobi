@@ -16,6 +16,24 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.3.0',
+		content: [
+			{
+				title: '新增:',
+				list: [
+					{
+						text: '- 新增平台币种数据检索(目前包含: 火币、币安、Okex)',
+						type: 0,
+					},
+					{
+						text: '- 页面内上传配置文件',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.2.3',
 		content: [
 			{

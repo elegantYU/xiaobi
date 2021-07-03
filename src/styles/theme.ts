@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-01-16 11:57:39
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-16 16:24:33
+ * @LastEditTime: 2021-07-04 00:41:06
  * @Description: 主题色
  */
 import colour from '@Styles/color';
@@ -55,6 +55,7 @@ export const light = {
 	newsTitleHover: colour.blue00,
 
 	search: colour.grey,
+	searchTitle: colour.black15,
 	searchIcon: colour.grey8f,
 	searchEmpty: colour.grey8f,
 
@@ -173,6 +174,7 @@ export const dark = {
 	newsTitleHover: colour.blue00,
 
 	search: colour.whitecf,
+	searchTitle: colour.whited4,
 	searchIcon: colour.grey8f,
 	searchEmpty: colour.grey8f,
 

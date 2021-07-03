@@ -12,4 +12,5 @@ export enum SyncKey {
 	FollowCodes = 'FollowCodes',
 	Settings = 'Settings',
 	BadgeSetting = 'BadgeSetting',
+	PlatCode = 'PlatCode',
 }

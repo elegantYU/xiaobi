@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:50:12
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-04-28 18:01:21
+ * @LastEditTime: 2021-07-02 20:50:29
  * @Description: 火币相关接口
  */
 import xhr from '@Utils/fetch';
@@ -16,6 +16,7 @@ import {
 	API_SEARCH,
 	API_KLINE,
 	API_TRENDLINE,
+	API_PLATCOIN,
 } from '@Const/api';
 
 const defaultParams = {
@@ -99,4 +100,12 @@ export const getTrendLineXHR: XHR<DefaultObject> = (params) =>
 		method: 'GET',
 		url: API_TRENDLINE,
 		params: { ...defaultParams, limit: 96, language: 'zh_CN', legal_currency: 'CNY', ...params },
+	});
+
+// 根据平台获取币种
+export const getCoinByPaltXHR: XHR<DefaultObject> = (params) =>
+	xhr({
+		method: 'GET',
+		url: API_PLATCOIN,
+		params: { ...defaultParams, ...params, language: 'zh_CN', legal_currency: 'USD', need_pagination: 1 },
 	});

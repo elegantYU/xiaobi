@@ -51,6 +51,8 @@
 
   css zoom 属性的不支持导致的，改成了宽高和 transform/scale 同时修改
 
+- 火狐打开本地文件夹会关闭 popup
+
 - popup 窗口崩溃
 
   排查过程如下：

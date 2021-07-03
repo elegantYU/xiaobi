@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { creaseState, themeState, NavMode, HomeTabState } from '@Const/setting';
-import { getAllConfig, setAllConfig, setSettingSM } from '@Api/setting';
+import { getAllConfigSM, setAllConfigSM, setSettingSM, updatePlatSM } from '@Api/setting';
 import { Context } from '@Src/context';
 import { LocalKey } from '@Const/local';
 import { setStorage, getStorage } from '@Src/utils/localStorage';
@@ -26,8 +26,13 @@ const CombinUI = styled.div`
 	gap: 4px;
 `;
 
+const LinkUI = styled.a`
+	font-size: 14px;
+	color: ${(p) => p.theme.ratioActiveBg};
+`;
+
 const downloadJSON = async () => {
-	const json = await getAllConfig();
+	const json = await getAllConfigSM();
 	const a = document.createElement('a');
 	a.download = 'config.json';
 	a.href = `data:text/plain,${json}`;
@@ -36,9 +41,11 @@ const downloadJSON = async () => {
 };
 
 const uploadJSON = async (data: any) => {
-	await setAllConfig(data);
+	await setAllConfigSM(data);
 	message.info('同步成功 重启生效');
 };
+
+const handleUpdatePlat = () => updatePlatSM();
 
 const Base = () => {
 	const [homeTab, setHomeTab] = useState(getStorage(LocalKey.HomeTab) ?? 0);
@@ -84,6 +91,19 @@ const Base = () => {
 						下载配置
 					</RatioBtnUI>
 				</CombinUI>
+			</Operation>
+			<Operation title='页面上传配置' desc='主要用于解决火狐浏览器插件问题'>
+				<LinkUI href='/option.html' target='_blank'>
+					打开页面
+				</LinkUI>
+			</Operation>
+			<Operation
+				title='更新平台数据'
+				desc='平台数据用于做币种搜索，数据更新一般需要 5 分钟左右。目前平台:火币、币安、Okex'
+			>
+				<RatioBtnUI className='active' onClick={handleUpdatePlat}>
+					数据更新
+				</RatioBtnUI>
 			</Operation>
 		</WrapperUI>
 	);

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchData, DefaultObject } from '@InterFace/index';
+import { SearchData, PlatSearchDataType } from '@InterFace/index';
 
 import Empty from '@Components/empty';
-import ListBlock from './listBlock';
+import PlatPanel from './platPanel';
 
 interface Props {
-	data: SearchData[] | null | DefaultObject;
+	data: null | PlatSearchDataType;
 	clickEvent: (d: SearchData) => void;
 }
 
@@ -17,10 +17,15 @@ const WrapperUI = styled.div`
 
 const List: React.FC<Props> = ({ data, clickEvent }) => {
 	const renderListJSX = () => {
-		if (!data || data.length === 0) {
+		if (!data) {
 			return <Empty />;
 		}
-		return (data as SearchData[]).map((d) => <ListBlock data={d} key={d.id} onClick={() => clickEvent(d)} />);
+		const res = Object.keys(data).reduce((obj, k) => (data[k].length > 0 ? { ...obj, [k]: data[k] } : obj), {} as any);
+		if (Object.keys(res).length === 0) {
+			return <Empty />;
+		}
+
+		return Object.keys(res).map((k) => <PlatPanel key={k} name={k} data={res[k]} clickEvent={clickEvent} />);
 	};
 
 	return <WrapperUI>{renderListJSX()}</WrapperUI>;
