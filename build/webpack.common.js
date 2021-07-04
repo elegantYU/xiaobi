@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path');
 const alias = require('./config/alias');
 const isDev = require('./config/isDev')
@@ -19,6 +18,7 @@ module.exports = {
 	entry: {
 		index: resolve('../src/index.tsx'),
 		background: resolve('../src/services/index.ts'),
+		option: resolve('../src/optionPage/index.tsx')
 	},
 	output: {
 		filename: 'static/js/[name].js',
@@ -135,10 +135,16 @@ module.exports = {
 			}
 		}),
 		new HtmlPlugin({
-			title: 'xiaobi',
+			title: '币',
 			filename: 'index.html',
 			template: resolve('../public/index.html'),
 			chunks: ["vendors", "index"]
+		}),
+		new HtmlPlugin({
+			title: '币',
+			filename: 'option.html',
+			template: resolve('../public/index.html'),
+			chunks: ["vendors", "option"]
 		}),
 		new HtmlPlugin({
 			title: "背景页",

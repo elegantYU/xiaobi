@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:23:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-16 15:50:09
+ * @LastEditTime: 2021-07-04 14:50:02
  * @Description: 从store获取数据
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap } from '@InterFace/index';
@@ -72,7 +72,8 @@ const downloadData: BackgroundAsyncMethod = async (send) => {
 	send(JSON.stringify(syncData));
 };
 const uploadData: BackgroundAsyncMethod = async (send, data) => {
-	await setSyncData(data);
+	const syncData = await getSyncData(null);
+	await setSyncData({ ...syncData, ...data });
 	send(true);
 };
 

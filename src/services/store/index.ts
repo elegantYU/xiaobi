@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 10:55:46
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-06-15 16:06:48
+ * @LastEditTime: 2021-07-04 00:18:42
  * @Description: 不在缓存本地数据，管理所有订阅
  */
 import type { Saga } from '@Utils/saga';
@@ -23,8 +23,6 @@ const Observer: ObserverType = {
 		if (this.list[uid]) return;
 
 		this.list[uid] = instance;
-
-		console.log('thislist', this.list);
 	},
 	remove(uid) {
 		this.list[uid].stop();
