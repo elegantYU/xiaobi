@@ -16,6 +16,20 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.3.1',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '- 可自主选择是否开启平台数据更新通知(默认关闭，之前太sb了)',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.3.0',
 		content: [
 			{

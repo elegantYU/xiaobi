@@ -21,6 +21,11 @@ export const HomeTabState = [
 	{ label: '关注榜', value: 3 },
 ];
 
+export const PlatUpdateNotifyState = [
+	{ label: '关闭', value: 0 },
+	{ label: '开启', value: 1 },
+];
+
 export const BadgeDataType = [
 	{ label: '现价', value: 'price' },
 	{ label: '涨跌幅', value: 'percent' },

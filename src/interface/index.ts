@@ -153,6 +153,7 @@ export type SettingType = {
 	nav: 0 | 1;
 	viewport: 0 | 1 | 2 | 3;
 	homeTab: 0 | 1 | 2 | 3;
+	platUpdateNotify: 0 | 1;
 };
 
 export type BadgeSettingType = {

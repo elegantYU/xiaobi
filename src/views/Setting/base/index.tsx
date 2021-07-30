@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { creaseState, themeState, NavMode, HomeTabState } from '@Const/setting';
+import { creaseState, themeState, NavMode, HomeTabState, PlatUpdateNotifyState } from '@Const/setting';
 import { getAllConfigSM, setAllConfigSM, setSettingSM, updatePlatSM } from '@Api/setting';
 import { Context } from '@Src/context';
 import { LocalKey } from '@Const/local';
@@ -104,6 +104,14 @@ const Base = () => {
 				<RatioBtnUI className='active' onClick={handleUpdatePlat}>
 					数据更新
 				</RatioBtnUI>
+			</Operation>
+			<Operation title='平台数据通知' desc='可自定义选择是否开启平台数据更新提示(默认关闭通知)'>
+				<RatioGroup
+					data={PlatUpdateNotifyState}
+					active={config?.platUpdateNotify}
+					field='platUpdateNotify'
+					clickEvent={handleRatioChange}
+				/>
 			</Operation>
 		</WrapperUI>
 	);

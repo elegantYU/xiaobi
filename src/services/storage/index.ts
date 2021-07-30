@@ -15,6 +15,7 @@ const DefaultData = {
 		nav: 1, //	0 icon 1 text
 		viewport: 1, //	默认 [0,1,2,3] => [0.9, 1, 1.1, 1.2]
 		homeTab: 0, // 0 1 2 3
+		platUpdateNotify: 0, //	0 关闭 1 开启
 	},
 	[SyncKey.PlatCode]: [
 		{
@@ -65,3 +66,5 @@ forceUpdate(SyncKey.BannerCoins, DefaultData[SyncKey.BannerCoins], '1.2.3');
 forceUpdate(SyncKey.PlatCode, DefaultData[SyncKey.PlatCode], '1.3.0')
 	.then((_) => recurseFetchData())
 	.catch((error) => error);
+// 1.3.1版本更新平台数据更新通知
+forceUpdate(SyncKey.Settings, DefaultData[SyncKey.Settings], '1.3.1');

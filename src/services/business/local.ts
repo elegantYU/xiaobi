@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:23:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-07-04 14:50:02
+ * @LastEditTime: 2021-07-31 00:42:45
  * @Description: 从store获取数据
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap } from '@InterFace/index';

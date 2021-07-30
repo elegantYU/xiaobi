@@ -37,8 +37,9 @@ const loopPageData: LoopFnType = async (id, page = 1, res = []) => {
 };
 
 export const recurseFetchData = async () => {
-	const syncData = await getSyncData(SyncKey.PlatCode);
+	const syncData = await getSyncData([SyncKey.PlatCode, SyncKey.Settings]);
 	const idList = syncData[SyncKey.PlatCode];
+	const { platUpdateNotify } = syncData[SyncKey.Settings];
 	let i = 0;
 
 	while (i < idList.length) {
@@ -58,14 +59,16 @@ export const recurseFetchData = async () => {
 	}
 
 	// 更新完毕
-	const opts = {
-		iconUrl: LOGO,
-		message: '平台数据更新完毕',
-		title: `"币"浏览器插件`,
-		type: 'basic',
-	};
+	if (platUpdateNotify) {
+		const opts = {
+			iconUrl: LOGO,
+			message: '平台数据更新完毕',
+			title: `"币"浏览器插件`,
+			type: 'basic',
+		};
 
-	createNotify(opts);
+		createNotify(opts);
+	}
 };
 
 export default PlatStore;
