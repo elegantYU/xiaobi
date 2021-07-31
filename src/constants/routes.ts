@@ -7,6 +7,7 @@ export enum StaticRoutes {
 	Setting = '/setting',
 	SettingBase = '/setting/base',
 	SettingNotify = '/setting/notify',
+	SettingBadge = '/setting/badge',
 	SettingHelp = '/setting/help',
 	SettingAbout = '/setting/about',
 	Search = '/search',

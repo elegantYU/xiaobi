@@ -50,6 +50,7 @@ const renderLinkJSX = () => {
 	const routers = [
 		{ name: '基础', path: StaticRoutes.SettingBase },
 		// { name: '通知', path: StaticRoutes.SettingNotify },
+		{ name: '角标', path: StaticRoutes.SettingBadge },
 		{ name: '帮助', path: StaticRoutes.SettingHelp },
 		{ name: '关于', path: StaticRoutes.SettingAbout },
 	];

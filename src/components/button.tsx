@@ -2,70 +2,62 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-	border?: boolean;
-	type?: 'primary' | 'warning' | 'success';
-	active?: boolean;
-	group?: boolean;
-	clickEvent?: () => void;
+	style?: { [key: string]: string };
+	changeEvent: (p: any) => void;
 }
 
-const WrapperUI = styled.button`
-	border-radius: 6px;
-	padding: 4px 5px;
+export const RatioBtnUI = styled.button`
+	height: 30px;
+	padding: 0 8px;
 	font-size: 12px;
-	color: #000;
+	display: flex;
+	align-items: center;
 	cursor: pointer;
+	color: ${(p) => p.theme.ratio};
+	background-color: ${(p) => p.theme.ratioBg};
+	border-radius: 6px;
+	position: relative;
 
-	&.group {
-		border-radius: 0;
-	}
-
-	&.border {
-		border: 1px solid #000;
-	}
-
-	&.active,
 	&:hover {
-		background-color: blue;
-		color: white;
+		background-color: ${(p) => p.theme.ratioBgHover};
 	}
 
-	&.primary {
-		background-color: blue;
-		color: white;
-
-		&.active,
+	&.active {
+		color: ${(p) => p.theme.ratioActive};
+		background-color: ${(p) => p.theme.ratioActiveBg};
 		&:hover {
-			background-color: #3c3cfd;
+			background-color: ${(p) => p.theme.ratioActiveBgHover};
 		}
 	}
-	&.warning {
-		background-color: red;
-		color: white;
 
-		&.active,
-		&:hover {
-			background-color: #ff3333;
-		}
-	}
-	&.success {
-		background-color: green;
-		color: white;
-
-		&.active,
-		&:hover {
-			background-color: #09ac09;
-		}
+	input {
+		opacity: 0;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
 	}
 `;
 
-const Btn: React.FC<Props> = ({ type, border, active, group, children, clickEvent }) => {
-	const className = `${type} ${border && 'border'} ${active && 'active'} ${group && 'group'} `;
+export const FileBtn: React.FC<Props> = ({ changeEvent, children, style }) => {
+	const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+		const { files } = e.target;
+		if (files) {
+			const reader = new FileReader();
+			reader.onload = (event) => {
+				if (event.target && typeof event.target?.result === 'string') {
+					changeEvent(JSON.parse(event.target?.result));
+				}
+			};
+
+			reader.readAsText(files[0]);
+		}
+	};
+
 	return (
-		<WrapperUI className={className} onClick={clickEvent}>
+		<RatioBtnUI className='active' style={style}>
 			{children}
-		</WrapperUI>
+			<input type='file' onChange={handleChange} accept='.json' />
+		</RatioBtnUI>
 	);
 };
-
-export default Btn;

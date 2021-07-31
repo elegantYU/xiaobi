@@ -15,7 +15,7 @@ const ContentUI = styled.div`
 	width: 100%;
 	height: 50px;
 	display: grid;
-	grid-template-columns: 80px 1fr;
+	grid-template-columns: 100px 1fr;
 	gap: 10px;
 	align-items: center;
 `;

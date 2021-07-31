@@ -23,13 +23,13 @@ const Loading: React.FC = () => {
 			<ContentLoader
 				speed={1}
 				width={360}
-				height={350}
-				viewBox='0 0 360 350'
+				height={280}
+				viewBox='0 0 360 280'
 				backgroundColor={theme.loading}
 				foregroundColor={theme.loadingFore}
 				interval={0.2}
 			>
-				<rect x='10' y='10' rx='6' ry='6' width='340' height='380' />
+				<rect x='10' y='10' rx='6' ry='6' width='340' height='260' />
 			</ContentLoader>
 		</>
 	);

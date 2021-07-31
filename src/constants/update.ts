@@ -16,6 +16,103 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.3.1',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '- 可自主选择是否开启平台数据更新通知(默认关闭，之前太sb了)',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
+		version: '1.3.0',
+		content: [
+			{
+				title: '新增:',
+				list: [
+					{
+						text: '- 新增平台币种数据检索(目前包含: 火币、币安、Okex)',
+						type: 0,
+					},
+					{
+						text: '- 页面内上传配置文件',
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '详情:',
+				list: [
+					{
+						text: 'https://github.com/elegantYU/xiaobi/releases/tag/1.3.0',
+						href: 'https://github.com/elegantYU/xiaobi/releases/tag/1.3.0',
+						type: 1,
+					},
+				],
+			},
+		],
+	},
+	{
+		version: '1.2.3',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '插件无法打开问题',
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '详情:',
+				list: [
+					{
+						text: 'https://github.com/elegantYU/xiaobi/releases/tag/1.2.3',
+						href: 'https://github.com/elegantYU/xiaobi/releases/tag/1.2.3',
+						type: 1,
+					},
+				],
+			},
+		],
+	},
+	{
+		version: '1.2.0',
+		content: [
+			{
+				title: '重要:',
+				list: [
+					{
+						text: `"币"插件改名啦~ 现更名为："币" 浏览器插件`,
+						type: 0,
+					},
+				],
+			},
+			{
+				title: '新增:',
+				list: [
+					{
+						text: '- 特殊关注配置区域(设置 -> 角标)',
+						type: 0,
+					},
+					{
+						text: '- 本地配置文件可下载/同步',
+						type: 0,
+					},
+					{
+						text: '- 币种详情页可以直接跳转对应交易平台',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.1.2',
 		content: [
 			{
@@ -59,7 +156,7 @@ export const Update: UpdateType = [
 				],
 			},
 			{
-				title: '更多信息:',
+				title: '详情:',
 				list: [
 					{
 						text: 'https://github.com/elegantYU/xiaobi/issues/9',
@@ -85,7 +182,7 @@ export const Update: UpdateType = [
 				],
 			},
 			{
-				title: '更多信息:',
+				title: '详情:',
 				list: [
 					{
 						text: 'https://github.com/elegantYU/xiaobi/issues/5',

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-04-01 14:42:00
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 14:11:46
+ * @LastEditTime: 2021-07-02 21:07:50
  * @Description: 市场行情相关接口
  */
 import {
@@ -44,6 +44,8 @@ const convertData = (list: any[], type?: string) =>
 			low_24h,
 			logo,
 			project_info,
+			market_alias,
+			market_name,
 		}) => ({
 			id: type ? currency_on_market_id : id,
 			alias,
@@ -63,6 +65,8 @@ const convertData = (list: any[], type?: string) =>
 			low_24h: convertCNUnit(low_24h || 0),
 			logo,
 			project_info,
+			market_alias,
+			market_name,
 		}),
 	);
 
@@ -169,11 +173,11 @@ const getSelfCoinList: BackgroundAsyncMethod = async (sendResponse, data) => {
 		.then((_) => {
 			const result: TableList[] = data
 				? sortList(
-					data,
-					convertData(
-						_.map(({ data }) => data),
-						'1',
-					),
+						data,
+						convertData(
+							_.map(({ data }) => data),
+							'1',
+						),
 				  )
 				: convertData(_.map(({ data }) => data));
 			sendResponse(result);

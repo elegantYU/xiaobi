@@ -90,7 +90,7 @@ const Home: React.FC<Props> = ({ history }) => {
 	}, [tabIndex]);
 
 	useEffect(() => {
-		if (request) {
+		if (request && !request.code) {
 			if (!wsData) {
 				setTableData(request);
 			} else if (!request.code) {

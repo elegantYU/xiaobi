@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-03-23 14:23:02
  * @LastEditors: elegantYu
- * @LastEditTime: 2021-05-28 14:59:26
+ * @LastEditTime: 2021-07-31 00:42:45
  * @Description: 从store获取数据
  */
 import { BackgroundAsyncMethod, BackgroundCmdMap } from '@InterFace/index';
@@ -66,10 +66,23 @@ const changeFollow: BackgroundAsyncMethod = async (send, id) => {
 	send(true);
 };
 
+// 下载配置
+const downloadData: BackgroundAsyncMethod = async (send) => {
+	const syncData = await getSyncData(null);
+	send(JSON.stringify(syncData));
+};
+const uploadData: BackgroundAsyncMethod = async (send, data) => {
+	const syncData = await getSyncData(null);
+	await setSyncData({ ...syncData, ...data });
+	send(true);
+};
+
 export default [
 	[CMDS.CMD_SETTING, (send) => getSetting(send)],
 	[CMDS.CMD_CHANGE_SETTING, (send, data) => changeSetting(send, data)],
 	[CMDS.CMD_COINTSTATE, (send, data) => getCoinState(send, data)],
 	[CMDS.CMD_TOGGLE_SELF, (send, id) => changeSelf(send, id)],
 	[CMDS.CMD_TOGGLE_FOLLOW, (send, id) => changeFollow(send, id)],
+	[CMDS.CMD_DOWNLOAD_CONFIG, (send) => downloadData(send)],
+	[CMDS.CMD_UPLOAD_CONFIG, (send, d) => uploadData(send, d)],
 ] as BackgroundCmdMap;

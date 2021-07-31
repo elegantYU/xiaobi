@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { RatioBtnUI } from '@Components/button';
 
 interface Props {
 	data: Array<{
@@ -17,36 +18,12 @@ const WrapperUI = styled.div`
 	gap: 2px;
 `;
 
-const ItemUI = styled.div`
-	height: 30px;
-	padding: 0 8px;
-	font-size: 12px;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-	color: ${(p) => p.theme.ratio};
-	background-color: ${(p) => p.theme.ratioBg};
-	border-radius: 6px;
-
-	&:hover {
-		background-color: ${(p) => p.theme.ratioBgHover};
-	}
-
-	&.active {
-		color: ${(p) => p.theme.ratioActive};
-		background-color: ${(p) => p.theme.ratioActiveBg};
-		&:hover {
-			background-color: ${(p) => p.theme.ratioActiveBgHover};
-		}
-	}
-`;
-
 const RatioGroup: React.FC<Props> = ({ data, active, field, clickEvent }) => {
 	const renderItemJSX = () =>
 		data.map(({ label, value }) => (
-			<ItemUI key={value} className={active === value ? 'active' : ''} onClick={() => clickEvent(value, field)}>
+			<RatioBtnUI key={value} className={active === value ? 'active' : ''} onClick={() => clickEvent(value, field)}>
 				{label}
-			</ItemUI>
+			</RatioBtnUI>
 		));
 
 	return <WrapperUI>{renderItemJSX()}</WrapperUI>;

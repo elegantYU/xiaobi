@@ -9,6 +9,7 @@ import SideBar from '@Components/trade/sidebar';
 import Head from '@Components/trade/head';
 import ChartView from '@Components/trade/chart';
 import Tabs from '@Components/trade/tabs';
+import Footer from '@Components/trade/foot';
 
 interface Props {
 	location: any;
@@ -23,7 +24,9 @@ const WrapperUI = styled.div`
 `;
 
 const ContentUI = styled.div`
+	height: 100%;
 	overflow: auto;
+	position: relative;
 `;
 
 const Trade: React.FC<Props> = ({ location }) => {
@@ -49,6 +52,7 @@ const Trade: React.FC<Props> = ({ location }) => {
 				<Head data={data} />
 				<ChartView data={current} loading={!!data} />
 				<Tabs data={data} id={current.id || 0} />
+				<Footer data={data} id={current.id || 0} />
 			</ContentUI>
 		</WrapperUI>
 	);
