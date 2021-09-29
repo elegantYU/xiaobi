@@ -16,6 +16,20 @@ export type UpdateType = {
 
 export const Update: UpdateType = [
 	{
+		version: '1.3.2',
+		content: [
+			{
+				title: '修复:',
+				list: [
+					{
+						text: '- 修复颜色等配置重启浏览器被重置问题',
+						type: 0,
+					},
+				],
+			},
+		],
+	},
+	{
 		version: '1.3.1',
 		content: [
 			{

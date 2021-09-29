@@ -58,7 +58,7 @@ const forceUpdate: (key: keyof SyncDataType, value: any, version: string) => Pro
 
 	if (isUpdate) return;
 
-	await setSyncData({ [key]: value, versionKey: true });
+	await setSyncData({ [key]: value, [versionKey]: true });
 };
 // 1.2.3版本更新用户的 banner
 forceUpdate(SyncKey.BannerCoins, DefaultData[SyncKey.BannerCoins], '1.2.3');
