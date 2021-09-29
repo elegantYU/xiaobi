@@ -24,6 +24,8 @@
 
 [谷歌浏览器](https://chrome.google.com/webstore/detail/acbboldcmppilbflnijahpgobpkkifkh)
 
+[Edge 浏览器](https://microsoftedge.microsoft.com/addons/detail/lgghibmnfelpmjkmjipfahlbfamkdemb)
+
 [火狐浏览器](https://addons.mozilla.org/zh-CN/firefox/addon/xiaobi)
 
 [安装包下载](https://chrome.pictureknow.com/extension?id=44ff63184eef4b00bd7db9c7383876e3)
